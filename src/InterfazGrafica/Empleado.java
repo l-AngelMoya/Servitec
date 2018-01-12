@@ -387,11 +387,10 @@ public class Empleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+        DataBase.actualizar(instanciaConexion, 1, this);
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-         JOptionPane.showMessageDialog(rootPane, "Empleado "+ TxTNombre.getText() + " " +TxtApellido.getText() + " fue ingresado con exito en la base de datos");
          DataBase.Insertar(instanciaConexion, 1, this);
          
     }//GEN-LAST:event_BtnIngresarActionPerformed
@@ -419,9 +418,7 @@ public class Empleado extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        DataBase.eliminar(instanciaConexion, this);
-        //JOptionPane.showMessageDialog(rootPane, "registro eliminado con exito");
-        
+        DataBase.eliminar(instanciaConexion,1, this);        
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed

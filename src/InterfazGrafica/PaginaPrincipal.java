@@ -90,6 +90,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         btnTrabajo.setBackground(new java.awt.Color(0, 204, 255));
         btnTrabajo.setFont(new java.awt.Font("Dutch801 XBd BT", 2, 36)); // NOI18N
         btnTrabajo.setText("Trabajo");
+        btnTrabajo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrabajoActionPerformed(evt);
+            }
+        });
 
         BtnReportes.setBackground(new java.awt.Color(0, 204, 255));
         BtnReportes.setFont(new java.awt.Font("Dutch801 XBd BT", 2, 36)); // NOI18N
@@ -251,6 +256,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         fs.setLocationRelativeTo(null);
         dispose();
     }//GEN-LAST:event_btnFacturaServActionPerformed
+
+    private void btnTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTrabajoActionPerformed
 
     /**
      * @param args the command line arguments

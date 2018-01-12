@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -113,8 +114,8 @@ public class DataBase<T> {
         return cliente;
     }*/
     /**
-     * Metodo para buscar 1.empleado,2.clientes, 3. distribuidora 4.
-     * FacturaServitecClass
+     * Metodo para buscar 1.empleado,2.clientes, 3. distribuidora
+     * 4.FacturaServitecClass
      *
      * @param instanciaConexion
      * @param identificador
@@ -157,6 +158,7 @@ public class DataBase<T> {
                         return null;
                     }
                     break;
+                //Factura servitec class
                 case (4):
                     String sq4 = "select * from facturaservitec where noFactura='" + identificador.getText() + "' ";
                     ResultSet rs4 = stmt.executeQuery(sq4);
@@ -196,22 +198,22 @@ public class DataBase<T> {
                         stmt.setString(5, claseEmpleado.getTxtDireccion().getText());
                         stmt.setString(6, claseEmpleado.getTxttelefono().getText());
                         stmt.setString(7, claseEmpleado.getTxtCargo().getText());
-                        if(claseEmpleado.getTxtSalario().getText().isEmpty()){
-                            stmt.setDouble(8,0.0);
-                        }else{
+                        if (claseEmpleado.getTxtSalario().getText().isEmpty()) {
+                            stmt.setDouble(8, 0.0);
+                        } else {
                             stmt.setDouble(8, Double.valueOf(claseEmpleado.getTxtSalario().getText()));
                         }
                         stmt.setString(9, claseEmpleado.getTxtUser().getText());
                         stmt.setString(10, claseEmpleado.getTxtContra().getText());
-                        if(claseEmpleado.getTxtIdSupervisor().getText().isEmpty()){
+                        if (claseEmpleado.getTxtIdSupervisor().getText().isEmpty() || claseEmpleado.getTxtIdSupervisor().getText().equalsIgnoreCase("null")) {
                             stmt.setString(11, null);
-                        }else{
+                        } else {
                             stmt.setString(11, claseEmpleado.getTxtIdSupervisor().getText());
                         }
-                        //ejecuta el query y da un result de las filas ingresadas
                         int filasIngresadas = stmt.executeUpdate();
-                    }catch(NumberFormatException | SQLException ex){
-                        ex.printStackTrace();                     
+                        JOptionPane.showMessageDialog(null, "empleado " + claseEmpleado.getTxTNombre().getText() + " " + claseEmpleado.getTxtApellido().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (NumberFormatException | SQLException ex) {
+                        ex.printStackTrace();
                     }
 
                     break;
@@ -223,20 +225,48 @@ public class DataBase<T> {
         }
 
     }
-    
-    //String sq1 = "SELECT * FROM empleado WHERE cedula='" + identificador.getText() + "' ";
 
-    public static void eliminar(java.sql.Connection instanciaConexion,Object clase){
-        try{
-            Empleado claseEmpleado = (Empleado) clase;
-            String sq1 = "DELETE FROM empleado WHERE cedula='"+claseEmpleado.getTxtCedula().getText()+"'";
-            PreparedStatement stmt = instanciaConexion.prepareStatement(sq1);
-            stmt.executeUpdate(sq1);
-            System.out.println("borrado!");
-        }catch( SQLException e){
+    public static void actualizar(java.sql.Connection instanciaConexion, int tipo, Object clase) {
+        try {
+            switch (tipo) {
+                case (1):
+                    Empleado claseEmpleado = (Empleado) clase;
+                    String sql;
+                    if(claseEmpleado.getTxtIdSupervisor().getText().isEmpty()){
+                        sql = "UPDATE empleado SET nombre='"+claseEmpleado.getTxTNombre().getText()+ "', apellido='"+claseEmpleado.getTxtApellido().getText()+ "',correo='"+claseEmpleado.getTxtCorreo().getText()+ "',direccion='"+claseEmpleado.getTxtDireccion().getText()+ "',telefono='"+claseEmpleado.getTxttelefono().getText()+ "',cargo='"+claseEmpleado.getTxtCargo().getText()+ "',salarioMensual='"+Double.valueOf(claseEmpleado.getTxtSalario().getText())+ "',user='"+claseEmpleado.getTxtUser().getText()+ "',contraseña='"+claseEmpleado.getTxtContra().getText()+ "',idSupervisor='"+null+"' ";
+                        
+                    }else{
+                        sql = "UPDATE empleado SET nombre='"+claseEmpleado.getTxTNombre().getText()+ "', apellido='"+claseEmpleado.getTxtApellido().getText()+ "',correo='"+claseEmpleado.getTxtCorreo().getText()+ "',direccion='"+claseEmpleado.getTxtDireccion().getText()+ "',telefono='"+claseEmpleado.getTxttelefono().getText()+ "',cargo='"+claseEmpleado.getTxtCargo().getText()+ "',salarioMensual='"+Double.valueOf(claseEmpleado.getTxtSalario().getText())+ "',user='"+claseEmpleado.getTxtUser().getText()+ "',contraseña="+claseEmpleado.getTxtContra().getText()+ "',idSupervisor='"+claseEmpleado.getTxtIdSupervisor().getText()+ "' ";
+                    }
+
+                    PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                    stmt.executeUpdate(sql); 
+                    break;
+                case(2):
+                    System.out.println("hola");
+                break;
+            }
+            }catch(Exception e){
             System.out.println("ha sucecido un problema");
             e.printStackTrace();
-        }       
+        }
+        }
+        //String sq1 = "SELECT * FROM empleado WHERE cedula='" + identificador.getText() + "' ";
+    public static void eliminar(java.sql.Connection instanciaConexion, int tipo, Object clase) {
+        try {
+            switch (tipo) {
+                case (1):
+                    Empleado claseEmpleado = (Empleado) clase;
+                    String sq1 = "DELETE FROM empleado WHERE cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
+                    PreparedStatement stmt = instanciaConexion.prepareStatement(sq1);
+                    stmt.executeUpdate(sq1);
+                    JOptionPane.showMessageDialog(null, "empleado eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("ha sucecido un problema");
+            e.printStackTrace();
+        }
     }
 
 }
