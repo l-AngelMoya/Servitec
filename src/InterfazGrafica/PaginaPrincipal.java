@@ -73,6 +73,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         btnGasto.setBackground(new java.awt.Color(0, 204, 255));
         btnGasto.setFont(new java.awt.Font("Dutch801 XBd BT", 2, 36)); // NOI18N
         btnGasto.setText("Gasto");
+        btnGasto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGastoActionPerformed(evt);
+            }
+        });
 
         btnClliente.setBackground(new java.awt.Color(0, 204, 255));
         btnClliente.setFont(new java.awt.Font("Dutch801 XBd BT", 2, 36)); // NOI18N
@@ -86,6 +91,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         btnArticulo.setBackground(new java.awt.Color(0, 204, 255));
         btnArticulo.setFont(new java.awt.Font("Dutch801 XBd BT", 2, 36)); // NOI18N
         btnArticulo.setText("Articulo");
+        btnArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArticuloActionPerformed(evt);
+            }
+        });
 
         btnTrabajo.setBackground(new java.awt.Color(0, 204, 255));
         btnTrabajo.setFont(new java.awt.Font("Dutch801 XBd BT", 2, 36)); // NOI18N
@@ -258,8 +268,22 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFacturaServActionPerformed
 
     private void btnTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnTrabajoActionPerformed
+
+    private void btnArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArticuloActionPerformed
+        Articulo art = new Articulo();
+        art.setVisible(true);
+        art.setLocationRelativeTo(null);
+        dispose();
+    }//GEN-LAST:event_btnArticuloActionPerformed
+
+    private void btnGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGastoActionPerformed
+        Gasto gast= new Gasto();
+        gast.setVisible(true);
+        gast.setLocationRelativeTo(null);
+        dispose();
+    }//GEN-LAST:event_btnGastoActionPerformed
 
     /**
      * @param args the command line arguments

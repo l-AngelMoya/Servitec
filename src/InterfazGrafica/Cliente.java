@@ -6,7 +6,10 @@
 package InterfazGrafica;
 
 import java.sql.Connection;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import servitec.DataBase;
 import servitec.clienteClass;
 import servitec.empleadoClass;
@@ -69,6 +72,12 @@ public class Cliente extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel3.setText("Ingrese el numero de cedula ");
+
+        TxtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtCedulaActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel4.setText("Nombre");
@@ -275,7 +284,7 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-        // TODO add your handling code here:
+        DataBase.Insertar(instanciaConexion, 2, this);
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
@@ -296,7 +305,7 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
+        DataBase.eliminar(instanciaConexion, 2, this);
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
@@ -326,6 +335,10 @@ public class Cliente extends javax.swing.JFrame {
         TxtDireccion.setText("");
         Txttelefono.setText("");
     }//GEN-LAST:event_brochitaLimpieza
+
+    private void TxtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtCedulaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,4 +400,199 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
+
+    public DataBase getHaciendoConexion() {
+        return haciendoConexion;
+    }
+
+    public void setHaciendoConexion(DataBase haciendoConexion) {
+        this.haciendoConexion = haciendoConexion;
+    }
+
+    public Connection getInstanciaConexion() {
+        return instanciaConexion;
+    }
+
+    public void setInstanciaConexion(Connection instanciaConexion) {
+        this.instanciaConexion = instanciaConexion;
+    }
+
+    public JButton getBtnBuscar() {
+        return BtnBuscar;
+    }
+
+    public void setBtnBuscar(JButton BtnBuscar) {
+        this.BtnBuscar = BtnBuscar;
+    }
+
+    public JButton getBtnEliminar() {
+        return BtnEliminar;
+    }
+
+    public void setBtnEliminar(JButton BtnEliminar) {
+        this.BtnEliminar = BtnEliminar;
+    }
+
+    public JButton getBtnIngresar() {
+        return BtnIngresar;
+    }
+
+    public void setBtnIngresar(JButton BtnIngresar) {
+        this.BtnIngresar = BtnIngresar;
+    }
+
+    public JButton getBtnModificar() {
+        return BtnModificar;
+    }
+
+    public void setBtnModificar(JButton BtnModificar) {
+        this.BtnModificar = BtnModificar;
+    }
+
+    public JButton getBtnRegresar1() {
+        return BtnRegresar1;
+    }
+
+    public void setBtnRegresar1(JButton BtnRegresar1) {
+        this.BtnRegresar1 = BtnRegresar1;
+    }
+
+    public JButton getBtnSalir() {
+        return BtnSalir;
+    }
+
+    public void setBtnSalir(JButton BtnSalir) {
+        this.BtnSalir = BtnSalir;
+    }
+
+    public JTextField getTxTNombre() {
+        return TxTNombre;
+    }
+
+    public void setTxTNombre(JTextField TxTNombre) {
+        this.TxTNombre = TxTNombre;
+    }
+
+    public JTextField getTxtApellido() {
+        return TxtApellido;
+    }
+
+    public void setTxtApellido(JTextField TxtApellido) {
+        this.TxtApellido = TxtApellido;
+    }
+
+    public JTextField getTxtCedula() {
+        return TxtCedula;
+    }
+
+    public void setTxtCedula(JTextField TxtCedula) {
+        this.TxtCedula = TxtCedula;
+    }
+
+    public JTextField getTxtCorreo() {
+        return TxtCorreo;
+    }
+
+    public void setTxtCorreo(JTextField TxtCorreo) {
+        this.TxtCorreo = TxtCorreo;
+    }
+
+    public JTextField getTxtDireccion() {
+        return TxtDireccion;
+    }
+
+    public void setTxtDireccion(JTextField TxtDireccion) {
+        this.TxtDireccion = TxtDireccion;
+    }
+
+    public JTextField getTxttelefono() {
+        return Txttelefono;
+    }
+
+    public void setTxttelefono(JTextField Txttelefono) {
+        this.Txttelefono = Txttelefono;
+    }
+
+    public JLabel getBrochita() {
+        return brochita;
+    }
+
+    public void setBrochita(JLabel brochita) {
+        this.brochita = brochita;
+    }
+
+    public JLabel getCandado() {
+        return candado;
+    }
+
+    public void setCandado(JLabel candado) {
+        this.candado = candado;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public void setjLabel8(JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
+    }
+
+
+
 }

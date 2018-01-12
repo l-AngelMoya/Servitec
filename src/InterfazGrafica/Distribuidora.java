@@ -6,7 +6,10 @@
 package InterfazGrafica;
 
 import java.sql.Connection;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import servitec.DataBase;
 import servitec.*;
 
@@ -37,7 +40,7 @@ public class Distribuidora extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        TxtCedula = new javax.swing.JTextField();
+        Txtid = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         TxTNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -52,6 +55,8 @@ public class Distribuidora extends javax.swing.JFrame {
         BtnEliminar = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
         BtnRegresar1 = new javax.swing.JButton();
+        candado = new javax.swing.JLabel();
+        brochita = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -65,9 +70,9 @@ public class Distribuidora extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel3.setText("Ingrese el  id ");
 
-        TxtCedula.addActionListener(new java.awt.event.ActionListener() {
+        Txtid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtCedulaActionPerformed(evt);
+                TxtidActionPerformed(evt);
             }
         });
 
@@ -143,6 +148,20 @@ public class Distribuidora extends javax.swing.JFrame {
             }
         });
 
+        candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo.jpg")); // NOI18N
+        candado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                candadoMouseClicked(evt);
+            }
+        });
+
+        brochita.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\limpiar.png")); // NOI18N
+        brochita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                brochitaLimpieza(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,36 +172,36 @@ public class Distribuidora extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(TxtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                        .addComponent(Txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TxtDireccion)
-                            .addComponent(TxtCorreo)
-                            .addComponent(Txttelefono))
-                        .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(BtnModificar, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnRegresar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(57, 57, 57))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(TxtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(TxTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(TxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Txttelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(candado)
+                    .addComponent(brochita))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(BtnModificar, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnRegresar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,40 +213,46 @@ public class Distribuidora extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
                         .addComponent(BtnBuscar)
                         .addGap(18, 18, 18)
                         .addComponent(BtnIngresar)
                         .addGap(18, 18, 18)
                         .addComponent(BtnEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnRegresar1)
-                        .addGap(24, 24, 24)
-                        .addComponent(BtnSalir)
-                        .addGap(164, 164, 164))
+                        .addComponent(BtnModificar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(candado)
+                                .addGap(50, 50, 50)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(brochita))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(Txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnRegresar1)
+                .addGap(24, 24, 24)
+                .addComponent(BtnSalir)
+                .addGap(164, 164, 164))
         );
 
         pack();
@@ -238,11 +263,11 @@ public class Distribuidora extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-        // TODO add your handling code here:
+        DataBase.Insertar(instanciaConexion, 3, this);
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        DistribuidoraClass distribuidora=(DistribuidoraClass)haciendoConexion.Busqueda(instanciaConexion, TxtCedula,3);
+        DistribuidoraClass distribuidora=(DistribuidoraClass)haciendoConexion.Busqueda(instanciaConexion, Txtid,3);
         if(distribuidora==null){
             JOptionPane.showMessageDialog(rootPane, "Dsitribuidora ingresada no existe en la base de datos");
         }else{
@@ -254,7 +279,7 @@ public class Distribuidora extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
+        DataBase.eliminar(instanciaConexion, 3, this);
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
@@ -268,9 +293,26 @@ public class Distribuidora extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_BtnRegresar1ActionPerformed
 
-    private void TxtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCedulaActionPerformed
+    private void TxtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtidActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtCedulaActionPerformed
+    }//GEN-LAST:event_TxtidActionPerformed
+
+    private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
+        TxTNombre.setEnabled(true);
+        Txtid.setEnabled(true);
+        TxtCorreo.setEnabled(true);
+        TxtDireccion.setEnabled(true);
+        Txttelefono.setEnabled(true);
+     
+    }//GEN-LAST:event_candadoMouseClicked
+
+    private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza
+        TxTNombre.setText("");
+        Txtid.setText("");
+        TxtCorreo.setText("");
+        TxtDireccion.setText("");
+        Txttelefono.setText("");
+    }//GEN-LAST:event_brochitaLimpieza
 
     /**
      * @param args the command line arguments
@@ -318,10 +360,12 @@ public class Distribuidora extends javax.swing.JFrame {
     private javax.swing.JButton BtnRegresar1;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JTextField TxTNombre;
-    private javax.swing.JTextField TxtCedula;
     private javax.swing.JTextField TxtCorreo;
     private javax.swing.JTextField TxtDireccion;
+    private javax.swing.JTextField Txtid;
     private javax.swing.JTextField Txttelefono;
+    private javax.swing.JLabel brochita;
+    private javax.swing.JLabel candado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -330,4 +374,182 @@ public class Distribuidora extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
+
+    public DataBase getHaciendoConexion() {
+        return haciendoConexion;
+    }
+
+    public void setHaciendoConexion(DataBase haciendoConexion) {
+        this.haciendoConexion = haciendoConexion;
+    }
+
+    public Connection getInstanciaConexion() {
+        return instanciaConexion;
+    }
+
+    public void setInstanciaConexion(Connection instanciaConexion) {
+        this.instanciaConexion = instanciaConexion;
+    }
+
+    public JButton getBtnBuscar() {
+        return BtnBuscar;
+    }
+
+    public void setBtnBuscar(JButton BtnBuscar) {
+        this.BtnBuscar = BtnBuscar;
+    }
+
+    public JButton getBtnEliminar() {
+        return BtnEliminar;
+    }
+
+    public void setBtnEliminar(JButton BtnEliminar) {
+        this.BtnEliminar = BtnEliminar;
+    }
+
+    public JButton getBtnIngresar() {
+        return BtnIngresar;
+    }
+
+    public void setBtnIngresar(JButton BtnIngresar) {
+        this.BtnIngresar = BtnIngresar;
+    }
+
+    public JButton getBtnModificar() {
+        return BtnModificar;
+    }
+
+    public void setBtnModificar(JButton BtnModificar) {
+        this.BtnModificar = BtnModificar;
+    }
+
+    public JButton getBtnRegresar1() {
+        return BtnRegresar1;
+    }
+
+    public void setBtnRegresar1(JButton BtnRegresar1) {
+        this.BtnRegresar1 = BtnRegresar1;
+    }
+
+    public JButton getBtnSalir() {
+        return BtnSalir;
+    }
+
+    public void setBtnSalir(JButton BtnSalir) {
+        this.BtnSalir = BtnSalir;
+    }
+
+    public JTextField getTxTNombre() {
+        return TxTNombre;
+    }
+
+    public void setTxTNombre(JTextField TxTNombre) {
+        this.TxTNombre = TxTNombre;
+    }
+
+    public JTextField getTxtCorreo() {
+        return TxtCorreo;
+    }
+
+    public void setTxtCorreo(JTextField TxtCorreo) {
+        this.TxtCorreo = TxtCorreo;
+    }
+
+    public JTextField getTxtDireccion() {
+        return TxtDireccion;
+    }
+
+    public void setTxtDireccion(JTextField TxtDireccion) {
+        this.TxtDireccion = TxtDireccion;
+    }
+
+    public JTextField getTxtid() {
+        return Txtid;
+    }
+
+    public void setTxtid(JTextField Txtid) {
+        this.Txtid = Txtid;
+    }
+
+    public JTextField getTxttelefono() {
+        return Txttelefono;
+    }
+
+    public void setTxttelefono(JTextField Txttelefono) {
+        this.Txttelefono = Txttelefono;
+    }
+
+    public JLabel getBrochita() {
+        return brochita;
+    }
+
+    public void setBrochita(JLabel brochita) {
+        this.brochita = brochita;
+    }
+
+    public JLabel getCandado() {
+        return candado;
+    }
+
+    public void setCandado(JLabel candado) {
+        this.candado = candado;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public void setjLabel8(JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
+    }
+
+
 }

@@ -6,6 +6,7 @@
 package servitec;
 
 import InterfazGrafica.*;
+import java.sql.Date;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -158,12 +159,32 @@ public class DataBase<T> {
                         return null;
                     }
                     break;
-                //Factura servitec class
+                // Articulo
                 case (4):
-                    String sq4 = "select * from facturaservitec where noFactura='" + identificador.getText() + "' ";
+                    String sq4 = "SELECT * FROM articulo WHERE codigoArticulo='" + identificador.getText() + "' ";
                     ResultSet rs4 = stmt.executeQuery(sq4);
                     if (rs4.next()) {
-                        objeto = (T) new FacturaServitecClass(rs4.getString(1), rs4.getDate(2), rs4.getString(3), Double.valueOf(rs4.getString(4)), Double.valueOf(rs4.getString(5)), Double.valueOf(rs4.getString(6)));
+                        objeto = (T) new ArticuloClass(rs4.getString(1), rs4.getString(2));
+                    } else {
+                        return null;
+                    }
+                    break;
+                //Trabajo
+                case (5):
+                    String sq5 = "SELECT * FROM trabajo WHERE noTrabajo='" + identificador.getText() + "' ";
+                    ResultSet rs5 = stmt.executeQuery(sq5);
+                    if (rs5.next()) {
+                        objeto = (T) new TrabajoClass(rs5.getString(1),  Date.valueOf(rs5.getString(2)), Date.valueOf(rs5.getString(5)) , Float.valueOf(rs5.getString(6)) ,"001" ,rs5.getString(4) ," ");
+                    } else {
+                        return null;
+                    }
+                    break;
+                //Factura servitec class
+                case (6):
+                    String sq6 = "select * from facturaservitec where noFactura='" + identificador.getText() + "' ";
+                    ResultSet rs6 = stmt.executeQuery(sq6);
+                    if (rs6.next()) {
+                        objeto = (T) new FacturaServitecClass(rs6.getString(1), rs6.getDate(2), rs6.getString(3), Double.valueOf(rs6.getString(4)), Double.valueOf(rs6.getString(5)), Double.valueOf(rs6.getString(6)));
                     } else {//FacturaServitecClass(String noFactura, Date fechaEmision, String cedula, double subtotal, double iva, double total)
                         return null;
                     }
@@ -172,12 +193,14 @@ public class DataBase<T> {
         } catch (SQLException e) {
             System.out.println("ha sucecido un problema");
             e.printStackTrace();
+
         }
         return objeto;
     }
 
     /**
      * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora 4.
+     * Articulo
      *
      * @param instanciaConexion
      * @param tipo
@@ -186,6 +209,7 @@ public class DataBase<T> {
     public static void Insertar(java.sql.Connection instanciaConexion, int tipo, Object clase) {
         try {
             switch (tipo) {
+                //empleado
                 case (1):
                     try {
                         Empleado claseEmpleado = (Empleado) clase;
@@ -210,12 +234,63 @@ public class DataBase<T> {
                         } else {
                             stmt.setString(11, claseEmpleado.getTxtIdSupervisor().getText());
                         }
-                        int filasIngresadas = stmt.executeUpdate();
+                        stmt.executeUpdate();
                         JOptionPane.showMessageDialog(null, "empleado " + claseEmpleado.getTxTNombre().getText() + " " + claseEmpleado.getTxtApellido().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
                     } catch (NumberFormatException | SQLException ex) {
                         ex.printStackTrace();
                     }
 
+                    break;
+                //cliente
+                case (2):
+                    try {
+                        Cliente claseCliente = (Cliente) clase;
+                        String sql = "INSERT INTO cliente VALUES (?,?,?,?,?,?)";
+                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                        stmt.setString(1, claseCliente.getTxtCedula().getText());
+                        stmt.setString(2, claseCliente.getTxTNombre().getText());
+                        stmt.setString(3, claseCliente.getTxtApellido().getText());
+                        stmt.setString(4, claseCliente.getTxtCorreo().getText());
+                        stmt.setString(5, claseCliente.getTxtDireccion().getText());
+                        stmt.setString(6, claseCliente.getTxttelefono().getText());
+                        stmt.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Cliente " + claseCliente.getTxTNombre().getText() + " " + claseCliente.getTxtApellido().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    break;
+                // Distribuidora
+                case (3):
+                    try {
+                        Distribuidora claseDistribuidora = (Distribuidora) clase;
+                        String sql = "INSERT INTO distribuidora  VALUES (?,?,?,?,?)";
+                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                        stmt.setString(1, claseDistribuidora.getTxtid().getText());
+                        stmt.setString(2, claseDistribuidora.getTxTNombre().getText());
+                        stmt.setString(3, claseDistribuidora.getTxtDireccion().getText());
+                        stmt.setString(4, claseDistribuidora.getTxtCorreo().getText());
+                        stmt.setString(5, claseDistribuidora.getTxttelefono().getText());
+                        stmt.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Distribuidora " + claseDistribuidora.getTxTNombre().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    break;
+                // Articulo
+                case (4):
+                    try {
+                        Articulo claseArticulo = (Articulo) clase;
+                        String sql = "INSERT INTO articulo  VALUES (?,?)";
+                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                        stmt.setString(1, claseArticulo.getTxtCodigo().getText());
+                        stmt.setString(2, claseArticulo.getTxtDescri().getText());
+                        stmt.executeUpdate();
+                        JOptionPane.showMessageDialog(null, claseArticulo.getTxtCodigo().getText() + " " + claseArticulo.getTxtDescri().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
                     break;
             }
 
@@ -232,37 +307,59 @@ public class DataBase<T> {
                 case (1):
                     Empleado claseEmpleado = (Empleado) clase;
                     String sql;
-                    if(claseEmpleado.getTxtIdSupervisor().getText().isEmpty()){
-                        sql = "UPDATE empleado SET nombre='"+claseEmpleado.getTxTNombre().getText()+ "', apellido='"+claseEmpleado.getTxtApellido().getText()+ "',correo='"+claseEmpleado.getTxtCorreo().getText()+ "',direccion='"+claseEmpleado.getTxtDireccion().getText()+ "',telefono='"+claseEmpleado.getTxttelefono().getText()+ "',cargo='"+claseEmpleado.getTxtCargo().getText()+ "',salarioMensual='"+Double.valueOf(claseEmpleado.getTxtSalario().getText())+ "',user='"+claseEmpleado.getTxtUser().getText()+ "',contraseña='"+claseEmpleado.getTxtContra().getText()+ "',idSupervisor='"+null+"' ";
-                        
-                    }else{
-                        sql = "UPDATE empleado SET nombre='"+claseEmpleado.getTxTNombre().getText()+ "', apellido='"+claseEmpleado.getTxtApellido().getText()+ "',correo='"+claseEmpleado.getTxtCorreo().getText()+ "',direccion='"+claseEmpleado.getTxtDireccion().getText()+ "',telefono='"+claseEmpleado.getTxttelefono().getText()+ "',cargo='"+claseEmpleado.getTxtCargo().getText()+ "',salarioMensual='"+Double.valueOf(claseEmpleado.getTxtSalario().getText())+ "',user='"+claseEmpleado.getTxtUser().getText()+ "',contraseña="+claseEmpleado.getTxtContra().getText()+ "',idSupervisor='"+claseEmpleado.getTxtIdSupervisor().getText()+ "' ";
+                    if (claseEmpleado.getTxtIdSupervisor().getText().equals("")) {
+                        sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "',correo='" + claseEmpleado.getTxtCorreo().getText() + "',direccion='" + claseEmpleado.getTxtDireccion().getText() + "',telefono='" + claseEmpleado.getTxttelefono().getText() + "',cargo='" + claseEmpleado.getTxtCargo().getText() + "',salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "',user='" + claseEmpleado.getTxtUser().getText() + "',contraseña='" + claseEmpleado.getTxtContra().getText() + "',idSupervisor='" + "null" + "' ";
+                    } else {
+                        sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "',correo='" + claseEmpleado.getTxtCorreo().getText() + "',direccion='" + claseEmpleado.getTxtDireccion().getText() + "',telefono='" + claseEmpleado.getTxttelefono().getText() + "',cargo='" + claseEmpleado.getTxtCargo().getText() + "',salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "',user='" + claseEmpleado.getTxtUser().getText() + "',contraseña=" + claseEmpleado.getTxtContra().getText() + "',idSupervisor='" + claseEmpleado.getTxtIdSupervisor().getText() + "' ";
                     }
 
                     PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
-                    stmt.executeUpdate(sql); 
+                    stmt.executeUpdate(sql);
                     break;
-                case(2):
+                case (2):
                     System.out.println("hola");
-                break;
+                    break;
             }
-            }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("ha sucecido un problema");
             e.printStackTrace();
         }
-        }
-        //String sq1 = "SELECT * FROM empleado WHERE cedula='" + identificador.getText() + "' ";
+    }
+
     public static void eliminar(java.sql.Connection instanciaConexion, int tipo, Object clase) {
         try {
             switch (tipo) {
                 case (1):
                     Empleado claseEmpleado = (Empleado) clase;
                     String sq1 = "DELETE FROM empleado WHERE cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
-                    PreparedStatement stmt = instanciaConexion.prepareStatement(sq1);
-                    stmt.executeUpdate(sq1);
+                    PreparedStatement stmt1 = instanciaConexion.prepareStatement(sq1);
+                    stmt1.executeUpdate(sq1);
                     JOptionPane.showMessageDialog(null, "empleado eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                //cliente
+                case (2):
+                    Cliente claseCliente = (Cliente) clase;
+                    String sq2 = "DELETE FROM cliente WHERE cedula='" + claseCliente.getTxtCedula().getText() + "'";
+                    PreparedStatement stmt2 = instanciaConexion.prepareStatement(sq2);
+                    stmt2.executeUpdate(sq2);
+                    JOptionPane.showMessageDialog(null, "cliente eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                //Distribuidora
+                case (3):
+                    Distribuidora claseDistribuidora = (Distribuidora) clase;
+                    String sq3 = "DELETE FROM distribuidora WHERE idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
+                    PreparedStatement stmt3 = instanciaConexion.prepareStatement(sq3);
+                    stmt3.executeUpdate(sq3);
+                    JOptionPane.showMessageDialog(null, "Distribuidora eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case (4):
+                    Articulo claseArticulo = (Articulo) clase;
+                    String sq4 = "DELETE FROM articulo WHERE codigoArticulo='" + claseArticulo.getTxtCodigo().getText() + "'";
+                    PreparedStatement stmt4 = instanciaConexion.prepareStatement(sq4);
+                    stmt4.executeUpdate(sq4);
+                    JOptionPane.showMessageDialog(null, "Articulo eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
+                    break;
             }
-
         } catch (SQLException e) {
             System.out.println("ha sucecido un problema");
             e.printStackTrace();

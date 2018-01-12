@@ -21,6 +21,9 @@ public class DistribuidoraClass {
     */
     //private String sucursales;
 
+    
+
+    
     public DistribuidoraClass(String idDistribuidora, String nombre, String direccion, String correo, String telefono) {
         this.idDistribuidora = idDistribuidora;
         this.nombre = nombre;

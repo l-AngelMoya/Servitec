@@ -189,6 +189,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Gasto"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGastoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnClliente">
       <Properties>
@@ -214,6 +217,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Articulo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnArticuloActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTrabajo">
       <Properties>
