@@ -302,6 +302,12 @@ public class DataBase<T> {
 
     }
 
+    /**
+     * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora 4.
+     * @param instanciaConexion
+     * @param tipo
+     * @param clase
+     */
     public static void actualizar(java.sql.Connection instanciaConexion, int tipo, Object clase) {
         try {
             switch (tipo) {
@@ -323,6 +329,12 @@ public class DataBase<T> {
                     }
 
                     break;
+                case (2):
+                    Distribuidora claseDistribuidora = (Distribuidora) clase;
+                    String sq2 = "UPDATE distribuidora SET nombre='" + claseDistribuidora.getTxTNombre().getText() + "', direccion='" + claseDistribuidora.getTxtDireccion().getText()+ "', correo='" + claseDistribuidora.getTxtCorreo().getText() + "', telefono='" + claseDistribuidora.getTxttelefono().getText() + "' where idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
+                    PreparedStatement stmt = instanciaConexion.prepareStatement(sq2);
+                    stmt.executeUpdate(sq2);
+                    JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             System.out.println("ha sucecido un problema");

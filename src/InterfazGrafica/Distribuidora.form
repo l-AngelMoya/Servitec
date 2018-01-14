@@ -39,24 +39,31 @@
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel4" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                  <Component id="jLabel6" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="54" pref="54" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="TxtCorreo" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
-                      <Component id="TxTNombre" min="-2" pref="218" max="-2" attributes="0"/>
-                      <Component id="TxtDireccion" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel4" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="54" pref="54" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="TxTNombre" min="-2" pref="218" max="-2" attributes="0"/>
+                              <Component id="TxtDireccion" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="Txttelefono" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="candado" min="-2" max="-2" attributes="0"/>
+                          <Component id="brochita" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="Txttelefono" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="candado" min="-2" max="-2" attributes="0"/>
-                  <Component id="brochita" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel6" min="-2" pref="67" max="-2" attributes="0"/>
+                      <EmptySpace min="54" pref="54" max="-2" attributes="0"/>
+                      <Component id="TxtCorreo" min="-2" pref="218" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -104,18 +111,18 @@
                                   <Component id="jLabel4" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="TxTNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel6" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="TxtCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="candado" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
