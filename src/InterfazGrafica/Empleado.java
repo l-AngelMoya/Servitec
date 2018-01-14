@@ -18,7 +18,7 @@ import servitec.empleadoClass;
  * @author Angel Moya
  */
 public class Empleado extends javax.swing.JFrame {
-
+    private static int contador=0;
     DataBase haciendoConexion = new DataBase();
     Connection instanciaConexion = haciendoConexion.getConnection();
     /**
@@ -144,6 +144,7 @@ public class Empleado extends javax.swing.JFrame {
 
         BtnModificar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnModificar.setText("Modificar");
+        BtnModificar.setDoubleBuffered(true);
         BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnModificarActionPerformed(evt);
@@ -199,7 +200,7 @@ public class Empleado extends javax.swing.JFrame {
         TxtContra.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtContra.setEnabled(false);
 
-        candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo.jpg")); // NOI18N
+        candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo1.jpg")); // NOI18N
         candado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 candadoMouseClicked(evt);
@@ -437,17 +438,33 @@ public class Empleado extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtCedulaActionPerformed
 
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
-        TxTNombre.setEnabled(true);
-        TxtApellido.setEnabled(true);
-        TxtCargo.setEnabled(true);
-        TxtCedula.setEnabled(true);
-        TxtCorreo.setEnabled(true);
-        TxtDireccion.setEnabled(true);
-        TxtIdSupervisor.setEnabled(true);
-        TxtUser.setEnabled(true);
-        Txttelefono.setEnabled(true);
-        TxtSalario.setEnabled(true);
-        TxtContra.setEnabled(true);
+        if(contador%2==0){
+            candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo.jpg")); // NOI18N
+            TxTNombre.setEnabled(true);
+            TxtApellido.setEnabled(true);
+            TxtCargo.setEnabled(true);
+            TxtCorreo.setEnabled(true);
+            TxtDireccion.setEnabled(true);
+            TxtIdSupervisor.setEnabled(true);
+            TxtUser.setEnabled(true);
+            Txttelefono.setEnabled(true);
+            TxtSalario.setEnabled(true);
+            TxtContra.setEnabled(true);
+        }else{
+            candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo1.jpg")); // NOI18N
+            TxTNombre.setEnabled(false);
+            TxtApellido.setEnabled(false);
+            TxtCargo.setEnabled(false);
+            TxtCorreo.setEnabled(false);
+            TxtDireccion.setEnabled(false);
+            TxtIdSupervisor.setEnabled(false);
+            TxtUser.setEnabled(false);
+            Txttelefono.setEnabled(false);
+            TxtSalario.setEnabled(false);
+            TxtContra.setEnabled(false);
+        }
+        contador=contador+1;
+        
     }//GEN-LAST:event_candadoMouseClicked
 
     private void Limpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Limpieza

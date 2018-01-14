@@ -268,7 +268,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFacturaServActionPerformed
 
     private void btnTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajoActionPerformed
-        
+        Trabajo tr = new Trabajo();
+        tr.setVisible(true);
+        tr.setLocationRelativeTo(null);
+        dispose();
     }//GEN-LAST:event_btnTrabajoActionPerformed
 
     private void btnArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArticuloActionPerformed

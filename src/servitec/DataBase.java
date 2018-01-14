@@ -6,6 +6,7 @@
 package servitec;
 
 import InterfazGrafica.*;
+import java.sql.Connection;
 import java.sql.Date;
 
 import java.sql.DriverManager;
@@ -131,7 +132,7 @@ public class DataBase<T> {
             switch (tipo) {
                 //Busqueda de empleado
                 case (1):
-                    String sq1 = "SELECT * FROM empleado WHERE cedula='" + identificador.getText() + "' ";
+                    String sq1 = "SELECT * FROM empleado WHERE cedula=" + identificador.getText() + " ";
                     ResultSet rs1 = stmt.executeQuery(sq1);
                     if (rs1.next()) {
                         objeto = (T) new empleadoClass(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5), rs1.getString(6), rs1.getString(7), Float.valueOf(rs1.getString(8)), rs1.getString(9), rs1.getString(10), rs1.getString(11));
@@ -174,7 +175,7 @@ public class DataBase<T> {
                     String sq5 = "SELECT * FROM trabajo WHERE noTrabajo='" + identificador.getText() + "' ";
                     ResultSet rs5 = stmt.executeQuery(sq5);
                     if (rs5.next()) {
-                        objeto = (T) new TrabajoClass(rs5.getString(1),  Date.valueOf(rs5.getString(2)), Date.valueOf(rs5.getString(5)) , Float.valueOf(rs5.getString(6)) ,"001" ,rs5.getString(4) ," ");
+                        objeto = (T) new TrabajoClass(rs5.getString(1), Date.valueOf(rs5.getString(2)), Date.valueOf(rs5.getString(5)), Float.valueOf(rs5.getString(6)), "001", rs5.getString(4), " ", rs5.getString(3));
                     } else {
                         return null;
                     }
@@ -185,7 +186,7 @@ public class DataBase<T> {
                     ResultSet rs6 = stmt.executeQuery(sq6);
                     if (rs6.next()) {
                         objeto = (T) new FacturaServitecClass(rs6.getString(1), rs6.getDate(2), rs6.getString(3), Double.valueOf(rs6.getString(4)), Double.valueOf(rs6.getString(5)), Double.valueOf(rs6.getString(6)));
-                    } else {//FacturaServitecClass(String noFactura, Date fechaEmision, String cedula, double subtotal, double iva, double total)
+                    } else {
                         return null;
                     }
                     break;
@@ -306,24 +307,47 @@ public class DataBase<T> {
             switch (tipo) {
                 case (1):
                     Empleado claseEmpleado = (Empleado) clase;
-                    String sql;
-                    if (claseEmpleado.getTxtIdSupervisor().getText().equals("")) {
-                        sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "',correo='" + claseEmpleado.getTxtCorreo().getText() + "',direccion='" + claseEmpleado.getTxtDireccion().getText() + "',telefono='" + claseEmpleado.getTxttelefono().getText() + "',cargo='" + claseEmpleado.getTxtCargo().getText() + "',salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "',user='" + claseEmpleado.getTxtUser().getText() + "',contraseña='" + claseEmpleado.getTxtContra().getText() + "',idSupervisor='" + "null" + "' ";
+
+                    if (VerificarCedulaEmpleado(instanciaConexion, claseEmpleado)) {
+                        String sql;
+                        if (claseEmpleado.getTxtIdSupervisor().getText().isEmpty() || claseEmpleado.getTxtIdSupervisor().getText().equalsIgnoreCase("null")) {
+                            sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "', user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor= null" + " where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
+                        } else {
+                            sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "', user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor='" + claseEmpleado.getTxtIdSupervisor().getText() + "' where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
+                        }
+                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                        stmt.executeUpdate(sql);
+                        JOptionPane.showMessageDialog(null, claseEmpleado.getTxTNombre().getText() + " fue Actualizado con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "',correo='" + claseEmpleado.getTxtCorreo().getText() + "',direccion='" + claseEmpleado.getTxtDireccion().getText() + "',telefono='" + claseEmpleado.getTxttelefono().getText() + "',cargo='" + claseEmpleado.getTxtCargo().getText() + "',salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "',user='" + claseEmpleado.getTxtUser().getText() + "',contraseña=" + claseEmpleado.getTxtContra().getText() + "',idSupervisor='" + claseEmpleado.getTxtIdSupervisor().getText() + "' ";
+                        JOptionPane.showMessageDialog(null,  "Supervisor no existe en la base de datos", "Actualizacion completa", JOptionPane.ERROR_MESSAGE);
                     }
 
-                    PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
-                    stmt.executeUpdate(sql);
-                    break;
-                case (2):
-                    System.out.println("hola");
                     break;
             }
         } catch (Exception e) {
             System.out.println("ha sucecido un problema");
             e.printStackTrace();
         }
+    }
+
+    public static boolean VerificarCedulaEmpleado(Connection instanciaConexion, Empleado e) {
+        boolean bandera = false;
+        try {
+            String sql = "SELECT cedula FROM empleado;";
+            Statement stmt = instanciaConexion.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                do {
+                    if (rs.getString(1).equalsIgnoreCase(e.getTxtIdSupervisor().getText())) {
+                        return true;
+                    }
+                } while (rs.next());
+            }
+        } catch (SQLException ex) {
+            System.out.println("ha sucecido un problema");
+            ex.printStackTrace();
+        }
+        return bandera;
     }
 
     public static void eliminar(java.sql.Connection instanciaConexion, int tipo, Object clase) {

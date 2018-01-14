@@ -20,6 +20,7 @@ public class TrabajoClass {
     private String codArt;
     private String factura;
     private String Bitacora;
+    private String descripcion;
 
     public TrabajoClass() {
         
@@ -30,17 +31,19 @@ public class TrabajoClass {
         this.factura = null;
         this.Bitacora = null;
         this.fechaEntrega=null;
-        
+        this.descripcion=null;
         
     }
 
-    public TrabajoClass(String nTrabajo,Date fechaTrabajo,Date fechaEntrega, float costoMano, String codArt, String factura, String Bitacora) {
+    public TrabajoClass(String nTrabajo,Date fechaTrabajo,Date fechaEntrega, float costoMano, String codArt, String factura, String Bitacora,String descripcion) {
         this.nTrabajo = nTrabajo;
         this.fechaTrabajo = fechaTrabajo;
         this.costoMano = costoMano;
         this.codArt = codArt;
         this.factura = factura;
         this.Bitacora = Bitacora;
+        this.descripcion=descripcion;
+       
     }
 
     public String getnTrabajo() {
@@ -99,6 +102,14 @@ public class TrabajoClass {
 
     public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
     

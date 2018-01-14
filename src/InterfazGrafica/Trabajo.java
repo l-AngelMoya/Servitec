@@ -60,9 +60,10 @@ public class Trabajo extends javax.swing.JFrame {
         BtnBuscar1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         TxtDescripcion = new javax.swing.JTextField();
+        candado = new javax.swing.JLabel();
+        brochita = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setEnabled(false);
 
         jLabel2.setFont(new java.awt.Font("Lucida Bright", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
@@ -73,7 +74,9 @@ public class Trabajo extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel4.setText("Ingrese el  N° de trabajo");
 
+        TxtFechaEntrega.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         TxtFechaEntrega.setEnabled(false);
+        TxtFechaEntrega.setOpaque(false);
         TxtFechaEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtFechaEntregaEntregaActionPerformed(evt);
@@ -137,7 +140,9 @@ public class Trabajo extends javax.swing.JFrame {
             }
         });
 
+        TxtManoObra.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         TxtManoObra.setEnabled(false);
+        TxtManoObra.setOpaque(false);
         TxtManoObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtManoObraActionPerformed(evt);
@@ -156,7 +161,9 @@ public class Trabajo extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel10.setText("N°  Factura");
 
+        TxtNumFact.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         TxtNumFact.setEnabled(false);
+        TxtNumFact.setOpaque(false);
         TxtNumFact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtNumFactActionPerformed(evt);
@@ -166,7 +173,9 @@ public class Trabajo extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel11.setText("Fecha Actual");
 
+        TxtFechaActual.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         TxtFechaActual.setEnabled(false);
+        TxtFechaActual.setOpaque(false);
         TxtFechaActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtFechaActualActionPerformed(evt);
@@ -193,6 +202,7 @@ public class Trabajo extends javax.swing.JFrame {
                 "Articulos"
             }
         ));
+        jTable1.setOpaque(false);
         jScrollPane2.setViewportView(jTable1);
 
         BtnBuscar1.setFont(new java.awt.Font("MS Reference Serif", 3, 14)); // NOI18N
@@ -206,10 +216,26 @@ public class Trabajo extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel12.setText("Descripcion");
 
+        TxtDescripcion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         TxtDescripcion.setEnabled(false);
+        TxtDescripcion.setOpaque(false);
         TxtDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtDescripcionActionPerformed(evt);
+            }
+        });
+
+        candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo.jpg")); // NOI18N
+        candado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                candadoMouseClicked(evt);
+            }
+        });
+
+        brochita.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\limpiar.png")); // NOI18N
+        brochita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                brochitaLimpieza(evt);
             }
         });
 
@@ -263,21 +289,32 @@ public class Trabajo extends javax.swing.JFrame {
                                     .addComponent(TxtManoObra))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(155, 155, 155)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(155, 155, 155)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(BtnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(62, 62, 62)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(candado)
+                                            .addComponent(brochita))
+                                        .addGap(61, 61, 61)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(BtnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnBuscar1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(BtnBuscar1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                        .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -305,12 +342,18 @@ public class Trabajo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtnIngresar)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(BtnModificar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(BtnIngresar)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addComponent(BtnModificar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(candado)
+                                .addGap(18, 18, 18)
+                                .addComponent(brochita)))
                         .addGap(26, 26, 26)
                         .addComponent(BtnEliminar)
                         .addGap(18, 18, 18)
@@ -364,6 +407,7 @@ public class Trabajo extends javax.swing.JFrame {
             TxtNumFact.setText(trabajo.getFactura());
             jTextAreaBitacora.setText(trabajo.getBitacora());
             TxtNumFact.setText(trabajo.getFactura());
+            TxtDescripcion.setText(trabajo.getDescripcion());
             
         }
     }//GEN-LAST:event_BtnBuscarActionPerformed
@@ -378,7 +422,7 @@ public class Trabajo extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        DataBase.eliminar(instanciaConexion,4, this);
+        //DataBase.eliminar(instanciaConexion,4, this);
         //JOptionPane.showMessageDialog(rootPane, "registro eliminado con exito");
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
@@ -416,6 +460,27 @@ public class Trabajo extends javax.swing.JFrame {
     private void TxtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtDescripcionActionPerformed
+
+    private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
+        TxtNumTrabajo.setEnabled(true);
+        TxtFechaEntrega.setEnabled(true);
+        TxtFechaActual.setEnabled(true);
+        TxtDescripcion.setEnabled(true);
+        TxtNumFact.setEnabled(true);
+        TxtManoObra.setEnabled(true);
+    }//GEN-LAST:event_candadoMouseClicked
+
+    private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza
+        TxtNumTrabajo.setText("");
+        TxtFechaEntrega.setText("");
+        TxtFechaActual.setText("");
+        TxtDescripcion.setText("");
+        jTextAreaBitacora.setText("");
+        jTable1.clearSelection();
+        TxtNumFact.setText("");
+        TxtManoObra.setText("");
+
+    }//GEN-LAST:event_brochitaLimpieza
 
     /**
      * @param args the command line arguments
@@ -467,6 +532,8 @@ public class Trabajo extends javax.swing.JFrame {
     private javax.swing.JTextField TxtManoObra;
     private javax.swing.JTextField TxtNumFact;
     private javax.swing.JTextField TxtNumTrabajo;
+    private javax.swing.JLabel brochita;
+    private javax.swing.JLabel candado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
