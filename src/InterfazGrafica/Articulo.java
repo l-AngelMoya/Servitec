@@ -18,11 +18,11 @@ import servitec.*;
  */
 public class Articulo extends javax.swing.JFrame {
 
-    
+    private static int contador = 0;
+
     DataBase haciendoConexion = new DataBase();
     Connection instanciaConexion = haciendoConexion.getConnection();
-    
-    
+
     public Articulo() {
         initComponents();
     }
@@ -162,14 +162,14 @@ public class Articulo extends javax.swing.JFrame {
             }
         });
 
-        candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo.jpg")); // NOI18N
+        candado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/photo1.jpg"))); // NOI18N
         candado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 candadoMouseClicked(evt);
             }
         });
 
-        brochita.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\limpiar.png")); // NOI18N
+        brochita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/limpiar.png"))); // NOI18N
         brochita.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 brochitaLimpieza(evt);
@@ -201,7 +201,7 @@ public class Articulo extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(candado)
                             .addComponent(brochita))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -283,10 +283,10 @@ public class Articulo extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtDistribuidorActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-       ArticuloClass articulo=(ArticuloClass)haciendoConexion.Busqueda(instanciaConexion, TxtCodigo,4);
-        if(articulo==null){
+        ArticuloClass articulo = (ArticuloClass) haciendoConexion.Busqueda(instanciaConexion, TxtCodigo, 4);
+        if (articulo == null) {
             JOptionPane.showMessageDialog(rootPane, "Articulo ingresado no existe en la base de datos");
-        }else{
+        } else {
             TxtCodigo.setText(articulo.getCodigo());
             TxtPrecioUnitario.setText(articulo.getPrecioUnitario());
             TxtDescri.setText(articulo.getDescripcion());
@@ -305,7 +305,7 @@ public class Articulo extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        DataBase.eliminar(instanciaConexion,4, this);
+        DataBase.eliminar(instanciaConexion, 4, this);
         //JOptionPane.showMessageDialog(rootPane, "registro eliminado con exito");
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
@@ -321,11 +321,21 @@ public class Articulo extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
-        TxtCodigo.setEnabled(true);
-        TxtDescri.setEnabled(true);
-        TxtDescuento.setEnabled(true);
-        TxtDistribuidor.setEnabled(true);
-        TxtPrecioUnitario.setEnabled(true);
+        if (contador % 2 == 0) {
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo.jpg"));
+            TxtDescri.setEnabled(true);
+            TxtDescuento.setEnabled(true);
+            TxtDistribuidor.setEnabled(true);
+            TxtPrecioUnitario.setEnabled(true);
+        } else {
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg")); //
+            TxtDescri.setEnabled(false);
+            TxtDescuento.setEnabled(false);
+            TxtDistribuidor.setEnabled(false);
+            TxtPrecioUnitario.setEnabled(false);
+        }
+        contador = contador + 1;
+
     }//GEN-LAST:event_candadoMouseClicked
 
     private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza
@@ -572,6 +582,5 @@ public class Articulo extends javax.swing.JFrame {
     public void setjLabel8(JLabel jLabel8) {
         this.jLabel8 = jLabel8;
     }
-
 
 }

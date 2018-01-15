@@ -34,7 +34,7 @@ public class DataBase<T> {
 
     private static final String driver = "com.mysql.jdbc.Driver"; //driver (se queda siempre igual, si se usa mysql)
     private static final String usuario = "root"; //usuario de la base de datos
-    private static final String contrasenna = "dean"; //contraseña del usuario
+    private static final String contrasenna = ""; //contraseña del usuario
     private static final String url = "jdbc:mysql://localhost:3306/servitec"; //basicamnete es la informacion del servidor de la base deatos y es jdbc:mysql://(direccionIp):(puerto)/(nombreDeLaBaseDeDatos)
 
     /*
@@ -75,7 +75,7 @@ public class DataBase<T> {
             if (rs.next()) {
                 b = true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("ha sucecido un problema");
         }
         return b;
@@ -304,6 +304,7 @@ public class DataBase<T> {
 
     /**
      * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora 4.
+     *
      * @param instanciaConexion
      * @param tipo
      * @param clase
@@ -314,7 +315,7 @@ public class DataBase<T> {
                 case (1):
                     Empleado claseEmpleado = (Empleado) clase;
 
-                    if (VerificarCedulaEmpleado(instanciaConexion, claseEmpleado)) {
+                    if (VerificarCedulaEmpleado(instanciaConexion, claseEmpleado) || claseEmpleado.getTxtIdSupervisor().getText().isEmpty()) {
                         String sql;
                         if (claseEmpleado.getTxtIdSupervisor().getText().isEmpty() || claseEmpleado.getTxtIdSupervisor().getText().equalsIgnoreCase("null")) {
                             sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "', user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor= null" + " where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
@@ -325,16 +326,24 @@ public class DataBase<T> {
                         stmt.executeUpdate(sql);
                         JOptionPane.showMessageDialog(null, claseEmpleado.getTxTNombre().getText() + " fue Actualizado con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null,  "Supervisor no existe en la base de datos", "Actualizacion completa", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Supervisor no existe en la base de datos", "Actualizacion completa", JOptionPane.ERROR_MESSAGE);
                     }
 
                     break;
                 case (2):
-                    Distribuidora claseDistribuidora = (Distribuidora) clase;
-                    String sq2 = "UPDATE distribuidora SET nombre='" + claseDistribuidora.getTxTNombre().getText() + "', direccion='" + claseDistribuidora.getTxtDireccion().getText()+ "', correo='" + claseDistribuidora.getTxtCorreo().getText() + "', telefono='" + claseDistribuidora.getTxttelefono().getText() + "' where idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
-                    PreparedStatement stmt = instanciaConexion.prepareStatement(sq2);
-                    stmt.executeUpdate(sq2);
+                    Cliente claseCliente = (Cliente) clase;
+                    String sq2 = "UPDATE cliente SET nombre='" + claseCliente.getTxTNombre().getText() + "', apellido='" + claseCliente.getTxtApellido().getText() + "', correo='" + claseCliente.getTxtCorreo().getText() + "', direccion='" + claseCliente.getTxtDireccion().getText() + "', telefono='" + claseCliente.getTxttelefono().getText() +"' where cedula='" + claseCliente.getTxtCedula().getText() + "'";
+                    PreparedStatement stmt2 = instanciaConexion.prepareStatement(sq2);
+                    stmt2.executeUpdate(sq2);
                     JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case (3):
+                    Distribuidora claseDistribuidora = (Distribuidora) clase;
+                    String sq3 = "UPDATE distribuidora SET nombre='" + claseDistribuidora.getTxTNombre().getText() + "', direccion='" + claseDistribuidora.getTxtDireccion().getText() + "', correo='" + claseDistribuidora.getTxtCorreo().getText() + "', telefono='" + claseDistribuidora.getTxttelefono().getText() + "' where idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
+                    PreparedStatement stmt3 = instanciaConexion.prepareStatement(sq3);
+                    stmt3.executeUpdate(sq3);
+                    JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
+                    break;
             }
         } catch (Exception e) {
             System.out.println("ha sucecido un problema");

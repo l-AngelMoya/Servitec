@@ -337,7 +337,7 @@
     <Component class="javax.swing.JLabel" name="candado">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Angel Moya\Documents\Luis Angel\Espol\Sexto semestre\Bases de datos\proyecto\Servitec\src\src\photo.jpg"/>
+          <Image iconType="3" name="/src/photo1.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -347,7 +347,7 @@
     <Component class="javax.swing.JLabel" name="brochita">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Angel Moya\Documents\Luis Angel\Espol\Sexto semestre\Bases de datos\proyecto\Servitec\src\src\limpiar.png"/>
+          <Image iconType="3" name="/src/limpiar.png"/>
         </Property>
       </Properties>
       <Events>

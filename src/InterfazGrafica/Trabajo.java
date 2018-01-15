@@ -15,11 +15,11 @@ import servitec.*;
  */
 public class Trabajo extends javax.swing.JFrame {
 
+    private static int contador = 0;
+
     DataBase haciendoConexion = new DataBase();
     Connection instanciaConexion = haciendoConexion.getConnection();
-    
-    
-    
+
     public Trabajo() {
         initComponents();
     }
@@ -225,14 +225,14 @@ public class Trabajo extends javax.swing.JFrame {
             }
         });
 
-        candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo.jpg")); // NOI18N
+        candado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/photo1.jpg"))); // NOI18N
         candado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 candadoMouseClicked(evt);
             }
         });
 
-        brochita.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\limpiar.png")); // NOI18N
+        brochita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/limpiar.png"))); // NOI18N
         brochita.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 brochitaLimpieza(evt);
@@ -396,10 +396,10 @@ public class Trabajo extends javax.swing.JFrame {
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
 
-        TrabajoClass trabajo=(TrabajoClass)haciendoConexion.Busqueda(instanciaConexion, TxtNumTrabajo,5);
-        if(trabajo==null){
+        TrabajoClass trabajo = (TrabajoClass) haciendoConexion.Busqueda(instanciaConexion, TxtNumTrabajo, 5);
+        if (trabajo == null) {
             JOptionPane.showMessageDialog(rootPane, "Trabajo ingresado no existe en la base de datos");
-        }else{
+        } else {
             TxtNumTrabajo.setText(trabajo.getnTrabajo());
             TxtFechaEntrega.setText(String.valueOf(trabajo.getFechaEntrega()));
             TxtFechaActual.setText(String.valueOf(trabajo.getFechaTrabajo()));
@@ -408,7 +408,7 @@ public class Trabajo extends javax.swing.JFrame {
             jTextAreaBitacora.setText(trabajo.getBitacora());
             TxtNumFact.setText(trabajo.getFactura());
             TxtDescripcion.setText(trabajo.getDescripcion());
-            
+
         }
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
@@ -462,12 +462,23 @@ public class Trabajo extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtDescripcionActionPerformed
 
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
-        TxtNumTrabajo.setEnabled(true);
-        TxtFechaEntrega.setEnabled(true);
-        TxtFechaActual.setEnabled(true);
-        TxtDescripcion.setEnabled(true);
-        TxtNumFact.setEnabled(true);
-        TxtManoObra.setEnabled(true);
+        if (contador % 2 == 0) {
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo.jpg"));
+            TxtFechaEntrega.setEnabled(true);
+            TxtFechaActual.setEnabled(true);
+            TxtDescripcion.setEnabled(true);
+            TxtNumFact.setEnabled(true);
+            TxtManoObra.setEnabled(true);
+        } else {
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg"));
+            TxtFechaEntrega.setEnabled(false);
+            TxtFechaActual.setEnabled(false);
+            TxtDescripcion.setEnabled(false);
+            TxtNumFact.setEnabled(false);
+            TxtManoObra.setEnabled(false);
+        }
+        contador=contador+1;
+
     }//GEN-LAST:event_candadoMouseClicked
 
     private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza

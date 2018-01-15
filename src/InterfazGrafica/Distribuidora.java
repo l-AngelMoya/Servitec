@@ -19,8 +19,11 @@ import servitec.*;
  */
 public class Distribuidora extends javax.swing.JFrame {
 
+    private static int contador = 0;
+
     DataBase haciendoConexion = new DataBase();
     Connection instanciaConexion = haciendoConexion.getConnection();
+
     /**
      * Creates new form Empleado
      */
@@ -148,14 +151,14 @@ public class Distribuidora extends javax.swing.JFrame {
             }
         });
 
-        candado.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\photo.jpg")); // NOI18N
+        candado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/photo1.jpg"))); // NOI18N
         candado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 candadoMouseClicked(evt);
             }
         });
 
-        brochita.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel Moya\\Documents\\Luis Angel\\Espol\\Sexto semestre\\Bases de datos\\proyecto\\Servitec\\src\\src\\limpiar.png")); // NOI18N
+        brochita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/limpiar.png"))); // NOI18N
         brochita.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 brochitaLimpieza(evt);
@@ -263,7 +266,7 @@ public class Distribuidora extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        DataBase.actualizar(instanciaConexion, 2, this);
+        DataBase.actualizar(instanciaConexion, 3, this);
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
@@ -271,10 +274,10 @@ public class Distribuidora extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        DistribuidoraClass distribuidora=(DistribuidoraClass)haciendoConexion.Busqueda(instanciaConexion, Txtid,3);
-        if(distribuidora==null){
+        DistribuidoraClass distribuidora = (DistribuidoraClass) haciendoConexion.Busqueda(instanciaConexion, Txtid, 3);
+        if (distribuidora == null) {
             JOptionPane.showMessageDialog(rootPane, "Dsitribuidora ingresada no existe en la base de datos");
-        }else{
+        } else {
             TxTNombre.setText(distribuidora.getNombre());
             TxtCorreo.setText(distribuidora.getCorreo());
             TxtDireccion.setText(distribuidora.getDireccion());
@@ -302,12 +305,21 @@ public class Distribuidora extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtidActionPerformed
 
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
-        TxTNombre.setEnabled(true);
-        Txtid.setEnabled(true);
-        TxtCorreo.setEnabled(true);
-        TxtDireccion.setEnabled(true);
-        Txttelefono.setEnabled(true);
-     
+        if (contador % 2 == 0) {
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo.jpg"));
+            TxTNombre.setEnabled(true);
+            TxtCorreo.setEnabled(true);
+            TxtDireccion.setEnabled(true);
+            Txttelefono.setEnabled(true);
+        } else {
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg"));
+            TxTNombre.setEnabled(false);
+            TxtCorreo.setEnabled(false);
+            TxtDireccion.setEnabled(false);
+            Txttelefono.setEnabled(false);
+        }
+        contador = contador + 1;
+
     }//GEN-LAST:event_candadoMouseClicked
 
     private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza
@@ -554,6 +566,5 @@ public class Distribuidora extends javax.swing.JFrame {
     public void setjLabel8(JLabel jLabel8) {
         this.jLabel8 = jLabel8;
     }
-
 
 }

@@ -17,10 +17,10 @@ public class Servitec {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         Inicio inicio=new Inicio();
+           Inicio inicio=new Inicio();
         inicio.setLocationRelativeTo(null);
-        inicio.setVisible(true);
-        
+        inicio.setVisible(true); 
+      
     }
     
 }
