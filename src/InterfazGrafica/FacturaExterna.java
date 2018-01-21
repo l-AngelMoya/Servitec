@@ -6,6 +6,8 @@
 package InterfazGrafica;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import servitec.DataBase;
@@ -18,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FacturaExterna extends javax.swing.JFrame {
 
+    private static ArrayList<String> valores = new ArrayList();
     DefaultTableModel modelo;
     private static int contador = 0;
 
@@ -623,7 +626,6 @@ public class FacturaExterna extends javax.swing.JFrame {
         if (!codigoIsRepetido(TxtcodArticulo)) {
             double precioTotArticulo = 0.0;
             double precioUniArticulo = 0.0;
-
             String codigoArticulo = TxtcodArticulo.getText();
             String cantidadArticulo = TxtcantArticulo.getText();
             if (!TxtpUnitArticulo.getText().isEmpty()) {
@@ -636,22 +638,21 @@ public class FacturaExterna extends javax.swing.JFrame {
             String descripcion = TxtDescprArticulo.getText();
             Object datos[] = {codigoArticulo, cantidadArticulo, precioUniArticulo, precioTotArticulo, descripcion};
             modelo.addRow(datos);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Articulo ya existe el la tabla", "Articulo Repetido - error", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    
     private boolean codigoIsRepetido(JTextField texto) {
-        for (int i = 0; i <= modelo.getRowCount()+1; i++) {
-            if (String.valueOf(modelo.getValueAt(i, 0)).equals(texto)) {
-                return true;
-            }
+        if (valores.contains(texto.getText())) {
+            return true;
+        } else {
+            valores.add(texto.getText());
         }
         return false;
     }
+    
     private void brochita1Limpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochita1Limpieza
         TxtcodArticulo.setText(" ");
         TxtcantArticulo.setText(" ");
