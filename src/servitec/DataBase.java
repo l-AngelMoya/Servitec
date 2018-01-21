@@ -214,29 +214,34 @@ public class DataBase<T> {
                 case (1):
                     try {
                         Empleado claseEmpleado = (Empleado) clase;
-                        String sql = "INSERT INTO empleado VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
-                        stmt.setString(1, claseEmpleado.getTxtCedula().getText());
-                        stmt.setString(2, claseEmpleado.getTxTNombre().getText());
-                        stmt.setString(3, claseEmpleado.getTxtApellido().getText());
-                        stmt.setString(4, claseEmpleado.getTxtCorreo().getText());
-                        stmt.setString(5, claseEmpleado.getTxtDireccion().getText());
-                        stmt.setString(6, claseEmpleado.getTxttelefono().getText());
-                        stmt.setString(7, claseEmpleado.getTxtCargo().getText());
-                        if (claseEmpleado.getTxtSalario().getText().isEmpty()) {
-                            stmt.setDouble(8, 0.0);
+                        if (!VerificarPK(instanciaConexion, 1, claseEmpleado)) {
+                            String sql = "INSERT INTO empleado VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                            PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                            stmt.setString(1, claseEmpleado.getTxtCedula().getText());
+                            stmt.setString(2, claseEmpleado.getTxTNombre().getText());
+                            stmt.setString(3, claseEmpleado.getTxtApellido().getText());
+                            stmt.setString(4, claseEmpleado.getTxtCorreo().getText());
+                            stmt.setString(5, claseEmpleado.getTxtDireccion().getText());
+                            stmt.setString(6, claseEmpleado.getTxttelefono().getText());
+                            stmt.setString(7, claseEmpleado.getTxtCargo().getText());
+                            if (claseEmpleado.getTxtSalario().getText().isEmpty()) {
+                                stmt.setDouble(8, 0.0);
+                            } else {
+                                stmt.setDouble(8, Double.valueOf(claseEmpleado.getTxtSalario().getText()));
+                            }
+                            stmt.setString(9, claseEmpleado.getTxtUser().getText());
+                            stmt.setString(10, claseEmpleado.getTxtContra().getText());
+                            if (claseEmpleado.getTxtIdSupervisor().getText().isEmpty() || claseEmpleado.getTxtIdSupervisor().getText().equalsIgnoreCase("null")) {
+                                stmt.setString(11, null);
+                            } else {
+                                stmt.setString(11, claseEmpleado.getTxtIdSupervisor().getText());
+                            }
+                            stmt.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "empleado " + claseEmpleado.getTxTNombre().getText() + " " + claseEmpleado.getTxtApellido().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
                         } else {
-                            stmt.setDouble(8, Double.valueOf(claseEmpleado.getTxtSalario().getText()));
+                            JOptionPane.showMessageDialog(null, "Numero de cedula ya existe en la base de datos", "Error en el ingreso", JOptionPane.ERROR_MESSAGE);
                         }
-                        stmt.setString(9, claseEmpleado.getTxtUser().getText());
-                        stmt.setString(10, claseEmpleado.getTxtContra().getText());
-                        if (claseEmpleado.getTxtIdSupervisor().getText().isEmpty() || claseEmpleado.getTxtIdSupervisor().getText().equalsIgnoreCase("null")) {
-                            stmt.setString(11, null);
-                        } else {
-                            stmt.setString(11, claseEmpleado.getTxtIdSupervisor().getText());
-                        }
-                        stmt.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "empleado " + claseEmpleado.getTxTNombre().getText() + " " + claseEmpleado.getTxtApellido().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+
                     } catch (NumberFormatException | SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -246,16 +251,20 @@ public class DataBase<T> {
                 case (2):
                     try {
                         Cliente claseCliente = (Cliente) clase;
-                        String sql = "INSERT INTO cliente VALUES (?,?,?,?,?,?)";
-                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
-                        stmt.setString(1, claseCliente.getTxtCedula().getText());
-                        stmt.setString(2, claseCliente.getTxTNombre().getText());
-                        stmt.setString(3, claseCliente.getTxtApellido().getText());
-                        stmt.setString(4, claseCliente.getTxtCorreo().getText());
-                        stmt.setString(5, claseCliente.getTxtDireccion().getText());
-                        stmt.setString(6, claseCliente.getTxttelefono().getText());
-                        stmt.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Cliente " + claseCliente.getTxTNombre().getText() + " " + claseCliente.getTxtApellido().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                        if (!VerificarPK(instanciaConexion, 2, claseCliente)) {
+                            String sql = "INSERT INTO cliente VALUES (?,?,?,?,?,?)";
+                            PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                            stmt.setString(1, claseCliente.getTxtCedula().getText());
+                            stmt.setString(2, claseCliente.getTxTNombre().getText());
+                            stmt.setString(3, claseCliente.getTxtApellido().getText());
+                            stmt.setString(4, claseCliente.getTxtCorreo().getText());
+                            stmt.setString(5, claseCliente.getTxtDireccion().getText());
+                            stmt.setString(6, claseCliente.getTxttelefono().getText());
+                            stmt.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Cliente " + claseCliente.getTxTNombre().getText() + " " + claseCliente.getTxtApellido().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Numero de cedula ya existe en la base de datos", "Error en el ingreso", JOptionPane.ERROR_MESSAGE);
+                        }
 
                     } catch (SQLException ex) {
                         ex.printStackTrace();
@@ -265,15 +274,17 @@ public class DataBase<T> {
                 case (3):
                     try {
                         Distribuidora claseDistribuidora = (Distribuidora) clase;
-                        String sql = "INSERT INTO distribuidora  VALUES (?,?,?,?,?)";
-                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
-                        stmt.setString(1, claseDistribuidora.getTxtid().getText());
-                        stmt.setString(2, claseDistribuidora.getTxTNombre().getText());
-                        stmt.setString(3, claseDistribuidora.getTxtDireccion().getText());
-                        stmt.setString(4, claseDistribuidora.getTxtCorreo().getText());
-                        stmt.setString(5, claseDistribuidora.getTxttelefono().getText());
-                        stmt.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Distribuidora " + claseDistribuidora.getTxTNombre().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                        if (!VerificarPK(instanciaConexion, 3, claseDistribuidora)) {
+                            String sql = "INSERT INTO distribuidora  VALUES (?,?,?,?,?)";
+                            PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                            stmt.setString(1, claseDistribuidora.getTxtid().getText());
+                            stmt.setString(2, claseDistribuidora.getTxTNombre().getText());
+                            stmt.setString(3, claseDistribuidora.getTxtDireccion().getText());
+                            stmt.setString(4, claseDistribuidora.getTxtCorreo().getText());
+                            stmt.setString(5, claseDistribuidora.getTxttelefono().getText());
+                            stmt.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Distribuidora " + claseDistribuidora.getTxTNombre().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                        }
 
                     } catch (SQLException ex) {
                         ex.printStackTrace();
@@ -283,12 +294,15 @@ public class DataBase<T> {
                 case (4):
                     try {
                         Articulo claseArticulo = (Articulo) clase;
-                        String sql = "INSERT INTO articulo  VALUES (?,?)";
-                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
-                        stmt.setString(1, claseArticulo.getTxtCodigo().getText());
-                        stmt.setString(2, claseArticulo.getTxtDescri().getText());
-                        stmt.executeUpdate();
-                        JOptionPane.showMessageDialog(null, claseArticulo.getTxtCodigo().getText() + " " + claseArticulo.getTxtDescri().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                        if (!VerificarPK(instanciaConexion, 4, claseArticulo)) {
+                            String sql = "INSERT INTO articulo  VALUES (?,?)";
+                            PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
+                            stmt.setString(1, claseArticulo.getTxtCodigo().getText());
+                            stmt.setString(2, claseArticulo.getTxtDescri().getText());
+                            stmt.executeUpdate();
+                            JOptionPane.showMessageDialog(null, claseArticulo.getTxtCodigo().getText() + " " + claseArticulo.getTxtDescri().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -303,7 +317,7 @@ public class DataBase<T> {
     }
 
     /**
-     * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora 4.
+     * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora 4. articulo
      *
      * @param instanciaConexion
      * @param tipo
@@ -315,10 +329,12 @@ public class DataBase<T> {
                 case (1):
                     Empleado claseEmpleado = (Empleado) clase;
 
-                    if (VerificarCedulaEmpleado(instanciaConexion, claseEmpleado) || claseEmpleado.getTxtIdSupervisor().getText().isEmpty()) {
-                        String sql;
+                    if (VerificarPK(instanciaConexion, 1, claseEmpleado)) {
+                        String sql = "";
                         if (claseEmpleado.getTxtIdSupervisor().getText().isEmpty() || claseEmpleado.getTxtIdSupervisor().getText().equalsIgnoreCase("null")) {
-                            sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "', user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor= null" + " where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
+                            if (IsVacioNumero(claseEmpleado.getTxtSalario().getText())) {
+                                sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual= default , user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor= null" + " where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
+                            }
                         } else {
                             sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "', user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor='" + claseEmpleado.getTxtIdSupervisor().getText() + "' where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
                         }
@@ -326,22 +342,39 @@ public class DataBase<T> {
                         stmt.executeUpdate(sql);
                         JOptionPane.showMessageDialog(null, claseEmpleado.getTxTNombre().getText() + " fue Actualizado con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Supervisor no existe en la base de datos", "Actualizacion completa", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Empleado no existe en la base de datos", "ERROR EN LA ACTUALIZACION", JOptionPane.ERROR_MESSAGE);
                     }
 
                     break;
                 case (2):
                     Cliente claseCliente = (Cliente) clase;
-                    String sq2 = "UPDATE cliente SET nombre='" + claseCliente.getTxTNombre().getText() + "', apellido='" + claseCliente.getTxtApellido().getText() + "', correo='" + claseCliente.getTxtCorreo().getText() + "', direccion='" + claseCliente.getTxtDireccion().getText() + "', telefono='" + claseCliente.getTxttelefono().getText() +"' where cedula='" + claseCliente.getTxtCedula().getText() + "'";
-                    PreparedStatement stmt2 = instanciaConexion.prepareStatement(sq2);
-                    stmt2.executeUpdate(sq2);
-                    JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
+                    if (VerificarPK(instanciaConexion, 2, claseCliente)) {
+                        String sq2 = "UPDATE cliente SET nombre='" + claseCliente.getTxTNombre().getText() + "', apellido='" + claseCliente.getTxtApellido().getText() + "', correo='" + claseCliente.getTxtCorreo().getText() + "', direccion='" + claseCliente.getTxtDireccion().getText() + "', telefono='" + claseCliente.getTxttelefono().getText() + "' where cedula='" + claseCliente.getTxtCedula().getText() + "'";
+                        PreparedStatement stmt2 = instanciaConexion.prepareStatement(sq2);
+                        stmt2.executeUpdate(sq2);
+                        JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cliente no existe en la base de datos", "ERROR EN LA ACTUALIZACION", JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
+
                 case (3):
                     Distribuidora claseDistribuidora = (Distribuidora) clase;
-                    String sq3 = "UPDATE distribuidora SET nombre='" + claseDistribuidora.getTxTNombre().getText() + "', direccion='" + claseDistribuidora.getTxtDireccion().getText() + "', correo='" + claseDistribuidora.getTxtCorreo().getText() + "', telefono='" + claseDistribuidora.getTxttelefono().getText() + "' where idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
-                    PreparedStatement stmt3 = instanciaConexion.prepareStatement(sq3);
-                    stmt3.executeUpdate(sq3);
+                    if (VerificarPK(instanciaConexion, 3, claseDistribuidora)) {
+                        String sq3 = "UPDATE distribuidora SET nombre='" + claseDistribuidora.getTxTNombre().getText() + "', direccion='" + claseDistribuidora.getTxtDireccion().getText() + "', correo='" + claseDistribuidora.getTxtCorreo().getText() + "', telefono='" + claseDistribuidora.getTxttelefono().getText() + "' where idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
+                        PreparedStatement stmt3 = instanciaConexion.prepareStatement(sq3);
+                        stmt3.executeUpdate(sq3);
+                        JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Distribuidora no existe en la base de datos", "ERROR EN LA ACTUALIZACION", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                    
+                case (4):
+                    Articulo claseArticulo = (Articulo) clase;
+                    // String sq4 = "UPDATE distribuidora SET nombre='" + claseDistribuidora.getTxTNombre().getText() + "', direccion='" + claseDistribuidora.getTxtDireccion().getText() + "', correo='" + claseDistribuidora.getTxtCorreo().getText() + "', telefono='" + claseDistribuidora.getTxttelefono().getText() + "' where idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
+                    //PreparedStatement stmt4 = instanciaConexion.prepareStatement(sq4);
+                    //stmt4.executeUpdate(sq4);
                     JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
                     break;
             }
@@ -351,19 +384,80 @@ public class DataBase<T> {
         }
     }
 
-    public static boolean VerificarCedulaEmpleado(Connection instanciaConexion, Empleado e) {
+    public static boolean IsVacioNumero(String cadenaNumero) {
+        //double numero=Double.valueOf(cadenaNumero);
+        if (cadenaNumero.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora
+     * 4.articulo true si el codigo existe, false si no existe
+     *
+     * @param instanciaConexion
+     * @param tipo
+     * @param clase
+     * @return
+     */
+    public static boolean VerificarPK(Connection instanciaConexion, int tipo, Object clase) {
         boolean bandera = false;
         try {
-            String sql = "SELECT cedula FROM empleado;";
             Statement stmt = instanciaConexion.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            if (rs.next()) {
-                do {
-                    if (rs.getString(1).equalsIgnoreCase(e.getTxtIdSupervisor().getText())) {
-                        return true;
+
+            switch (tipo) {
+                case (1):
+                    Empleado claseEmpleado = (Empleado) clase;
+                    String sql = "SELECT cedula FROM empleado;";
+                    ResultSet rs1 = stmt.executeQuery(sql);
+                    if (rs1.next()) {
+                        do {
+                            if (rs1.getString(1).equalsIgnoreCase(claseEmpleado.getTxtCedula().getText())) {
+                                return true;
+                            }
+                        } while (rs1.next());
                     }
-                } while (rs.next());
+                    break;
+                case (2):
+                    Cliente claseCliente = (Cliente) clase;
+                    String sq2 = "SELECT cedula FROM cliente;";
+                    ResultSet rs2 = stmt.executeQuery(sq2);
+                    if (rs2.next()) {
+                        do {
+                            if (rs2.getString(1).equalsIgnoreCase(claseCliente.getTxtCedula().getText())) {
+                                return true;
+                            }
+                        } while (rs2.next());
+                    }
+                    break;
+                case (3):
+                    Distribuidora claseDistribuidora = (Distribuidora) clase;
+                    String sq3 = "SELECT idDistribuidora FROM distribuidora;";
+                    ResultSet rs3 = stmt.executeQuery(sq3);
+                    if (rs3.next()) {
+                        do {
+                            if (rs3.getString(1).equalsIgnoreCase(claseDistribuidora.getTxtid().getText())) {
+                                return true;
+                            }
+                        } while (rs3.next());
+                    }
+                    break;
+                case (4):
+                    Articulo claseArticulo = (Articulo) clase;
+                    String sq4 = "SELECT codigoArticulo FROM articulo;";
+                    ResultSet rs4 = stmt.executeQuery(sq4);
+                    if (rs4.next()) {
+                        do {
+                            if (rs4.getString(1).equalsIgnoreCase(claseArticulo.getTxtCodigo().getText())) {
+                                return true;
+                            }
+                        } while (rs4.next());
+                    }
+                    break;
             }
+
         } catch (SQLException ex) {
             System.out.println("ha sucecido un problema");
             ex.printStackTrace();

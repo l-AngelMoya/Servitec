@@ -274,6 +274,7 @@
           <Font name="MS Reference Serif" size="18" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnModificarActionPerformed"/>
@@ -285,6 +286,7 @@
           <Font name="MS Reference Serif" size="18" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Ingresar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnIngresarActionPerformed"/>

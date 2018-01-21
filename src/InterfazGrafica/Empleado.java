@@ -193,6 +193,7 @@ public class Empleado extends javax.swing.JFrame {
 
         BtnIngresar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnIngresar.setText("Ingresar");
+        BtnIngresar.setEnabled(false);
         BtnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnIngresarActionPerformed(evt);
@@ -321,9 +322,8 @@ public class Empleado extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(candado)
-                                            .addComponent(brochita))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(77, 77, 77)
+                                            .addComponent(brochita))))
+                                .addGap(77, 92, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(BtnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -487,6 +487,9 @@ public class Empleado extends javax.swing.JFrame {
             Txttelefono.setEnabled(true);
             TxtSalario.setEnabled(true);
             TxtContra.setEnabled(true);
+            BtnIngresar.setEnabled(true);
+            BtnModificar.setEnabled(true);
+
         }else{
             candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg")); //
             TxTNombre.setEnabled(false);
@@ -499,6 +502,8 @@ public class Empleado extends javax.swing.JFrame {
             Txttelefono.setEnabled(false);
             TxtSalario.setEnabled(false);
             TxtContra.setEnabled(false);
+            BtnIngresar.setEnabled(false);
+            BtnModificar.setEnabled(false);
         }
         contador=contador+1;
         

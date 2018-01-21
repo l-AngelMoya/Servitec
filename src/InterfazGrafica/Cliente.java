@@ -114,6 +114,7 @@ public class Cliente extends javax.swing.JFrame {
 
         BtnModificar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnModificar.setText("Modificar");
+        BtnModificar.setEnabled(false);
         BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnModificarActionPerformed(evt);
@@ -122,6 +123,7 @@ public class Cliente extends javax.swing.JFrame {
 
         BtnIngresar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnIngresar.setText("Ingresar");
+        BtnIngresar.setEnabled(false);
         BtnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnIngresarActionPerformed(evt);
@@ -331,6 +333,8 @@ public class Cliente extends javax.swing.JFrame {
             TxtCorreo.setEnabled(true);
             TxtDireccion.setEnabled(true);
             Txttelefono.setEnabled(true);
+            BtnIngresar.setEnabled(true);
+            BtnModificar.setEnabled(true);
         } else {
             candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg")); //
             TxTNombre.setEnabled(false);
@@ -338,6 +342,10 @@ public class Cliente extends javax.swing.JFrame {
             TxtCorreo.setEnabled(false);
             TxtDireccion.setEnabled(false);
             Txttelefono.setEnabled(false);
+            BtnIngresar.setEnabled(false);
+            BtnModificar.setEnabled(false);
+
+
         }
         contador = contador + 1;
 
