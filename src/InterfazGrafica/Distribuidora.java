@@ -84,24 +84,44 @@ public class Distribuidora extends javax.swing.JFrame {
 
         TxTNombre.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxTNombre.setEnabled(false);
+        TxTNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxTNombreActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel6.setText("Correo");
 
         TxtCorreo.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtCorreo.setEnabled(false);
+        TxtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtCorreoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel7.setText("Direccion");
 
         TxtDireccion.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtDireccion.setEnabled(false);
+        TxtDireccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtDireccionActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel8.setText("Telefono");
 
         Txttelefono.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         Txttelefono.setEnabled(false);
+        Txttelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxttelefonoActionPerformed(evt);
+            }
+        });
 
         BtnModificar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnModificar.setText("Modificar");
@@ -301,7 +321,7 @@ public class Distribuidora extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRegresar1ActionPerformed
 
     private void TxtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtidActionPerformed
-        // TODO add your handling code here:
+        Txtid.transferFocus();
     }//GEN-LAST:event_TxtidActionPerformed
 
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
@@ -329,6 +349,22 @@ public class Distribuidora extends javax.swing.JFrame {
         TxtDireccion.setText("");
         Txttelefono.setText("");
     }//GEN-LAST:event_brochitaLimpieza
+
+    private void TxTNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxTNombreActionPerformed
+        TxTNombre.transferFocus();
+    }//GEN-LAST:event_TxTNombreActionPerformed
+
+    private void TxtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCorreoActionPerformed
+        TxtCorreo.transferFocus();
+    }//GEN-LAST:event_TxtCorreoActionPerformed
+
+    private void TxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDireccionActionPerformed
+         TxtDireccion.transferFocus();
+    }//GEN-LAST:event_TxtDireccionActionPerformed
+
+    private void TxttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxttelefonoActionPerformed
+         Txttelefono.transferFocus();
+    }//GEN-LAST:event_TxttelefonoActionPerformed
 
     /**
      * @param args the command line arguments

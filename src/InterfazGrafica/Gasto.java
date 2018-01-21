@@ -16,6 +16,7 @@ import servitec.GastoClass;
  */
 public class Gasto extends javax.swing.JFrame {
 
+    private static int contador = 0;
   DataBase haciendoConexion = new DataBase();
   Connection instanciaConexion = haciendoConexion.getConnection();
     
@@ -52,6 +53,8 @@ public class Gasto extends javax.swing.JFrame {
         BtnEliminar = new javax.swing.JButton();
         BtnRegresar = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
+        candado = new javax.swing.JLabel();
+        brochita = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,6 +157,20 @@ public class Gasto extends javax.swing.JFrame {
             }
         });
 
+        candado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/photo1.jpg"))); // NOI18N
+        candado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                candadoMouseClicked(evt);
+            }
+        });
+
+        brochita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/limpiar.png"))); // NOI18N
+        brochita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                brochitaLimpieza(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,6 +218,12 @@ public class Gasto extends javax.swing.JFrame {
                             .addComponent(BtnRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(candado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(brochita)
+                .addGap(177, 177, 177))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +236,11 @@ public class Gasto extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtNumGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addGap(47, 47, 47)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(candado)
+                    .addComponent(brochita))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnBuscar)
                     .addComponent(TxtRazon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,30 +268,30 @@ public class Gasto extends javax.swing.JFrame {
                 .addComponent(BtnRegresar)
                 .addGap(18, 18, 18)
                 .addComponent(BtnSalir)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void TxtNumGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNumGastoActionPerformed
-        // TODO add your handling code here:
+       TxtNumGasto.transferFocus();
     }//GEN-LAST:event_TxtNumGastoActionPerformed
 
     private void TxtRazonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtRazonActionPerformed
-        // TODO add your handling code here:
+        TxtRazon.transferFocus();
     }//GEN-LAST:event_TxtRazonActionPerformed
 
     private void TxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTotalActionPerformed
-        // TODO add your handling code here:
+        TxtTotal.transferFocus();
     }//GEN-LAST:event_TxtTotalActionPerformed
 
     private void TxtEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEmpleadoActionPerformed
-        // TODO add your handling code here:
+        TxtEmpleado.transferFocus();
     }//GEN-LAST:event_TxtEmpleadoActionPerformed
 
     private void TxtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFechaActionPerformed
-        // TODO add your handling code here:
+        TxtFecha.transferFocus();
     }//GEN-LAST:event_TxtFechaActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
@@ -289,7 +316,7 @@ public class Gasto extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+         DataBase.actualizar(instanciaConexion, 2, this);
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
@@ -307,6 +334,34 @@ public class Gasto extends javax.swing.JFrame {
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_BtnSalirActionPerformed
+
+    private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
+        if (contador % 2 == 0) {
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo.jpg"));
+
+            TxtNumGasto.setEnabled(true);
+            TxtRazon.setEnabled(true);
+            TxtTotal.setEnabled(true);
+            TxtFecha.setEnabled(true);
+            TxtEmpleado.setEnabled(true);
+        } else {
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg")); //
+             TxtNumGasto.setEnabled(false);
+            TxtRazon.setEnabled(false);
+            TxtTotal.setEnabled(false);
+            TxtFecha.setEnabled(false);
+            TxtEmpleado.setEnabled(false);
+        }
+        contador = contador + 1;
+    }//GEN-LAST:event_candadoMouseClicked
+
+    private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza
+         TxtNumGasto.setText("");
+            TxtRazon.setText("");
+            TxtTotal.setText("");
+            TxtFecha.setText("");
+            TxtEmpleado.setText("");
+    }//GEN-LAST:event_brochitaLimpieza
 
     /**
      * @param args the command line arguments
@@ -356,6 +411,8 @@ public class Gasto extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNumGasto;
     private javax.swing.JTextField TxtRazon;
     private javax.swing.JTextField TxtTotal;
+    private javax.swing.JLabel brochita;
+    private javax.swing.JLabel candado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

@@ -34,7 +34,7 @@ public class DataBase<T> {
 
     private static final String driver = "com.mysql.jdbc.Driver"; //driver (se queda siempre igual, si se usa mysql)
     private static final String usuario = "root"; //usuario de la base de datos
-    private static final String contrasenna = ""; //contraseña del usuario
+    private static final String contrasenna = "dean"; //contraseña del usuario
     private static final String url = "jdbc:mysql://localhost:3306/servitec"; //basicamnete es la informacion del servidor de la base deatos y es jdbc:mysql://(direccionIp):(puerto)/(nombreDeLaBaseDeDatos)
 
     /*

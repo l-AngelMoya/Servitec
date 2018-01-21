@@ -69,6 +69,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         btnFacturaExt.setBackground(new java.awt.Color(0, 204, 255));
         btnFacturaExt.setFont(new java.awt.Font("Dutch801 XBd BT", 2, 32)); // NOI18N
         btnFacturaExt.setText("Factura Externa");
+        btnFacturaExt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturaExtActionPerformed(evt);
+            }
+        });
 
         btnGasto.setBackground(new java.awt.Color(0, 204, 255));
         btnGasto.setFont(new java.awt.Font("Dutch801 XBd BT", 2, 36)); // NOI18N
@@ -180,7 +185,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnFacturaExt, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFacturaExt, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -214,10 +219,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                                 .addGap(0, 18, Short.MAX_VALUE)))))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFacturaExt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BtnReportes)
-                        .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnFacturaExt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnReportes))
+                    .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnGasto)
                 .addGap(58, 58, 58))
@@ -287,6 +292,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         gast.setLocationRelativeTo(null);
         dispose();
     }//GEN-LAST:event_btnGastoActionPerformed
+
+    private void btnFacturaExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaExtActionPerformed
+        FacturaExterna factExt= new FacturaExterna();
+        factExt.setVisible(true);
+        factExt.setLocationRelativeTo(null);
+        dispose();
+    }//GEN-LAST:event_btnFacturaExtActionPerformed
 
     /**
      * @param args the command line arguments

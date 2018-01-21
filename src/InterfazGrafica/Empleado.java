@@ -98,42 +98,77 @@ public class Empleado extends javax.swing.JFrame {
 
         TxtApellido.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtApellido.setEnabled(false);
+        TxtApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtApellidoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel6.setText("Correo");
 
         TxtCorreo.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtCorreo.setEnabled(false);
+        TxtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtCorreoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel7.setText("Direccion");
 
         TxtDireccion.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtDireccion.setEnabled(false);
+        TxtDireccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtDireccionActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel8.setText("Telefono");
 
         Txttelefono.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         Txttelefono.setEnabled(false);
+        Txttelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxttelefonoActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel9.setText("Cargo");
 
         TxtCargo.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtCargo.setEnabled(false);
+        TxtCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtCargoActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel10.setText("Salario Mensual");
 
         TxtSalario.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtSalario.setEnabled(false);
+        TxtSalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtSalarioActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel11.setText("User");
 
         TxtUser.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtUser.setEnabled(false);
+        TxtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtUserActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel12.setText("idSupervisor");
@@ -141,6 +176,11 @@ public class Empleado extends javax.swing.JFrame {
         TxtIdSupervisor.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         TxtIdSupervisor.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtIdSupervisor.setEnabled(false);
+        TxtIdSupervisor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtIdSupervisorActionPerformed(evt);
+            }
+        });
 
         BtnModificar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnModificar.setText("Modificar");
@@ -193,12 +233,22 @@ public class Empleado extends javax.swing.JFrame {
 
         TxTNombre.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxTNombre.setEnabled(false);
+        TxTNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxTNombreActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel13.setText("Contraseña");
 
         TxtContra.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         TxtContra.setEnabled(false);
+        TxtContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtContraActionPerformed(evt);
+            }
+        });
 
         candado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/photo1.jpg"))); // NOI18N
         candado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -264,29 +314,23 @@ public class Empleado extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel16))
+                                    .addComponent(jLabel16)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(53, 53, 53)
                                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(candado)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(brochita))))
+                                            .addComponent(candado)
+                                            .addComponent(brochita))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGap(77, 77, 77)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(BtnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,7 +471,7 @@ public class Empleado extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
     private void TxtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCedulaActionPerformed
-        // TODO add your handling code here:
+        TxtCedula.transferFocus();
     }//GEN-LAST:event_TxtCedulaActionPerformed
 
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
@@ -473,6 +517,46 @@ public class Empleado extends javax.swing.JFrame {
         TxtSalario.setText("");
         TxtContra.setText("");
     }//GEN-LAST:event_Limpieza
+
+    private void TxTNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxTNombreActionPerformed
+         TxTNombre.transferFocus();
+    }//GEN-LAST:event_TxTNombreActionPerformed
+
+    private void TxtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtApellidoActionPerformed
+         TxtApellido.transferFocus();
+    }//GEN-LAST:event_TxtApellidoActionPerformed
+
+    private void TxtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCorreoActionPerformed
+         TxtCorreo.transferFocus();
+    }//GEN-LAST:event_TxtCorreoActionPerformed
+
+    private void TxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDireccionActionPerformed
+        TxtDireccion.transferFocus();
+    }//GEN-LAST:event_TxtDireccionActionPerformed
+
+    private void TxttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxttelefonoActionPerformed
+         Txttelefono.transferFocus();
+    }//GEN-LAST:event_TxttelefonoActionPerformed
+
+    private void TxtCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCargoActionPerformed
+         TxtCargo.transferFocus();
+    }//GEN-LAST:event_TxtCargoActionPerformed
+
+    private void TxtSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtSalarioActionPerformed
+         TxtSalario.transferFocus();
+    }//GEN-LAST:event_TxtSalarioActionPerformed
+
+    private void TxtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUserActionPerformed
+        TxtUser.transferFocus();
+    }//GEN-LAST:event_TxtUserActionPerformed
+
+    private void TxtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtContraActionPerformed
+         TxtContra.transferFocus();
+    }//GEN-LAST:event_TxtContraActionPerformed
+
+    private void TxtIdSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdSupervisorActionPerformed
+         TxtIdSupervisor.transferFocus();
+    }//GEN-LAST:event_TxtIdSupervisorActionPerformed
 
     /**
      * @param args the command line arguments

@@ -57,7 +57,7 @@ public class Trabajo extends javax.swing.JFrame {
         jTextAreaBitacora = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        BtnBuscar1 = new javax.swing.JButton();
+        BtnAgregarArticulo = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         TxtDescripcion = new javax.swing.JTextField();
         candado = new javax.swing.JLabel();
@@ -205,11 +205,11 @@ public class Trabajo extends javax.swing.JFrame {
         jTable1.setOpaque(false);
         jScrollPane2.setViewportView(jTable1);
 
-        BtnBuscar1.setFont(new java.awt.Font("MS Reference Serif", 3, 14)); // NOI18N
-        BtnBuscar1.setText("Agregar Articulo");
-        BtnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+        BtnAgregarArticulo.setFont(new java.awt.Font("MS Reference Serif", 3, 14)); // NOI18N
+        BtnAgregarArticulo.setText("Agregar Articulo");
+        BtnAgregarArticulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscar1ActionPerformed(evt);
+                BtnAgregarArticuloActionPerformed(evt);
             }
         });
 
@@ -309,7 +309,7 @@ public class Trabajo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(BtnBuscar1)
+                                        .addComponent(BtnAgregarArticulo)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                                         .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -365,7 +365,7 @@ public class Trabajo extends javax.swing.JFrame {
                                 .addGap(18, 18, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                                .addComponent(BtnBuscar1)
+                                .addComponent(BtnAgregarArticulo)
                                 .addGap(91, 91, 91))))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -391,38 +391,20 @@ public class Trabajo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TxtFechaEntregaEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFechaEntregaEntregaActionPerformed
-        // TODO add your handling code here:
+       TxtFechaEntrega.transferFocus();
     }//GEN-LAST:event_TxtFechaEntregaEntregaActionPerformed
-
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-
-        TrabajoClass trabajo = (TrabajoClass) haciendoConexion.Busqueda(instanciaConexion, TxtNumTrabajo, 5);
-        if (trabajo == null) {
-            JOptionPane.showMessageDialog(rootPane, "Trabajo ingresado no existe en la base de datos");
-        } else {
-            TxtNumTrabajo.setText(trabajo.getnTrabajo());
-            TxtFechaEntrega.setText(String.valueOf(trabajo.getFechaEntrega()));
-            TxtFechaActual.setText(String.valueOf(trabajo.getFechaTrabajo()));
-            TxtManoObra.setText(String.valueOf(trabajo.getCostoMano()));
-            TxtNumFact.setText(trabajo.getFactura());
-            jTextAreaBitacora.setText(trabajo.getBitacora());
-            TxtNumFact.setText(trabajo.getFactura());
-            TxtDescripcion.setText(trabajo.getDescripcion());
-
-        }
-    }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
         //JOptionPane.showMessageDialog(rootPane, "Trabajo "+ TxtNumTrabajo + " fue ingresado con exito en la base de datos");
-        //DataBase.Insertar(instanciaConexion, 1, this);
+        DataBase.Insertar(instanciaConexion, 1, this);
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+        DataBase.actualizar(instanciaConexion, 2, this);// TODO add your handling code here:
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        //DataBase.eliminar(instanciaConexion,4, this);
+        DataBase.eliminar(instanciaConexion,4, this);
         //JOptionPane.showMessageDialog(rootPane, "registro eliminado con exito");
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
@@ -438,27 +420,27 @@ public class Trabajo extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void TxtManoObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtManoObraActionPerformed
-        // TODO add your handling code here:
+        TxtManoObra.transferFocus();
     }//GEN-LAST:event_TxtManoObraActionPerformed
 
     private void TxtNumTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNumTrabajoActionPerformed
-        // TODO add your handling code here:
+        TxtNumTrabajo.transferFocus();
     }//GEN-LAST:event_TxtNumTrabajoActionPerformed
 
     private void TxtNumFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNumFactActionPerformed
-        // TODO add your handling code here:
+        TxtNumFact.transferFocus();
     }//GEN-LAST:event_TxtNumFactActionPerformed
 
     private void TxtFechaActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFechaActualActionPerformed
-        // TODO add your handling code here:
+        TxtFechaActual.transferFocus();
     }//GEN-LAST:event_TxtFechaActualActionPerformed
 
-    private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
+    private void BtnAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarArticuloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnBuscar1ActionPerformed
+    }//GEN-LAST:event_BtnAgregarArticuloActionPerformed
 
     private void TxtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescripcionActionPerformed
-        // TODO add your handling code here:
+        TxtDescripcion.transferFocus();
     }//GEN-LAST:event_TxtDescripcionActionPerformed
 
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
@@ -492,6 +474,24 @@ public class Trabajo extends javax.swing.JFrame {
         TxtManoObra.setText("");
 
     }//GEN-LAST:event_brochitaLimpieza
+
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+
+        TrabajoClass trabajo = (TrabajoClass) haciendoConexion.Busqueda(instanciaConexion, TxtNumTrabajo, 5);
+        if (trabajo == null) {
+            JOptionPane.showMessageDialog(rootPane, "Trabajo ingresado no existe en la base de datos");
+        } else {
+            TxtNumTrabajo.setText(trabajo.getnTrabajo());
+            TxtFechaEntrega.setText(String.valueOf(trabajo.getFechaEntrega()));
+            TxtFechaActual.setText(String.valueOf(trabajo.getFechaTrabajo()));
+            TxtManoObra.setText(String.valueOf(trabajo.getCostoMano()));
+            TxtNumFact.setText(trabajo.getFactura());
+            jTextAreaBitacora.setText(trabajo.getBitacora());
+            TxtNumFact.setText(trabajo.getFactura());
+            TxtDescripcion.setText(trabajo.getDescripcion());
+
+        }
+    }//GEN-LAST:event_BtnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,8 +530,8 @@ public class Trabajo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAgregarArticulo;
     private javax.swing.JButton BtnBuscar;
-    private javax.swing.JButton BtnBuscar1;
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnIngresar;
     private javax.swing.JButton BtnModificar;

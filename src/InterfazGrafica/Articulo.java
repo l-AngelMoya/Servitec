@@ -263,23 +263,23 @@ public class Articulo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TxtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCodigoActionPerformed
-        // TODO add your handling code here:
+       TxtCodigo.transferFocus();
     }//GEN-LAST:event_TxtCodigoActionPerformed
 
     private void TxtPrecioUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPrecioUnitarioActionPerformed
-        // TODO add your handling code here:
+        TxtPrecioUnitario.transferFocus();
     }//GEN-LAST:event_TxtPrecioUnitarioActionPerformed
 
     private void TxtDescriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescriActionPerformed
-        // TODO add your handling code here:
+        TxtDescri.transferFocus();
     }//GEN-LAST:event_TxtDescriActionPerformed
 
     private void TxtDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescuentoActionPerformed
-        // TODO add your handling code here:
+        TxtDescuento.transferFocus();
     }//GEN-LAST:event_TxtDescuentoActionPerformed
 
     private void TxtDistribuidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDistribuidorActionPerformed
-        // TODO add your handling code here:
+        TxtDistribuidor.transferFocus();
     }//GEN-LAST:event_TxtDistribuidorActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
@@ -301,7 +301,7 @@ public class Articulo extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        // TODO add your handling code here:
+        DataBase.actualizar(instanciaConexion, 2, this);
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed

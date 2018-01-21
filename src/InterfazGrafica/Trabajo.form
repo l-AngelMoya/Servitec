@@ -108,7 +108,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="BtnBuscar1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="BtnAgregarArticulo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace pref="14" max="32767" attributes="0"/>
                                       <Component id="BtnSalir" min="-2" pref="129" max="-2" attributes="0"/>
                                   </Group>
@@ -183,7 +183,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace pref="11" max="32767" attributes="0"/>
-                              <Component id="BtnBuscar1" min="-2" max="-2" attributes="0"/>
+                              <Component id="BtnAgregarArticulo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -450,7 +450,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="BtnBuscar1">
+    <Component class="javax.swing.JButton" name="BtnAgregarArticulo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Reference Serif" size="14" style="3"/>
@@ -458,7 +458,7 @@
         <Property name="text" type="java.lang.String" value="Agregar Articulo"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscar1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAgregarArticuloActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
