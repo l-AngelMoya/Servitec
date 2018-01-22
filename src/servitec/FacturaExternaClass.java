@@ -12,7 +12,8 @@ import java.sql.Date;
  * @author Usuario
  */
 public class FacturaExternaClass {
-     private String noFactura;
+    private int noRegistro; 
+    private String noFactura;
     private Date fechaEmision;
     private String cedula;
     private int descuento;
@@ -21,11 +22,12 @@ public class FacturaExternaClass {
     private double total;
 
     public FacturaExternaClass() {
-        this(null,null,null,0,0,0,0);
+        this(0,null,null,null,0,0,0,0);
         
     }
 
-    public FacturaExternaClass(String noFactura, Date fechaEmision, String cedula, int descuento, double subtotal, double iva, double total) {
+    public FacturaExternaClass(int noRegistro,String noFactura, Date fechaEmision, String cedula, int descuento, double subtotal, double iva, double total) {
+        this.noRegistro=noRegistro;
         this.noFactura = noFactura;
         this.fechaEmision = fechaEmision;
         this.cedula = cedula;
@@ -33,6 +35,14 @@ public class FacturaExternaClass {
         this.subtotal = subtotal;
         this.iva = iva;
         this.total = total;
+    }
+
+    public int getNoRegistro() {
+        return noRegistro;
+    }
+
+    public void setNoRegistro(int noRegistro) {
+        this.noRegistro = noRegistro;
     }
 
     

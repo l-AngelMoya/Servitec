@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -114,10 +115,12 @@ public class DataBase<T> {
             e.printStackTrace();
         }
         return cliente;
-    }*/
+    }
+     */
     /**
-     * Metodo para buscar 1.empleado,2.clientes, 3. distribuidora
-     * 4.FacturaServitecClass
+     * Metodo para buscar datos 1.empleado,2.clientes, 3. distribuidora
+     * 4.Articulo 5.factura servitec 6. trabajo 7. factura externa 8. reporte 9.
+     * gasto
      *
      * @param instanciaConexion
      * @param identificador
@@ -200,8 +203,9 @@ public class DataBase<T> {
     }
 
     /**
-     * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora 4.
-     * Articulo
+     * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora
+     * 4.Articulo 5.factura servitec 6. trabajo 7. factura externa 8. reporte 9.
+     * gasto
      *
      * @param instanciaConexion
      * @param tipo
@@ -307,6 +311,22 @@ public class DataBase<T> {
                         ex.printStackTrace();
                     }
                     break;
+
+                //factura externa
+                case (7):
+                    try {
+                        FacturaExterna claseFactExterna = (FacturaExterna) clase;
+                        Statement stmt = instanciaConexion.createStatement();
+                        
+
+                        String sq1 = "call Ingresar_Factura_Externa('" + claseFactExterna.getTxtnFactura().getText() + "','" + claseFactExterna.getTxtDistribuidora().getText() + "','" + Date.valueOf(claseFactExterna.getTxTFechaEmision().getText()) + "'," + claseFactExterna.getTxtSubtotal().getText() + "," + claseFactExterna.getTxtDescuento().getText() + "," + claseFactExterna.getTxtIva().getText() + "," + claseFactExterna.getTxtTotal().getText() + ");";
+                        System.out.println(sq1);
+                        stmt.executeQuery(sq1);
+                        JOptionPane.showMessageDialog(null, "Ingreso con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    break;
             }
 
         } catch (Exception e) {
@@ -317,7 +337,9 @@ public class DataBase<T> {
     }
 
     /**
-     * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora 4. articulo
+     * Metodo para actualizar datos 1.empleado,2.clientes, 3. distribuidora
+     * 4.Articulo 5.factura servitec 6. trabajo 7. factura externa 8. reporte 9.
+     * gasto
      *
      * @param instanciaConexion
      * @param tipo
@@ -332,7 +354,7 @@ public class DataBase<T> {
                     if (VerificarPK(instanciaConexion, 1, claseEmpleado)) {
                         String sql = "";
                         if (claseEmpleado.getTxtIdSupervisor().getText().isEmpty() || claseEmpleado.getTxtIdSupervisor().getText().equalsIgnoreCase("null")) {
-                            if (IsVacioNumero(claseEmpleado.getTxtSalario().getText())) {
+                            if (claseEmpleado.getTxtSalario().getText().isEmpty()) {
                                 sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual= default , user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor= null" + " where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
                             }
                         } else {
@@ -365,11 +387,11 @@ public class DataBase<T> {
                         PreparedStatement stmt3 = instanciaConexion.prepareStatement(sq3);
                         stmt3.executeUpdate(sq3);
                         JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
-                    }else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Distribuidora no existe en la base de datos", "ERROR EN LA ACTUALIZACION", JOptionPane.ERROR_MESSAGE);
                     }
                     break;
-                    
+
                 case (4):
                     Articulo claseArticulo = (Articulo) clase;
                     // String sq4 = "UPDATE distribuidora SET nombre='" + claseDistribuidora.getTxTNombre().getText() + "', direccion='" + claseDistribuidora.getTxtDireccion().getText() + "', correo='" + claseDistribuidora.getTxtCorreo().getText() + "', telefono='" + claseDistribuidora.getTxttelefono().getText() + "' where idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
@@ -384,6 +406,12 @@ public class DataBase<T> {
         }
     }
 
+    /**
+     * metodo que me retorna true si la casilla esta vacia.
+     *
+     * @param cadenaNumero
+     * @return
+     */
     public static boolean IsVacioNumero(String cadenaNumero) {
         //double numero=Double.valueOf(cadenaNumero);
         if (cadenaNumero.isEmpty()) {
@@ -394,13 +422,14 @@ public class DataBase<T> {
     }
 
     /**
-     * Metodo para insertar datos 1.empleado,2.clientes, 3. distribuidora
-     * 4.articulo true si el codigo existe, false si no existe
+     * Metodo para verificar si existe o no la primary key tipo>
+     * 1.empleado,2.clientes, 3. distribuidora 4.articulo 5.factura servitec 6.
+     * trabajo 7. factura externa 8. reporte 9. gasto
      *
      * @param instanciaConexion
      * @param tipo
      * @param clase
-     * @return
+     * @return true si el codigo existe, false si no existe
      */
     public static boolean VerificarPK(Connection instanciaConexion, int tipo, Object clase) {
         boolean bandera = false;
@@ -465,6 +494,15 @@ public class DataBase<T> {
         return bandera;
     }
 
+    /**
+     * Metodo para eliminar registos tipo> 1.empleado,2.clientes, 3.
+     * distribuidora 4.articulo 5.factura servitec 6. trabajo 7. factura externa
+     * 8. reporte 9. gasto
+     *
+     * @param instanciaConexion
+     * @param tipo
+     * @param clase
+     */
     public static void eliminar(java.sql.Connection instanciaConexion, int tipo, Object clase) {
         try {
             switch (tipo) {
