@@ -33,8 +33,9 @@ create table distribuidora(
 );
 
 
-create table facturaExterna(
-  noFactura int primary key,
+create table facturaExterna( 
+  noRegistro int primary key auto_increment,
+  noFactura char(10),
   idDistribuidora char(20),
   fechaEmision date,
   subtotal float,
@@ -46,7 +47,7 @@ create table facturaExterna(
 );
 
 create table empleado(
-  cedula char (10) primary key,
+  cedula char (15) primary key,
   nombre char (20),
   apellido char (20),
   correo char (30),
@@ -55,8 +56,8 @@ create table empleado(
   cargo char(30),
   salarioMensual float default 0.0,
   user char(12),
-  contraseña char(12),
-  idsupervisor char(10) default "null",
+  contraseña varchar(12),
+  idsupervisor char(15) default "null",
   foreign key(idsupervisor)references empleado(cedula)
   );
   
@@ -93,14 +94,15 @@ create table articulo(
 );
 
 create table compraArticulo(
-  noFactura int,
+  noRegistro int,
   codigoArticulo char(20),
   cantidad int,
   precioUnitario float,
   precioTotal float,
-  primary key(noFactura ,codigoArticulo),
-  foreign key (noFactura) references facturaExterna (noFactura),
-  foreign key (codigoArticulo) references articulo (codigoArticulo) );
+  primary key(noRegistro ,codigoArticulo),
+  foreign key (noRegistro) references facturaExterna (noRegistro),
+  foreign key (codigoArticulo) references articulo (codigoArticulo) 
+  );
 
 
 create table insumos(
@@ -118,11 +120,28 @@ create table gasto(
   fechaGasto date
 );
  
-create table salarioEmpleado(
-  idEmpleado char(10),
-  noGasto int,
-  salario float,
-  primary key(idEmpleado,noGasto),
-  foreign key (idEmpleado) references empleado(cedula),
-  foreign key (noGasto) references gasto(noGasto)
-);
+ 
+ delimiter $
+ create procedure Ingresar_Factura_Externa(in nfactura char(15),in noDistribuidora char(20),in fecha date,in subtot float, in descuento float, in iva float, in total float,out fknoRegistro int)
+ begin   
+	INSERT INTO facturaExterna VALUES (0,nfactura,noDistribuidora,fecha,subtot,descuento,iva,total);
+    
+    SELECT noRegistro into fknoRegistro FROM facturaExterna order BY noRegistro DESC LIMIT 1;
+
+end
+$
+ delimiter ;
+ 
+ 
+ delimiter @
+ create procedure Ingresar_Articulo(in codArticulo char(20),in cantidad int,in punitario float,in ptotal float, in descrip varchar(60),in noRegistro int)
+ begin
+	INSERT INTO articulo VALUES (codArticulo,descrip);
+    Insert into compraArticulo values (noRegistro,codArticulo,cantidad,punitario,ptotal);
+ end
+ @
+ delimiter ;
+# call Ingresar_Factura_Externa("10","0992125691001",now(),0,0,0,0,@fknoRegistro);
+ #select @fknoRegistro;
+ #call Ingresar_Articulo("54234",4,10,40,"juego de cama",1);
+

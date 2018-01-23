@@ -21,11 +21,14 @@ insert into empleado values ("0990851889","Luis","Moya", "lamoya@espol.edu.ec", 
   
   insert into articulo values("001","varilla 1/2"), ("002", "lampara Fluorescente"), ("003","foco"), ("004","cable 1 mm");
   
-  #date = YYYY-MM-DD
-  insert into facturaservitec values ("0000370", "2018-01-10","0919862664",25.00,3.00,28.00);
+  insert into facturaservitec values ("0000370", "2018-01-10","0919862664",25.00,3.00,28.00),
+									 ("0000001", "2018-01-10","0919862664",25.00,3.00,28.00);
   
   insert into trabajo values (1, "2018-01-12" ,"Reparacion de luces fluorecentes", "0000370", "2018-01-20",25.00,false),
 							 (2, "2018-01-12", "Reparacion techo", "0000370" , "2018-01-14",30.00, true ),
                              (3, "2018-01-12", "Cambio de tomacorriente", "0000370" , "2018-01-14",10.00, true );
 
   insert into bitacora values (001, "se retiro la fluorecente y se limpio el socket", "2018-01-12", 1);
+
+	
+    

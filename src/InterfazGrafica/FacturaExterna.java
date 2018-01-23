@@ -6,8 +6,9 @@
 package InterfazGrafica;
 
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ import javax.swing.JTextField;
 import servitec.DataBase;
 import servitec.FacturaExternaClass;
 import javax.swing.table.DefaultTableModel;
+import servitec.ArticuloClass;
 
 /**
  *
@@ -38,6 +40,7 @@ public class FacturaExterna extends javax.swing.JFrame {
         String datos[][] = {};
         modelo = new DefaultTableModel(datos, cabecera);
         tablaTrabajos.setModel(modelo);
+        TxTFechaEmision.setText(String.valueOf(LocalDate.now()));
     }
 
     @SuppressWarnings("unchecked")
@@ -81,12 +84,14 @@ public class FacturaExterna extends javax.swing.JFrame {
         TxtpUnitArticulo = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         TxtpTotArticulo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BtnIngresarArticulo = new javax.swing.JButton();
         brochita1 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         TxtNRegistro = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Lucida Bright", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
@@ -292,10 +297,10 @@ public class FacturaExterna extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ingresar Articulo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnIngresarArticulo.setText("Ingresar Articulo");
+        BtnIngresarArticulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnIngresarArticuloActionPerformed(evt);
             }
         });
 
@@ -313,6 +318,13 @@ public class FacturaExterna extends javax.swing.JFrame {
         TxtNRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtNRegistroActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -368,7 +380,7 @@ public class FacturaExterna extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(TxtpTotArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton1)
+                                                .addComponent(BtnIngresarArticulo)
                                                 .addGap(81, 81, 81))
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
@@ -410,7 +422,9 @@ public class FacturaExterna extends javax.swing.JFrame {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(TxtRucDistribuidora, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(279, 279, 279)))
+                                .addGap(47, 47, 47)
+                                .addComponent(jButton1)
+                                .addGap(159, 159, 159)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -471,7 +485,7 @@ public class FacturaExterna extends javax.swing.JFrame {
                                                 .addGap(0, 25, Short.MAX_VALUE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton1)))
+                                                    .addComponent(BtnIngresarArticulo)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(26, 26, 26)
                                                 .addComponent(TxtpTotArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -503,7 +517,8 @@ public class FacturaExterna extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TxtRucDistribuidora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -544,8 +559,7 @@ public class FacturaExterna extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-        
-        DataBase.Insertar(instanciaConexion,7, this);
+         DataBase.Insertar(instanciaConexion, 7, this);
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
@@ -643,7 +657,7 @@ public class FacturaExterna extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtpTotArticuloActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnIngresarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarArticuloActionPerformed
         if (!codigoIsRepetido(TxtcodArticulo)) {
             double precioTotArticulo = 0.0;
             double precioUniArticulo = 0.0;
@@ -662,9 +676,9 @@ public class FacturaExterna extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Articulo ya existe el la tabla", "Articulo Repetido - error", JOptionPane.INFORMATION_MESSAGE);
         }
+    }//GEN-LAST:event_BtnIngresarArticuloActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    //el codigo se va guardando progresivamente si no existe en la base de datos.
     private boolean codigoIsRepetido(JTextField texto) {
         if (valores.contains(texto.getText())) {
             return true;
@@ -673,18 +687,23 @@ public class FacturaExterna extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     private void brochita1Limpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochita1Limpieza
         TxtcodArticulo.setText(" ");
         TxtcantArticulo.setText(" ");
         TxtpUnitArticulo.setText(" ");
         TxtpTotArticulo.setText(" ");
         TxtDescprArticulo.setText(" ");
+        TxtNRegistro.setText(" ");
     }//GEN-LAST:event_brochita1Limpieza
 
     private void TxtNRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNRegistroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNRegistroActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -731,6 +750,22 @@ public class FacturaExterna extends javax.swing.JFrame {
 
     public DefaultTableModel getModelo() {
         return modelo;
+    }
+
+    public JButton getBtnIngresarArticulo() {
+        return BtnIngresarArticulo;
+    }
+
+    public void setBtnIngresarArticulo(JButton BtnIngresarArticulo) {
+        this.BtnIngresarArticulo = BtnIngresarArticulo;
+    }
+
+    public JTextField getTxtRucDistribuidora() {
+        return TxtRucDistribuidora;
+    }
+
+    public void setTxtRucDistribuidora(JTextField TxtRucDistribuidora) {
+        this.TxtRucDistribuidora = TxtRucDistribuidora;
     }
 
     public void setModelo(DefaultTableModel modelo) {
@@ -938,11 +973,11 @@ public class FacturaExterna extends javax.swing.JFrame {
     }
 
     public JButton getjButton1() {
-        return jButton1;
+        return BtnIngresarArticulo;
     }
 
     public void setjButton1(JButton jButton1) {
-        this.jButton1 = jButton1;
+        this.BtnIngresarArticulo = jButton1;
     }
 
     public JLabel getjLabel1() {
@@ -1088,13 +1123,13 @@ public class FacturaExterna extends javax.swing.JFrame {
     public void setTablaTrabajos(JTable tablaTrabajos) {
         this.tablaTrabajos = tablaTrabajos;
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnIngresar;
+    private javax.swing.JButton BtnIngresarArticulo;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JButton BtnRegresar;
     private javax.swing.JButton BtnSalir;

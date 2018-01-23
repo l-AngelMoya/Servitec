@@ -82,6 +82,11 @@ public class ArticuloClass {
     public void setDistribuidora(String distribuidora) {
         this.distribuidora = distribuidora;
     }
+
+    @Override
+    public String toString() {
+        return "ArticuloClass{" + "codigo=" + codigo + ", precioUnitario=" + precioUnitario + ", descripcion=" + descripcion + ", descuento=" + descuento + ", distribuidora=" + distribuidora + '}';
+    }
    
     
     

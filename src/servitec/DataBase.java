@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -317,18 +318,42 @@ public class DataBase<T> {
                     try {
                         FacturaExterna claseFactExterna = (FacturaExterna) clase;
                         Statement stmt = instanciaConexion.createStatement();
-                        
-
-                        String sq1 = "call Ingresar_Factura_Externa('" + claseFactExterna.getTxtnFactura().getText() + "','" + claseFactExterna.getTxtDistribuidora().getText() + "','" + Date.valueOf(claseFactExterna.getTxTFechaEmision().getText()) + "'," + claseFactExterna.getTxtSubtotal().getText() + "," + claseFactExterna.getTxtDescuento().getText() + "," + claseFactExterna.getTxtIva().getText() + "," + claseFactExterna.getTxtTotal().getText() + ");";
-                        System.out.println(sq1);
+                        //ingresa la parte de la entidad factura
+                        String sq1 = "call Ingresar_Factura_Externa('" + claseFactExterna.getTxtnFactura().getText() + "','" + claseFactExterna.getTxtDistribuidora().getText() + "','" + Date.valueOf(claseFactExterna.getTxTFechaEmision().getText()) + "'," + claseFactExterna.getTxtSubtotal().getText() + "," + claseFactExterna.getTxtDescuento().getText() + "," + claseFactExterna.getTxtIva().getText() + "," + claseFactExterna.getTxtTotal().getText() + ",@fknoRegistro);";
                         stmt.executeQuery(sq1);
+
+                        //imprime el pf de la factura ingresada previamente y la muestra en un txt para que sea obtenida por el siguiente procedure
+                        String sq2 = "select @fknoRegistro";
+                        ResultSet noRegistro = stmt.executeQuery(sq2);
+                        if (noRegistro.next()) {
+                            claseFactExterna.getTxtNRegistro().setText(noRegistro.getString(1));
+                        } else {
+                            System.out.println("Error");
+                        }
+
+                        for (int i = 0; i < claseFactExterna.getTablaTrabajos().getRowCount(); i++) {
+                            String cadena = "";
+                            for (int j = 0; j < claseFactExterna.getTablaTrabajos().getColumnCount(); j++) {
+                                cadena = cadena + claseFactExterna.getTablaTrabajos().getValueAt(i, j) + ",";
+                            }
+                            String[] str = cadena.split(",");
+                            Statement stmt1 = instanciaConexion.createStatement();
+                            String sq3 = "call Ingresar_Articulo('" + str[0] + "'," + str[1] + "," + str[2] + "," + str[3] + ",'" + str[4] + "'," + claseFactExterna.getTxtNRegistro().getText() + ");";
+                            System.out.println(sq3);
+                            stmt1.executeQuery(sq3);
+
+                        }
+
+
                         JOptionPane.showMessageDialog(null, "Ingreso con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                         
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
                     break;
-            }
+                case (8):
 
+            }
         } catch (Exception e) {
             System.out.println("ha sucecido un problema");
             e.printStackTrace();
