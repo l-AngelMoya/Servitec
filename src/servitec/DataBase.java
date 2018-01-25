@@ -296,7 +296,7 @@ public class DataBase<T> {
                     }
                     break;
                 // Articulo
-                case (4):
+                /*case (4):
                     try {
                         Articulo claseArticulo = (Articulo) clase;
                         if (!VerificarPK(instanciaConexion, 4, claseArticulo)) {
@@ -311,7 +311,7 @@ public class DataBase<T> {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                    break;
+                    break;*/
 
                 //factura externa
                 case (7):
@@ -319,37 +319,42 @@ public class DataBase<T> {
                         FacturaExterna claseFactExterna = (FacturaExterna) clase;
                         Statement stmt = instanciaConexion.createStatement();
                         //ingresa la parte de la entidad factura
-                        String sq1 = "call Ingresar_Factura_Externa('" + claseFactExterna.getTxtnFactura().getText() + "','" + claseFactExterna.getTxtDistribuidora().getText() + "','" + Date.valueOf(claseFactExterna.getTxTFechaEmision().getText()) + "'," + claseFactExterna.getTxtSubtotal().getText() + "," + claseFactExterna.getTxtDescuento().getText() + "," + claseFactExterna.getTxtIva().getText() + "," + claseFactExterna.getTxtTotal().getText() + ",@fknoRegistro);";
-                        stmt.executeQuery(sq1);
-
-                        //imprime el pf de la factura ingresada previamente y la muestra en un txt para que sea obtenida por el siguiente procedure
-                        String sq2 = "select @fknoRegistro";
-                        ResultSet noRegistro = stmt.executeQuery(sq2);
-                        if (noRegistro.next()) {
-                            claseFactExterna.getTxtNRegistro().setText(noRegistro.getString(1));
+                        if (claseFactExterna.getTxtSubtotal().getText().isEmpty() || claseFactExterna.getTxtDescuento().getText().isEmpty() || claseFactExterna.getTxtIva().getText().isEmpty() || claseFactExterna.getTxtTotal().getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "ingrese valores numericos", "Ingreso Fallido", JOptionPane.INFORMATION_MESSAGE);
                         } else {
-                            System.out.println("Error");
-                        }
+                            String sq1 = "call Ingresar_Factura_Externa('" + claseFactExterna.getTxtnFactura().getText() + "','" + claseFactExterna.getTxtDistribuidora().getText() + "','" + Date.valueOf(claseFactExterna.getTxTFechaEmision().getText()) + "'," + claseFactExterna.getTxtSubtotal().getText() + "," + claseFactExterna.getTxtDescuento().getText() + "," + claseFactExterna.getTxtIva().getText() + "," + claseFactExterna.getTxtTotal().getText() + ",@fknoRegistro);";
+                            stmt.executeQuery(sq1);
 
-                        for (int i = 0; i < claseFactExterna.getTablaTrabajos().getRowCount(); i++) {
-                            String cadena = "";
-                            for (int j = 0; j < claseFactExterna.getTablaTrabajos().getColumnCount(); j++) {
-                                cadena = cadena + claseFactExterna.getTablaTrabajos().getValueAt(i, j) + ",";
+                            //imprime el pf de la factura ingresada previamente y la muestra en un txt para que sea obtenida por el siguiente procedure
+                            String sq2 = "select @fknoRegistro";
+                            ResultSet noRegistro = stmt.executeQuery(sq2);
+                            if (noRegistro.next()) {
+                                claseFactExterna.getTxtNRegistro().setText(noRegistro.getString(1));
+                            } else {
+                                System.out.println("Error");
                             }
-                            String[] str = cadena.split(",");
-                            Statement stmt1 = instanciaConexion.createStatement();
-                            String sq3 = "call Ingresar_Articulo('" + str[0] + "'," + str[1] + "," + str[2] + "," + str[3] + ",'" + str[4] + "'," + claseFactExterna.getTxtNRegistro().getText() + ");";
-                            System.out.println(sq3);
-                            stmt1.executeQuery(sq3);
 
+                            for (int i = 0; i < claseFactExterna.getTablaTrabajos().getRowCount(); i++) {
+                                String cadena = "";
+                                for (int j = 0; j < claseFactExterna.getTablaTrabajos().getColumnCount(); j++) {
+                                    cadena = cadena + claseFactExterna.getTablaTrabajos().getValueAt(i, j) + ",";
+                                }
+                                String[] str = cadena.split(",");
+                                Statement stmt1 = instanciaConexion.createStatement();
+                                String sq3 = "call Ingresar_Articulo('" + str[0] + "'," + str[1] + "," + str[2] + "," + str[3] + ",'" + str[4] + "'," + claseFactExterna.getTxtNRegistro().getText() + ");";
+                                System.out.println(sq3);
+                                stmt1.executeQuery(sq3);
+
+                            }
+
+                            JOptionPane.showMessageDialog(null, "Ingreso con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
                         }
-
-
-                        JOptionPane.showMessageDialog(null, "Ingreso con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
-                         
                     } catch (SQLException ex) {
                         ex.printStackTrace();
+                    } catch (Exception e) {
+                        System.out.println("Tipo de dato erroneo");
                     }
+
                     break;
                 case (8):
 

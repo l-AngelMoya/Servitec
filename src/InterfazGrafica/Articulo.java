@@ -37,46 +37,24 @@ public class Articulo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         TxtCodigo = new javax.swing.JTextField();
-        TxtPrecioUnitario = new javax.swing.JTextField();
-        TxtDescri = new javax.swing.JTextField();
-        TxtDescuento = new javax.swing.JTextField();
-        TxtDistribuidor = new javax.swing.JTextField();
         BtnBuscar = new javax.swing.JButton();
-        BtnIngresar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnRegresar = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
         candado = new javax.swing.JLabel();
         brochita = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaArticulos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Lucida Bright", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setText("Articulo");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel4.setText("Ingrese el  código");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel5.setText("Precio Unitario");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel6.setText("Descripción");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel7.setText("Descuento");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel8.setText("Distribuidoras");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/Servitec_logo_small.png"))); // NOI18N
 
@@ -86,47 +64,11 @@ public class Articulo extends javax.swing.JFrame {
             }
         });
 
-        TxtPrecioUnitario.setEnabled(false);
-        TxtPrecioUnitario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtPrecioUnitarioActionPerformed(evt);
-            }
-        });
-
-        TxtDescri.setEnabled(false);
-        TxtDescri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDescriActionPerformed(evt);
-            }
-        });
-
-        TxtDescuento.setEnabled(false);
-        TxtDescuento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDescuentoActionPerformed(evt);
-            }
-        });
-
-        TxtDistribuidor.setEnabled(false);
-        TxtDistribuidor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDistribuidorActionPerformed(evt);
-            }
-        });
-
         BtnBuscar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnBuscar.setText("Buscar");
         BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBuscarActionPerformed(evt);
-            }
-        });
-
-        BtnIngresar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
-        BtnIngresar.setText("Ingresar");
-        BtnIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnIngresarActionPerformed(evt);
             }
         });
 
@@ -176,87 +118,87 @@ public class Articulo extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/buscar.png"))); // NOI18N
+
+        TablaArticulos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "codigo", "descripcion", "N. Factura", "IdDistribuidora", "PrecioU"
+            }
+        ));
+        TablaArticulos.setEnabled(false);
+        jScrollPane1.setViewportView(TablaArticulos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jLabel1))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TxtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtDescri, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtDistribuidor, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(candado)
-                            .addComponent(brochita))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                            .addComponent(BtnRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(candado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(brochita)
+                        .addGap(31, 31, 31))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(candado)
-                        .addGap(26, 26, 26)
-                        .addComponent(brochita))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1))
-                            .addGap(5, 5, 5)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(BtnBuscar))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtDescri, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnModificar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtDistribuidor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(candado)
+                            .addComponent(brochita))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnBuscar)
+                        .addGap(27, 27, 27)
+                        .addComponent(BtnModificar)
+                        .addGap(31, 31, 31)
                         .addComponent(BtnEliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnRegresar)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnSalir)))
-                .addGap(0, 59, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
+                        .addComponent(BtnRegresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(49, 49, 49)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(BtnSalir)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,39 +208,16 @@ public class Articulo extends javax.swing.JFrame {
        TxtCodigo.transferFocus();
     }//GEN-LAST:event_TxtCodigoActionPerformed
 
-    private void TxtPrecioUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPrecioUnitarioActionPerformed
-        TxtPrecioUnitario.transferFocus();
-    }//GEN-LAST:event_TxtPrecioUnitarioActionPerformed
-
-    private void TxtDescriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescriActionPerformed
-        TxtDescri.transferFocus();
-    }//GEN-LAST:event_TxtDescriActionPerformed
-
-    private void TxtDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescuentoActionPerformed
-        TxtDescuento.transferFocus();
-    }//GEN-LAST:event_TxtDescuentoActionPerformed
-
-    private void TxtDistribuidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDistribuidorActionPerformed
-        TxtDistribuidor.transferFocus();
-    }//GEN-LAST:event_TxtDistribuidorActionPerformed
-
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
         ArticuloClass articulo = (ArticuloClass) haciendoConexion.Busqueda(instanciaConexion, TxtCodigo, 4);
         if (articulo == null) {
             JOptionPane.showMessageDialog(rootPane, "Articulo ingresado no existe en la base de datos");
         } else {
             TxtCodigo.setText(articulo.getCodigo());
-            TxtPrecioUnitario.setText(articulo.getPrecioUnitario());
-            TxtDescri.setText(articulo.getDescripcion());
-            TxtDescuento.setText(articulo.getDescuento());
-            TxtDistribuidor.setText(articulo.getDistribuidora());
+            
 
         }
     }//GEN-LAST:event_BtnBuscarActionPerformed
-
-    private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-        DataBase.Insertar(instanciaConexion, 4, this);
-    }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         DataBase.actualizar(instanciaConexion, 2, this);
@@ -323,16 +242,11 @@ public class Articulo extends javax.swing.JFrame {
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
         if (contador % 2 == 0) {
             candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo.jpg"));
-            TxtDescri.setEnabled(true);
-            TxtDescuento.setEnabled(true);
-            TxtDistribuidor.setEnabled(true);
-            TxtPrecioUnitario.setEnabled(true);
+            TablaArticulos.setEnabled(true);
         } else {
             candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg")); //
-            TxtDescri.setEnabled(false);
-            TxtDescuento.setEnabled(false);
-            TxtDistribuidor.setEnabled(false);
-            TxtPrecioUnitario.setEnabled(false);
+            TablaArticulos.setEnabled(false);
+
         }
         contador = contador + 1;
 
@@ -340,10 +254,9 @@ public class Articulo extends javax.swing.JFrame {
 
     private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza
         TxtCodigo.setText("");
-        TxtDescri.setText("");
-        TxtDescuento.setText("");
-        TxtDistribuidor.setText("");
-        TxtPrecioUnitario.setText("");
+        TablaArticulos.clearSelection();
+
+        
     }//GEN-LAST:event_brochitaLimpieza
 
     /**
@@ -387,24 +300,17 @@ public class Articulo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton BtnIngresar;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JButton BtnRegresar;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JTable TablaArticulos;
     private javax.swing.JTextField TxtCodigo;
-    private javax.swing.JTextField TxtDescri;
-    private javax.swing.JTextField TxtDescuento;
-    private javax.swing.JTextField TxtDistribuidor;
-    private javax.swing.JTextField TxtPrecioUnitario;
     private javax.swing.JLabel brochita;
     private javax.swing.JLabel candado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     public DataBase getHaciendoConexion() {
@@ -439,13 +345,7 @@ public class Articulo extends javax.swing.JFrame {
         this.BtnEliminar = BtnEliminar;
     }
 
-    public JButton getBtnIngresar() {
-        return BtnIngresar;
-    }
-
-    public void setBtnIngresar(JButton BtnIngresar) {
-        this.BtnIngresar = BtnIngresar;
-    }
+   
 
     public JButton getBtnModificar() {
         return BtnModificar;
@@ -479,38 +379,6 @@ public class Articulo extends javax.swing.JFrame {
         this.TxtCodigo = TxtCodigo;
     }
 
-    public JTextField getTxtDescri() {
-        return TxtDescri;
-    }
-
-    public void setTxtDescri(JTextField TxtDescri) {
-        this.TxtDescri = TxtDescri;
-    }
-
-    public JTextField getTxtDescuento() {
-        return TxtDescuento;
-    }
-
-    public void setTxtDescuento(JTextField TxtDescuento) {
-        this.TxtDescuento = TxtDescuento;
-    }
-
-    public JTextField getTxtDistribuidor() {
-        return TxtDistribuidor;
-    }
-
-    public void setTxtDistribuidor(JTextField TxtDistribuidor) {
-        this.TxtDistribuidor = TxtDistribuidor;
-    }
-
-    public JTextField getTxtPrecioUnitario() {
-        return TxtPrecioUnitario;
-    }
-
-    public void setTxtPrecioUnitario(JTextField TxtPrecioUnitario) {
-        this.TxtPrecioUnitario = TxtPrecioUnitario;
-    }
-
     public JLabel getBrochita() {
         return brochita;
     }
@@ -542,45 +410,4 @@ public class Articulo extends javax.swing.JFrame {
     public void setjLabel2(JLabel jLabel2) {
         this.jLabel2 = jLabel2;
     }
-
-    public JLabel getjLabel4() {
-        return jLabel4;
-    }
-
-    public void setjLabel4(JLabel jLabel4) {
-        this.jLabel4 = jLabel4;
-    }
-
-    public JLabel getjLabel5() {
-        return jLabel5;
-    }
-
-    public void setjLabel5(JLabel jLabel5) {
-        this.jLabel5 = jLabel5;
-    }
-
-    public JLabel getjLabel6() {
-        return jLabel6;
-    }
-
-    public void setjLabel6(JLabel jLabel6) {
-        this.jLabel6 = jLabel6;
-    }
-
-    public JLabel getjLabel7() {
-        return jLabel7;
-    }
-
-    public void setjLabel7(JLabel jLabel7) {
-        this.jLabel7 = jLabel7;
-    }
-
-    public JLabel getjLabel8() {
-        return jLabel8;
-    }
-
-    public void setjLabel8(JLabel jLabel8) {
-        this.jLabel8 = jLabel8;
-    }
-
 }
