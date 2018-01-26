@@ -707,6 +707,7 @@ public class FacturaExterna extends javax.swing.JFrame {
         TxtpTotArticulo.setText(" ");
         TxtDescprArticulo.setText(" ");
         TxtNRegistro.setText(" ");
+        jComboBox1.removeAllItems();
     }//GEN-LAST:event_brochita1Limpieza
 
     private void TxtNRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNRegistroActionPerformed

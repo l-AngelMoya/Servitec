@@ -57,7 +57,6 @@ public class DataBase<T> {
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("ha sucecido un problema");
         }
-        arregloPk.clear();
     }
 
     //Obtiene el objeto Connection que es el que se instancia para hacer los querys
@@ -545,21 +544,21 @@ public class DataBase<T> {
     //
     public static void llenarComboBoxFactExterna(java.sql.Connection instanciaConexion, FacturaExterna factExt) {
         try {
+            factExt.getjComboBox1().removeAllItems();
+            arregloPk.clear();
+
             if (!factExt.getTxtnFactura().getText().isEmpty()) {
                 Statement stmt = instanciaConexion.createStatement();
-                /*String sq1 = "call Buscar_Infor_FacExterna('" + factExt.getTxtnFactura().getText() + "',@distribuidora,@nombreDistribuidora,@numRegisto);";
-                stmt.executeQuery(sq1);
-                System.out.println(sq1);
-                String sq2 = "select @distribuidora,@nombreDistribuidora,@numRegisto";
-                ResultSet noFactura = stmt.executeQuery(sq2);*/
                 String sq1 = "select dis.idDistribuidora,dis.nombre,fe.noRegistro  from facturaExterna fe  join distribuidora dis on fe.idDistribuidora=dis.idDistribuidora where fe.noFactura=" + factExt.getTxtnFactura().getText() + " ";
                 System.out.println(sq1);
                 ResultSet noFactura = stmt.executeQuery(sq1);
 
-                if (noFactura.next() && !noFactura.getString(1).equals("null") && !arregloPk.contains(noFactura.getString(1) + "," + noFactura.getString(2) + "," + noFactura.getString(3))) {
-                    arregloPk.add(noFactura.getString(1) + "," + noFactura.getString(2) + "," + noFactura.getString(3));
-  
-                    factExt.getjComboBox1().addItem(noFactura.getString(1) + "," + noFactura.getString(2) + "," + noFactura.getString(3));
+                while (noFactura.next() && !noFactura.getString(1).equals("null") && !arregloPk.contains(noFactura.getString(1) + "," + noFactura.getString(2) + "," + noFactura.getString(3))) {
+                    String idDistibuidora=noFactura.getString(1);
+                    String nombDistribuidora=noFactura.getString(2);
+                    String numFactura= noFactura.getString(3);
+                    arregloPk.add(idDistibuidora + "," + nombDistribuidora + "," + numFactura);
+                    factExt.getjComboBox1().addItem(idDistibuidora + "," + nombDistribuidora+ "," + numFactura);
                 }
             }
         } catch (SQLException ex) {
