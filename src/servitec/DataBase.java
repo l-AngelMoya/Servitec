@@ -14,9 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -38,6 +38,9 @@ public class DataBase<T> {
     private static final String usuario = "root"; //usuario de la base de datos
     private static final String contrasenna = "dean"; //contraseña del usuario
     private static final String url = "jdbc:mysql://localhost:3306/servitec"; //basicamnete es la informacion del servidor de la base deatos y es jdbc:mysql://(direccionIp):(puerto)/(nombreDeLaBaseDeDatos)
+    private static ArrayList arregloPk = new ArrayList();
+
+    ;
 
     /*
     Este metodo es el constructor del metodo Conexion y se hace de esta forma normalmente
@@ -54,6 +57,7 @@ public class DataBase<T> {
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("ha sucecido un problema");
         }
+        arregloPk.clear();
     }
 
     //Obtiene el objeto Connection que es el que se instancia para hacer los querys
@@ -83,41 +87,6 @@ public class DataBase<T> {
         return b;
     }
 
-    /*public static empleadoClass BusquedaEmpleado(java.sql.Connection instanciaConexion,JTextField cedula) {
-        empleadoClass empleado=null;
-        try {
-            String sq2 = "SELECT * FROM empleado WHERE cedula='"+ cedula.getText() +"' ";
-            Statement stmt = instanciaConexion.createStatement();
-            ResultSet rs = stmt.executeQuery(sq2);
-            if (rs.next()) {
-                empleado=new empleadoClass(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), Float.valueOf(rs.getString(8)), rs.getString(9), rs.getString(10), rs.getString(11));  
-            }else{
-                return null;
-            }
-        } catch (SQLException e) {
-            System.out.println("ha sucecido un problema");
-            e.printStackTrace();
-        }
-        return empleado;
-    }
-    public static clienteClass BusquedaCliente(java.sql.Connection instanciaConexion,JTextField cedula) {
-        clienteClass cliente=null;
-        try {
-            String sq3 = "SELECT * FROM cliente WHERE cedula='"+ cedula.getText() +"' ";
-            Statement stmt = instanciaConexion.createStatement();
-            ResultSet rs = stmt.executeQuery(sq3);
-            if (rs.next()) {
-                cliente=new clienteClass(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));  
-            }else{
-                return null;
-            }
-        } catch (SQLException e) {
-            System.out.println("ha sucecido un problema");
-            e.printStackTrace();
-        }
-        return cliente;
-    }
-     */
     /**
      * Metodo para buscar datos 1.empleado,2.clientes, 3. distribuidora
      * 4.Articulo 5.factura servitec 6. trabajo 7. factura externa 8. reporte 9.
@@ -573,4 +542,39 @@ public class DataBase<T> {
         }
     }
 
+    //
+    public static void llenarComboBoxFactExterna(java.sql.Connection instanciaConexion, FacturaExterna factExt) {
+        try {
+            if (!factExt.getTxtnFactura().getText().isEmpty()) {
+                Statement stmt = instanciaConexion.createStatement();
+                /*String sq1 = "call Buscar_Infor_FacExterna('" + factExt.getTxtnFactura().getText() + "',@distribuidora,@nombreDistribuidora,@numRegisto);";
+                stmt.executeQuery(sq1);
+                System.out.println(sq1);
+                String sq2 = "select @distribuidora,@nombreDistribuidora,@numRegisto";
+                ResultSet noFactura = stmt.executeQuery(sq2);*/
+                String sq1 = "select dis.idDistribuidora,dis.nombre,fe.noRegistro  from facturaExterna fe  join distribuidora dis on fe.idDistribuidora=dis.idDistribuidora where fe.noFactura=" + factExt.getTxtnFactura().getText() + " ";
+                System.out.println(sq1);
+                ResultSet noFactura = stmt.executeQuery(sq1);
+
+                if (noFactura.next() && !noFactura.getString(1).equals("null") && !arregloPk.contains(noFactura.getString(1) + "," + noFactura.getString(2) + "," + noFactura.getString(3))) {
+                    arregloPk.add(noFactura.getString(1) + "," + noFactura.getString(2) + "," + noFactura.getString(3));
+  
+                    factExt.getjComboBox1().addItem(noFactura.getString(1) + "," + noFactura.getString(2) + "," + noFactura.getString(3));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FacturaExterna.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println("salio error");
+        }
+    }
+    /*
+                        String sq2 = "select @fknoRegistro";
+                            ResultSet noRegistro = stmt.executeQuery(sq2);
+                            if (noRegistro.next()) {
+                                claseFactExterna.getTxtNRegistro().setText(noRegistro.getString(1));
+                            } else {
+                                System.out.println("Error");
+                            }
+        */
 }
