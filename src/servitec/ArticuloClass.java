@@ -14,14 +14,12 @@ public class ArticuloClass {
     private String codigo;
     private String precioUnitario;
     private String descripcion;
-    private String descuento;
     private String distribuidora;
 
     public ArticuloClass(String codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precioUnitario = "-";
-        this.descuento = "-";
         this.distribuidora = "-";
     }
 
@@ -30,16 +28,14 @@ public class ArticuloClass {
         this.codigo = null;
         this.precioUnitario = null;
         this.descripcion = null;
-        this.descuento = null;
         this.distribuidora = null;
     
     }
     
-    public ArticuloClass(String codigo, String precioUnitario, String descripcion, String descuento, String distribuidora) {
+    public ArticuloClass(String codigo, String precioUnitario, String descripcion, String distribuidora) {
         this.codigo = codigo;
         this.precioUnitario = precioUnitario;
         this.descripcion = descripcion;
-        this.descuento = descuento;
         this.distribuidora = distribuidora;
     }
 
@@ -67,14 +63,7 @@ public class ArticuloClass {
         this.descripcion = descripcion;
     }
 
-    public String getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(String descuento) {
-        this.descuento = descuento;
-    }
-
+   
     public String getDistribuidora() {
         return distribuidora;
     }
@@ -85,7 +74,7 @@ public class ArticuloClass {
 
     @Override
     public String toString() {
-        return "ArticuloClass{" + "codigo=" + codigo + ", precioUnitario=" + precioUnitario + ", descripcion=" + descripcion + ", descuento=" + descuento + ", distribuidora=" + distribuidora + '}';
+        return "ArticuloClass{" + "codigo=" + codigo + ", precioUnitario=" + precioUnitario + ", descripcion=" + descripcion + ", descuento=" + distribuidora + '}';
     }
    
     

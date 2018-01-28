@@ -547,6 +547,22 @@ public class Empleado extends javax.swing.JFrame {
          TxtCargo.transferFocus();
     }//GEN-LAST:event_TxtCargoActionPerformed
 
+    public JLabel getjLabel14() {
+        return jLabel14;
+    }
+
+    public void setjLabel14(JLabel jLabel14) {
+        this.jLabel14 = jLabel14;
+    }
+
+    public JLabel getjLabel16() {
+        return jLabel16;
+    }
+
+    public void setjLabel16(JLabel jLabel16) {
+        this.jLabel16 = jLabel16;
+    }
+
     private void TxtSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtSalarioActionPerformed
          TxtSalario.transferFocus();
     }//GEN-LAST:event_TxtSalarioActionPerformed

@@ -39,7 +39,7 @@ public class DataBase<T> {
     private static final String contrasenna = "dean"; //contraseña del usuario
     private static final String url = "jdbc:mysql://localhost:3306/servitec"; //basicamnete es la informacion del servidor de la base deatos y es jdbc:mysql://(direccionIp):(puerto)/(nombreDeLaBaseDeDatos)
     private static ArrayList arregloPk = new ArrayList();
-
+    //private static ArrayList arreglo_
     ;
 
     /*
@@ -96,7 +96,8 @@ public class DataBase<T> {
      * @param tipo
      * @return
      */
-    public T Busqueda(java.sql.Connection instanciaConexion, JTextField identificador, int tipo) {
+    //public T Busqueda(java.sql.Connection instanciaConexion, JTextField identificador, int tipo) {
+    public T Busqueda(java.sql.Connection instanciaConexion, Object clase, int tipo) {
         T objeto = null;
         try {
             Statement stmt = instanciaConexion.createStatement();
@@ -104,7 +105,8 @@ public class DataBase<T> {
             switch (tipo) {
                 //Busqueda de empleado
                 case (1):
-                    String sq1 = "SELECT * FROM empleado WHERE cedula=" + identificador.getText() + " ";
+                    Empleado empleado = (Empleado) clase;
+                    String sq1 = "SELECT * FROM empleado WHERE cedula=" + empleado.getTxtCedula().getText() + " ";
                     ResultSet rs1 = stmt.executeQuery(sq1);
                     if (rs1.next()) {
                         objeto = (T) new empleadoClass(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5), rs1.getString(6), rs1.getString(7), Float.valueOf(rs1.getString(8)), rs1.getString(9), rs1.getString(10), rs1.getString(11));
@@ -114,7 +116,8 @@ public class DataBase<T> {
                     break;
                 //busqueda de cliente
                 case (2):
-                    String sq2 = "SELECT * FROM cliente WHERE cedula='" + identificador.getText() + "' ";
+                    Cliente cliente = (Cliente) clase;
+                    String sq2 = "SELECT * FROM cliente WHERE cedula='" + cliente.getTxtCedula().getText() + "' ";
                     ResultSet rs2 = stmt.executeQuery(sq2);
                     if (rs2.next()) {
                         objeto = (T) new clienteClass(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5), rs2.getString(6));
@@ -124,7 +127,8 @@ public class DataBase<T> {
                     break;
                 //Distribuidora
                 case (3):
-                    String sq3 = "SELECT * FROM distribuidora WHERE idDistribuidora='" + identificador.getText() + "' ";
+                    Distribuidora distribuidora = (Distribuidora) clase;
+                    String sq3 = "SELECT * FROM distribuidora WHERE idDistribuidora='" + distribuidora.getTxtid().getText() + "' ";
                     ResultSet rs3 = stmt.executeQuery(sq3);
                     if (rs3.next()) {
                         objeto = (T) new DistribuidoraClass(rs3.getString(1), rs3.getString(2), rs3.getString(3), rs3.getString(4), rs3.getString(5));
@@ -134,7 +138,8 @@ public class DataBase<T> {
                     break;
                 // Articulo
                 case (4):
-                    String sq4 = "SELECT * FROM articulo WHERE codigoArticulo='" + identificador.getText() + "' ";
+                    Articulo articulo = (Articulo) clase;
+                    String sq4 = "SELECT * FROM articulo WHERE codigoArticulo='" + articulo.getTxtCodigo().getText() + "' ";
                     ResultSet rs4 = stmt.executeQuery(sq4);
                     if (rs4.next()) {
                         objeto = (T) new ArticuloClass(rs4.getString(1), rs4.getString(2));
@@ -144,7 +149,8 @@ public class DataBase<T> {
                     break;
                 //Trabajo
                 case (5):
-                    String sq5 = "SELECT * FROM trabajo WHERE noTrabajo='" + identificador.getText() + "' ";
+                    Trabajo trabajo = (Trabajo) clase;
+                    String sq5 = "SELECT * FROM trabajo WHERE noTrabajo='" + trabajo.getTxtNumTrabajo().getText() + "' ";
                     ResultSet rs5 = stmt.executeQuery(sq5);
                     if (rs5.next()) {
                         objeto = (T) new TrabajoClass(rs5.getString(1), Date.valueOf(rs5.getString(2)), Date.valueOf(rs5.getString(5)), Float.valueOf(rs5.getString(6)), "001", rs5.getString(4), " ", rs5.getString(3));
@@ -154,12 +160,32 @@ public class DataBase<T> {
                     break;
                 //Factura servitec class
                 case (6):
-                    String sq6 = "select * from facturaservitec where noFactura='" + identificador.getText() + "' ";
+                    FacturaServitec facturaServitec = (FacturaServitec) clase;
+
+                    String sq6 = "select * from facturaservitec where noFactura='" + facturaServitec.getTxtnFactura().getText() + "' ";
                     ResultSet rs6 = stmt.executeQuery(sq6);
                     if (rs6.next()) {
                         objeto = (T) new FacturaServitecClass(rs6.getString(1), rs6.getDate(2), rs6.getString(3), Double.valueOf(rs6.getString(4)), Double.valueOf(rs6.getString(5)), Double.valueOf(rs6.getString(6)));
                     } else {
                         return null;
+                    }
+                    break;
+                case (7):
+                     arregloPk.clear();
+
+                    FacturaExterna facturaExterna = (FacturaExterna) clase;
+                    //String sq7 = "select * from facturaservitec where noFactura='" + identificador.getText() + "' ";
+                    JTextField cuadro = new JTextField();
+                    String[] info = facturaExterna.getjComboBox1().getSelectedItem().toString().split(",");
+                    System.out.println(info[0] + info[1] + info[2]);
+                    String sq7 = "select fe.noRegistro,fe.noFactura,fe.fechaEmision,idDistribuidora,subtotal,descuento,iva,total,ca.codigoArticulo,ca.cantidad,ca.precioUnitario,ca.precioTotal, ar.descripcion from facturaexterna fe  join compraarticulo ca on fe.noRegistro=ca.noRegistro join articulo ar on ar.codigoArticulo=ca.codigoArticulo where fe.noFactura='" + facturaExterna.getTxtnFactura().getText() + "'and fe.noRegistro=" + info[2] + ";";
+                    System.out.println(sq7);
+                    ResultSet rs7 = stmt.executeQuery(sq7);
+                    while (rs7.next()) {
+                        objeto = (T) new FacturaExternaClass(Integer.valueOf(rs7.getString(1)), rs7.getString(2), rs7.getDate(3), rs7.getString(4), rs7.getDouble(5), rs7.getDouble(6), rs7.getDouble(7), rs7.getDouble(8));
+                        Object datosArticulos[] = {rs7.getString(9), rs7.getString(10), rs7.getString(11), rs7.getString(12), rs7.getString(13)};
+                        arregloPk.add(rs7.getString(9));
+                        facturaExterna.getModelo().addRow(datosArticulos);
                     }
                     break;
             }
@@ -534,6 +560,16 @@ public class DataBase<T> {
                     stmt4.executeUpdate(sq4);
                     JOptionPane.showMessageDialog(null, "Articulo eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
                     break;
+                case (7):
+                    FacturaExterna claseFacturaExterna = (FacturaExterna) clase;
+                    for(int i=0;i<arregloPk.size();i++){
+                        String sq7 = "call eliminar_CompraArticulos_FacturaExterna('"+arregloPk.get(i)+"',"+claseFacturaExterna.getTxtNRegistro().getText()+");";
+                        PreparedStatement stmt7 = instanciaConexion.prepareStatement(sq7);
+                        stmt7.executeUpdate(sq7);
+                    }
+                    JOptionPane.showMessageDialog(null, "Articulos eliminados con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
+                   
+                    break;
             }
         } catch (SQLException e) {
             System.out.println("ha sucecido un problema");
@@ -550,15 +586,15 @@ public class DataBase<T> {
             if (!factExt.getTxtnFactura().getText().isEmpty()) {
                 Statement stmt = instanciaConexion.createStatement();
                 String sq1 = "select dis.idDistribuidora,dis.nombre,fe.noRegistro  from facturaExterna fe  join distribuidora dis on fe.idDistribuidora=dis.idDistribuidora where fe.noFactura=" + factExt.getTxtnFactura().getText() + " ";
-                System.out.println(sq1);
+                //System.out.println(sq1);
                 ResultSet noFactura = stmt.executeQuery(sq1);
 
                 while (noFactura.next() && !noFactura.getString(1).equals("null") && !arregloPk.contains(noFactura.getString(1) + "," + noFactura.getString(2) + "," + noFactura.getString(3))) {
-                    String idDistibuidora=noFactura.getString(1);
-                    String nombDistribuidora=noFactura.getString(2);
-                    String numFactura= noFactura.getString(3);
+                    String idDistibuidora = noFactura.getString(1);
+                    String nombDistribuidora = noFactura.getString(2);
+                    String numFactura = noFactura.getString(3);
                     arregloPk.add(idDistibuidora + "," + nombDistribuidora + "," + numFactura);
-                    factExt.getjComboBox1().addItem(idDistibuidora + "," + nombDistribuidora+ "," + numFactura);
+                    factExt.getjComboBox1().addItem(idDistibuidora + "," + nombDistribuidora + "," + numFactura);
                 }
             }
         } catch (SQLException ex) {
@@ -567,13 +603,5 @@ public class DataBase<T> {
             System.out.println("salio error");
         }
     }
-    /*
-                        String sq2 = "select @fknoRegistro";
-                            ResultSet noRegistro = stmt.executeQuery(sq2);
-                            if (noRegistro.next()) {
-                                claseFactExterna.getTxtNRegistro().setText(noRegistro.getString(1));
-                            } else {
-                                System.out.println("Error");
-                            }
-        */
+
 }

@@ -6,7 +6,15 @@
 package InterfazGrafica;
 
 import java.sql.Connection;
+import javax.accessibility.AccessibleContext;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import servitec.*;
 
 /**
@@ -387,6 +395,8 @@ public class Trabajo extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        getAccessibleContext().setAccessibleParent(BtnBuscar);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -477,7 +487,7 @@ public class Trabajo extends javax.swing.JFrame {
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
 
-        TrabajoClass trabajo = (TrabajoClass) haciendoConexion.Busqueda(instanciaConexion, TxtNumTrabajo, 5);
+        TrabajoClass trabajo = (TrabajoClass) haciendoConexion.Busqueda(instanciaConexion, this, 5);
         if (trabajo == null) {
             JOptionPane.showMessageDialog(rootPane, "Trabajo ingresado no existe en la base de datos");
         } else {
@@ -529,6 +539,288 @@ public class Trabajo extends javax.swing.JFrame {
         });
     }
 
+    public static int getContador() {
+        return contador;
+    }
+
+    public static void setContador(int contador) {
+        Trabajo.contador = contador;
+    }
+
+    public DataBase getHaciendoConexion() {
+        return haciendoConexion;
+    }
+
+    public void setHaciendoConexion(DataBase haciendoConexion) {
+        this.haciendoConexion = haciendoConexion;
+    }
+
+    public Connection getInstanciaConexion() {
+        return instanciaConexion;
+    }
+
+    public void setInstanciaConexion(Connection instanciaConexion) {
+        this.instanciaConexion = instanciaConexion;
+    }
+
+    public JButton getBtnAgregarArticulo() {
+        return BtnAgregarArticulo;
+    }
+
+    public void setBtnAgregarArticulo(JButton BtnAgregarArticulo) {
+        this.BtnAgregarArticulo = BtnAgregarArticulo;
+    }
+
+    public JButton getBtnBuscar() {
+        return BtnBuscar;
+    }
+
+    public void setBtnBuscar(JButton BtnBuscar) {
+        this.BtnBuscar = BtnBuscar;
+    }
+
+    public JButton getBtnEliminar() {
+        return BtnEliminar;
+    }
+
+    public void setBtnEliminar(JButton BtnEliminar) {
+        this.BtnEliminar = BtnEliminar;
+    }
+
+    public JButton getBtnIngresar() {
+        return BtnIngresar;
+    }
+
+    public void setBtnIngresar(JButton BtnIngresar) {
+        this.BtnIngresar = BtnIngresar;
+    }
+
+    public JButton getBtnModificar() {
+        return BtnModificar;
+    }
+
+    public void setBtnModificar(JButton BtnModificar) {
+        this.BtnModificar = BtnModificar;
+    }
+
+    public JButton getBtnRegresar() {
+        return BtnRegresar;
+    }
+
+    public void setBtnRegresar(JButton BtnRegresar) {
+        this.BtnRegresar = BtnRegresar;
+    }
+
+    public JButton getBtnSalir() {
+        return BtnSalir;
+    }
+
+    public void setBtnSalir(JButton BtnSalir) {
+        this.BtnSalir = BtnSalir;
+    }
+
+    public JTextField getTxtDescripcion() {
+        return TxtDescripcion;
+    }
+
+    public void setTxtDescripcion(JTextField TxtDescripcion) {
+        this.TxtDescripcion = TxtDescripcion;
+    }
+
+    public JTextField getTxtFechaActual() {
+        return TxtFechaActual;
+    }
+
+    public void setTxtFechaActual(JTextField TxtFechaActual) {
+        this.TxtFechaActual = TxtFechaActual;
+    }
+
+    public JTextField getTxtFechaEntrega() {
+        return TxtFechaEntrega;
+    }
+
+    public void setTxtFechaEntrega(JTextField TxtFechaEntrega) {
+        this.TxtFechaEntrega = TxtFechaEntrega;
+    }
+
+    public JTextField getTxtManoObra() {
+        return TxtManoObra;
+    }
+
+    public void setTxtManoObra(JTextField TxtManoObra) {
+        this.TxtManoObra = TxtManoObra;
+    }
+
+    public JTextField getTxtNumFact() {
+        return TxtNumFact;
+    }
+
+    public void setTxtNumFact(JTextField TxtNumFact) {
+        this.TxtNumFact = TxtNumFact;
+    }
+
+    public JTextField getTxtNumTrabajo() {
+        return TxtNumTrabajo;
+    }
+
+    public void setTxtNumTrabajo(JTextField TxtNumTrabajo) {
+        this.TxtNumTrabajo = TxtNumTrabajo;
+    }
+
+    public JLabel getBrochita() {
+        return brochita;
+    }
+
+    public void setBrochita(JLabel brochita) {
+        this.brochita = brochita;
+    }
+
+    public JLabel getCandado() {
+        return candado;
+    }
+
+    public void setCandado(JLabel candado) {
+        this.candado = candado;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel10() {
+        return jLabel10;
+    }
+
+    public void setjLabel10(JLabel jLabel10) {
+        this.jLabel10 = jLabel10;
+    }
+
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public void setjLabel11(JLabel jLabel11) {
+        this.jLabel11 = jLabel11;
+    }
+
+    public JLabel getjLabel12() {
+        return jLabel12;
+    }
+
+    public void setjLabel12(JLabel jLabel12) {
+        this.jLabel12 = jLabel12;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public void setjLabel8(JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
+    }
+
+    public JLabel getjLabel9() {
+        return jLabel9;
+    }
+
+    public void setjLabel9(JLabel jLabel9) {
+        this.jLabel9 = jLabel9;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public void setjScrollPane2(JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+
+    public JTextArea getjTextAreaBitacora() {
+        return jTextAreaBitacora;
+    }
+
+    public void setjTextAreaBitacora(JTextArea jTextAreaBitacora) {
+        this.jTextAreaBitacora = jTextAreaBitacora;
+    }
+
+    public JRootPane getRootPane() {
+        return rootPane;
+    }
+
+    public void setRootPane(JRootPane rootPane) {
+        this.rootPane = rootPane;
+    }
+
+    public boolean isRootPaneCheckingEnabled() {
+        return rootPaneCheckingEnabled;
+    }
+
+    public void setRootPaneCheckingEnabled(boolean rootPaneCheckingEnabled) {
+        this.rootPaneCheckingEnabled = rootPaneCheckingEnabled;
+    }
+
+    public AccessibleContext getAccessibleContext() {
+        return accessibleContext;
+    }
+
+    public void setAccessibleContext(AccessibleContext accessibleContext) {
+        this.accessibleContext = accessibleContext;
+    }
+
+   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregarArticulo;
     private javax.swing.JButton BtnBuscar;
@@ -560,4 +852,5 @@ public class Trabajo extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextAreaBitacora;
     // End of variables declaration//GEN-END:variables
+
 }

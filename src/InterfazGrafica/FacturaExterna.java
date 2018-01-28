@@ -34,7 +34,7 @@ import servitec.ArticuloClass;
 public class FacturaExterna extends javax.swing.JFrame {
 
     private static ArrayList<String> valores = new ArrayList();
-    DefaultTableModel modelo;
+    private DefaultTableModel modelo;
     private static int contador = 0;
 
     DataBase haciendoConexion = new DataBase();
@@ -101,6 +101,7 @@ public class FacturaExterna extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         TxtNRegistro = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -216,6 +217,7 @@ public class FacturaExterna extends javax.swing.JFrame {
 
         BtnEliminar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnEliminar.setText("Eliminar");
+        BtnEliminar.setEnabled(false);
         BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEliminarActionPerformed(evt);
@@ -344,6 +346,13 @@ public class FacturaExterna extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -431,22 +440,24 @@ public class FacturaExterna extends javax.swing.JFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(TxtIva, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(55, 55, 55))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TxtRucDistribuidora, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(154, 154, 154)
-                                .addComponent(brochita)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(candado)
-                                .addGap(58, 58, 58)))
+                                .addGap(55, 55, 55)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(BtnRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(BtnRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TxtRucDistribuidora, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(154, 154, 154)
+                        .addComponent(brochita)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(candado)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(88, 88, 88))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,7 +479,9 @@ public class FacturaExterna extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxTFechaEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addGap(18, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnIngresar)
@@ -485,7 +498,7 @@ public class FacturaExterna extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 25, Short.MAX_VALUE)
+                                        .addGap(0, 24, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(BtnIngresarArticulo)))
@@ -496,7 +509,7 @@ public class FacturaExterna extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(26, Short.MAX_VALUE))
+                                .addContainerGap(25, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BtnSalir)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -520,10 +533,11 @@ public class FacturaExterna extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(141, 141, 141)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtRucDistribuidora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(candado))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(candado, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtRucDistribuidora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(brochita))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,17 +563,25 @@ public class FacturaExterna extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        FacturaExternaClass facturaExterna = (FacturaExternaClass) haciendoConexion.Busqueda(instanciaConexion, TxtnFactura, 4);
+         for (int i = 0; i < tablaTrabajos.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
+        }
+        FacturaExternaClass facturaExterna = (FacturaExternaClass) haciendoConexion.Busqueda(instanciaConexion,this , 7);
+      
         if (facturaExterna == null) {
             JOptionPane.showMessageDialog(rootPane, "Factura no existe en la base de datos");
         } else {
             TxTFechaEmision.setText(String.valueOf(facturaExterna.getFechaEmision()));
-            TxtRucDistribuidora.setText(facturaExterna.getCedula());
+            TxtNRegistro.setText(String.valueOf(facturaExterna.getNoRegistro()));
+            TxtnFactura.setText(facturaExterna.getNoFactura());
+            TxTFechaEmision.setText(String.valueOf(facturaExterna.getFechaEmision()));
             TxtSubtotal.setText(String.valueOf(facturaExterna.getSubtotal()));
             TxtDescuento.setText(String.valueOf(facturaExterna.getDescuento()));
             TxtIva.setText(String.valueOf(facturaExterna.getIva()));
             TxtTotal.setText(String.valueOf(facturaExterna.getTotal()));
-            BtnModificar.setEnabled(true);
+            TxtRucDistribuidora.setText(facturaExterna.getIdDistribuidora());
+            BtnEliminar.setEnabled(true);
         }
 
     }//GEN-LAST:event_BtnBuscarActionPerformed
@@ -569,7 +591,7 @@ public class FacturaExterna extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        DataBase.eliminar(instanciaConexion, 2, this);
+        DataBase.eliminar(instanciaConexion, 7, this);
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
@@ -690,7 +712,7 @@ public class FacturaExterna extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtnIngresarArticuloActionPerformed
 
-    //el codigo se va guardando progresivamente si no existe en la base de datos.
+    //el codigo del articulo se va guardando progresivamente si no existe en la base de datos.
     private boolean codigoIsRepetido(JTextField texto) {
         if (valores.contains(texto.getText())) {
             return true;
@@ -722,6 +744,10 @@ public class FacturaExterna extends javax.swing.JFrame {
     private void TxtnFacturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxtnFacturaFocusLost
         DataBase.llenarComboBoxFactExterna(instanciaConexion, this);
     }//GEN-LAST:event_TxtnFacturaFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //System.out.println(jComboBox1.getSelectedItem());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1176,6 +1202,7 @@ public class FacturaExterna extends javax.swing.JFrame {
     private javax.swing.JLabel brochita;
     private javax.swing.JLabel brochita1;
     private javax.swing.JLabel candado;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

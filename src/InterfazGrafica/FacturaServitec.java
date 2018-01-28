@@ -6,7 +6,12 @@
 package InterfazGrafica;
 
 import java.sql.Connection;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import servitec.*;
 
 /**
@@ -369,7 +374,7 @@ public class FacturaServitec extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        FacturaServitecClass facturaServitec=(FacturaServitecClass)haciendoConexion.Busqueda(instanciaConexion, TxtnFactura,4);
+        FacturaServitecClass facturaServitec=(FacturaServitecClass)haciendoConexion.Busqueda(instanciaConexion, this,4);
         if(facturaServitec==null){
             JOptionPane.showMessageDialog(rootPane, "Factura no existe en la base de datos");
         }else{
@@ -454,6 +459,246 @@ public class FacturaServitec extends javax.swing.JFrame {
     private void TxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTotalActionPerformed
         TxtTotal.transferFocus();
     }//GEN-LAST:event_TxtTotalActionPerformed
+
+    public static int getContador() {
+        return contador;
+    }
+
+    public static void setContador(int contador) {
+        FacturaServitec.contador = contador;
+    }
+
+    public DataBase getHaciendoConexion() {
+        return haciendoConexion;
+    }
+
+    public void setHaciendoConexion(DataBase haciendoConexion) {
+        this.haciendoConexion = haciendoConexion;
+    }
+
+    public Connection getInstanciaConexion() {
+        return instanciaConexion;
+    }
+
+    public void setInstanciaConexion(Connection instanciaConexion) {
+        this.instanciaConexion = instanciaConexion;
+    }
+
+    public JButton getBtnBuscar() {
+        return BtnBuscar;
+    }
+
+    public void setBtnBuscar(JButton BtnBuscar) {
+        this.BtnBuscar = BtnBuscar;
+    }
+
+    public JButton getBtnCargarTrabajos() {
+        return BtnCargarTrabajos;
+    }
+
+    public void setBtnCargarTrabajos(JButton BtnCargarTrabajos) {
+        this.BtnCargarTrabajos = BtnCargarTrabajos;
+    }
+
+    public JButton getBtnEliminar() {
+        return BtnEliminar;
+    }
+
+    public void setBtnEliminar(JButton BtnEliminar) {
+        this.BtnEliminar = BtnEliminar;
+    }
+
+    public JButton getBtnIngresar() {
+        return BtnIngresar;
+    }
+
+    public void setBtnIngresar(JButton BtnIngresar) {
+        this.BtnIngresar = BtnIngresar;
+    }
+
+    public JButton getBtnModificar() {
+        return BtnModificar;
+    }
+
+    public void setBtnModificar(JButton BtnModificar) {
+        this.BtnModificar = BtnModificar;
+    }
+
+    public JButton getBtnRegresar1() {
+        return BtnRegresar1;
+    }
+
+    public void setBtnRegresar1(JButton BtnRegresar1) {
+        this.BtnRegresar1 = BtnRegresar1;
+    }
+
+    public JButton getBtnSalir() {
+        return BtnSalir;
+    }
+
+    public void setBtnSalir(JButton BtnSalir) {
+        this.BtnSalir = BtnSalir;
+    }
+
+    public JTextField getTxTFechaEmision() {
+        return TxTFechaEmision;
+    }
+
+    public void setTxTFechaEmision(JTextField TxTFechaEmision) {
+        this.TxTFechaEmision = TxTFechaEmision;
+    }
+
+    public JTextField getTxtCedula() {
+        return TxtCedula;
+    }
+
+    public void setTxtCedula(JTextField TxtCedula) {
+        this.TxtCedula = TxtCedula;
+    }
+
+    public JTextField getTxtIva() {
+        return TxtIva;
+    }
+
+    public void setTxtIva(JTextField TxtIva) {
+        this.TxtIva = TxtIva;
+    }
+
+    public JTextField getTxtTotal() {
+        return TxtTotal;
+    }
+
+    public void setTxtTotal(JTextField TxtTotal) {
+        this.TxtTotal = TxtTotal;
+    }
+
+    public JTextField getTxtnFactura() {
+        return TxtnFactura;
+    }
+
+    public void setTxtnFactura(JTextField TxtnFactura) {
+        this.TxtnFactura = TxtnFactura;
+    }
+
+    public JTextField getTxttsubtotal() {
+        return Txttsubtotal;
+    }
+
+    public void setTxttsubtotal(JTextField Txttsubtotal) {
+        this.Txttsubtotal = Txttsubtotal;
+    }
+
+    public JLabel getBrochita() {
+        return brochita;
+    }
+
+    public void setBrochita(JLabel brochita) {
+        this.brochita = brochita;
+    }
+
+    public JLabel getCandado() {
+        return candado;
+    }
+
+    public void setCandado(JLabel candado) {
+        this.candado = candado;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public void setjLabel8(JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
+    }
+
+    public JLabel getjLabel9() {
+        return jLabel9;
+    }
+
+    public void setjLabel9(JLabel jLabel9) {
+        this.jLabel9 = jLabel9;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public void setjScrollPane2(JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+
+    public JTable getTablaTrabajos() {
+        return tablaTrabajos;
+    }
+
+    public void setTablaTrabajos(JTable tablaTrabajos) {
+        this.tablaTrabajos = tablaTrabajos;
+    }
 
     /**
      * @param args the command line arguments
