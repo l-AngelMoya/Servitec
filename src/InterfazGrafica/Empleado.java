@@ -435,7 +435,7 @@ public class Empleado extends javax.swing.JFrame {
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
        
-        empleadoClass empleado=(empleadoClass)haciendoConexion.Busqueda(instanciaConexion, TxtCedula,1);
+        empleadoClass empleado=(empleadoClass)haciendoConexion.Busqueda(instanciaConexion, this,1);
         if(empleado==null){
             JOptionPane.showMessageDialog(rootPane, "Empleado ingresado no existe en la base de datos");
         }else{

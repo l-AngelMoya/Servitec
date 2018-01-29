@@ -17,34 +17,29 @@ public class TrabajoClass {
     private Date fechaTrabajo;
     private Date fechaEntrega;
     private float costoMano;
-    private String codArt;
     private String factura;
-    private String Bitacora;
     private String descripcion;
 
     public TrabajoClass() {
-        
         this.nTrabajo = null;
         this.fechaTrabajo = null;
         this.costoMano = 0;
-        this.codArt = null;
         this.factura = null;
-        this.Bitacora = null;
         this.fechaEntrega=null;
         this.descripcion=null;
         
     }
 
-    public TrabajoClass(String nTrabajo,Date fechaTrabajo,Date fechaEntrega, float costoMano, String codArt, String factura, String Bitacora,String descripcion) {
+    public TrabajoClass(String nTrabajo, Date fechaTrabajo, Date fechaEntrega, float costoMano, String factura, String descripcion) {
         this.nTrabajo = nTrabajo;
         this.fechaTrabajo = fechaTrabajo;
+        this.fechaEntrega = fechaEntrega;
         this.costoMano = costoMano;
-        this.codArt = codArt;
         this.factura = factura;
-        this.Bitacora = Bitacora;
-        this.descripcion=descripcion;
-       
+        this.descripcion = descripcion;
     }
+
+   
 
     public String getnTrabajo() {
         return nTrabajo;
@@ -70,30 +65,12 @@ public class TrabajoClass {
         this.costoMano = costoMano;
     }
 
-   
-
-    public String getCodArt() {
-        return codArt;
-    }
-
-    public void setCodArt(String codArt) {
-        this.codArt = codArt;
-    }
-
     public String getFactura() {
         return factura;
     }
 
     public void setFactura(String factura) {
         this.factura = factura;
-    }
-
-    public String getBitacora() {
-        return Bitacora;
-    }
-
-    public void setBitacora(String Bitacora) {
-        this.Bitacora = Bitacora;
     }
 
     public Date getFechaEntrega() {

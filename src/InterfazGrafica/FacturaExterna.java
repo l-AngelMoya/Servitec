@@ -607,7 +607,6 @@ public class FacturaExterna extends javax.swing.JFrame {
 
     private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza
         TxtnFactura.setText("");
-        TxTFechaEmision.setText("");
         TxtRucDistribuidora.setText("");
         TxtDescuento.setText("");
         TxtSubtotal.setText("");
