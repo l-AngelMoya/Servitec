@@ -15,20 +15,40 @@ insert into distribuidora values ("1792169623001","ChecoParts","Av. de las ameri
 insert into empleado values ("0990851889","Luis","Moya", "lamoya@espol.edu.ec", "guasmo sur", "0990851889","gerente",800,"lamoya","1234", null),
   ("0945321212","Carlos","Burgos", "carlosburgos@servitec.com", "Mucholote", "0921212325","Jefe",600, "cburgos","cburgos", null),
   ("0912345754","Carolina","Burgos", "caralbur@espol.edu.ec", "Mucholote", "0991241222","Secretaria",300,"carolina","caralbur", "0945321212"),
-  ("0912345678","Juan","Mera", "jmera@hotmail.com", "Orquideas", "0924213743","Albanil", 150 ,null, null, "0945321212"),
-  ("0912312431","Olando","Romero", "ORomero@hotmail.com", "Orquideas", "0936325323","Albanil", 150,null,null ,"0945321212"),
-  ("0912642371","Francisco","Lecaro", "FraLecaro@hotmail.com", "Orquideas", "0974563452","Albanil",150, null, null, "0945321212");
+  ("0912345678","Juan","Mera", "jmera@hotmail.com", "Orquideas", "0924213743","Albañil",	 150 ,null, null, "0945321212"),
+  ("0912312431","Orlando","Romero", "ORomero@hotmail.com", "Orquideas", "0936325323","Albañil", 150,null,null ,"0945321212"),
+  ("0912642371","Francisco","Lecaro", "FraLecaro@hotmail.com", "Orquideas", "0974563452","Albañil",150, null, null, "0945321212");
   
   insert into articulo values("001","varilla 1/2"), ("002", "lampara Fluorescente"), ("003","foco"), ("004","cable 1 mm");
   
   insert into facturaservitec values ("0000370", "2018-01-10","0919862664",25.00,3.00,28.00),
 									 ("0000001", "2018-01-10","0919862664",25.00,3.00,28.00);
   
-  insert into trabajo values (1, "2018-01-12" ,"Reparacion de luces fluorecentes", "0000370", "2018-01-20",25.00,false),
-							 (2, "2018-01-12", "Reparacion techo", "0000370" , "2018-01-14",30.00, true ),
-                             (3, "2018-01-12", "Cambio de tomacorriente", "0000370" , "2018-01-14",10.00, true );
+  
 
-  insert into bitacora values (001, "se retiro la fluorecente y se limpio el socket", "2018-01-12", 1);
+#insert into bitacora values (001, "se retiro la fluorecente y se limpio el socket", "2018-01-12", 1);
 
-	
-    
+
+call Ingresar_Factura_Externa("0000100","0992125691001",now(),122.57,10.97,13.39,124.99,@fknoRegistro);
+call Ingresar_Articulo("005",5,1.99,9.95,"toma corriente doble",1);
+call Ingresar_Articulo("006",1,0.25,0.25,"placa toma-sencilla",1);
+call Ingresar_Articulo("007",1,1.55,1.55,"pulsador",1);
+call Ingresar_Articulo("008",1,0.25,0.25,"Bisel 4x4 sencillo",1);
+call Ingresar_Articulo("009",3,35,100.44,"panel led",1);
+
+call Ingresar_Factura_Externa("0000100","0993223291032",now(),25,12,12,250,@fknoRegistro);
+call Ingresar_Articulo("010",4,2,8,"Pegamento",2);
+call Ingresar_Articulo("011",1,10,10,"Arena",2);
+call Ingresar_Articulo("012",4,1,4,"Ladrillo",2);
+
+call Ingresar_Factura_Externa("0000101","0993223291032",now(),25,12,12,250,@fknoRegistro);
+call Ingresar_Articulo("013",4,2,8,"Pegamento",3);
+call Ingresar_Articulo("014",1,10,10,"Arena",3);
+call Ingresar_Articulo("015",4,1,4,"Ladrillo",3);
+
+#Trabajo
+ call Ingresar_Trabajo('2018_01_28','2018_01_31',"fin proyecto",50,@pknoTrabajo);
+ call Ingresar_EmpleadoAsignados(1,'0912642371');
+ call Ingresar_Insumos(1,"007",1);
+ call Ingresar_Insumos(1,"010",2);
+ call Ingresar_Insumos(1,"012",1);
