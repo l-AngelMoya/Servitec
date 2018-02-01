@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="680" pageHeight="601" orientation="Landscape" columnWidth="640" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="145c7505-4347-456c-9c04-de1a5a64669f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     facturaexterna.`noRegistro` AS facturaexterna_noRegistro,
+     facturaexterna.`idDistribuidora` AS facturaexterna_idDistribuidora,
+     facturaexterna.`fechaEmision` AS facturaexterna_fechaEmision,
+     facturaexterna.`descuento` AS facturaexterna_descuento,
+     facturaexterna.`iva` AS facturaexterna_iva,
+     facturaexterna.`total` AS facturaexterna_total
+FROM
+     `facturaexterna` facturaexterna]]>
+	</queryString>
+	<field name="facturaexterna_noRegistro" class="java.lang.Integer"/>
+	<field name="facturaexterna_idDistribuidora" class="java.lang.String"/>
+	<field name="facturaexterna_fechaEmision" class="java.sql.Date"/>
+	<field name="facturaexterna_descuento" class="java.lang.Float"/>
+	<field name="facturaexterna_iva" class="java.lang.Float"/>
+	<field name="facturaexterna_total" class="java.lang.Float"/>
+	<variable name="facturaexterna_total_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{facturaexterna_total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="163" y="0" width="321" height="33" uuid="9af61cc9-2473-46c0-9559-11331a982b8f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Aharoni" size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE EGRESOS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="118" height="79" uuid="35ee6d48-2f25-49be-a531-355e9915caaa"/>
+				<imageExpression><![CDATA["C:\\Users\\Anii BC\\Downloads\\Servitec-master\\Servitec-master\\src\\vistas\\Servitec_logo_small.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="163" y="33" width="298" height="1" uuid="771b73a8-4184-4e27-95b6-bb81279fb166"/>
+			</line>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="517" y="59" width="100" height="20" uuid="9e98946a-ddbd-42d5-85a7-8cbe9021af9e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="0" width="100" height="20" uuid="ed948d2c-da07-45c2-9ccb-af7b1b043d21"/>
+				<text><![CDATA[facturaexterna_fechaEmision]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="0" width="100" height="20" uuid="c6914de2-bbb6-4691-90ed-826a809d24a3"/>
+				<text><![CDATA[facturaexterna_noRegistro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="0" width="100" height="20" uuid="ac56b9a9-1244-482d-a192-fada36fb1e26"/>
+				<text><![CDATA[facturaexterna_idDistribuidora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="0" width="100" height="20" uuid="7b9489a6-b538-4d3e-ae7b-ff8fdeb7a6b2"/>
+				<text><![CDATA[facturaexterna_descuento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="100" height="20" uuid="9c92bb46-4989-42a7-b55e-20cdab33c1cd"/>
+				<text><![CDATA[facturaexterna_iva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="0" width="100" height="20" uuid="7d2e7306-619b-4ccc-a2a2-9455274238b3"/>
+				<text><![CDATA[facturaexterna_total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="71" splitType="Stretch">
+			<textField>
+				<reportElement x="17" y="0" width="100" height="20" uuid="13ddfeed-ba63-4467-ba1f-2016e59e8d32"/>
+				<textFieldExpression><![CDATA[$F{facturaexterna_fechaEmision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="100" height="20" uuid="b1bb18ed-8dc3-4ca0-83a7-9abe7b14d119"/>
+				<textFieldExpression><![CDATA[$F{facturaexterna_noRegistro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="217" y="0" width="100" height="20" uuid="ca4b67a9-a1b8-4918-b950-0f05b645590c"/>
+				<textFieldExpression><![CDATA[$F{facturaexterna_idDistribuidora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="0" width="100" height="20" uuid="c1a7fc04-798f-4105-9655-86c4466656e0"/>
+				<textFieldExpression><![CDATA[$F{facturaexterna_descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="100" height="20" uuid="0fc864c9-a608-4be8-97a0-3fd4bc14daf2"/>
+				<textFieldExpression><![CDATA[$F{facturaexterna_iva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="517" y="0" width="100" height="20" uuid="41b4b922-4432-4d9a-8473-cec9cb636d50"/>
+				<textFieldExpression><![CDATA[$F{facturaexterna_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="219" y="0" width="116" height="20" uuid="07c098a5-793c-4203-a920-fa46f359fd6a"/>
+				<text><![CDATA[TOTAL DE EGRESOS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="335" y="0" width="100" height="20" uuid="afd01474-ae3c-4bc2-bb0a-177d8d71c0a0"/>
+				<textFieldExpression><![CDATA[$V{facturaexterna_total_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="239" y="0" width="80" height="20" uuid="f0d54e69-4dcb-485b-a624-549d1da0d146"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="319" y="0" width="40" height="20" uuid="c154bd13-ace9-4fb3-9d06-c770d5295194"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

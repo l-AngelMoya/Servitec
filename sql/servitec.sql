@@ -12,16 +12,16 @@ create table cliente(
   telefono char(30)
   );
   
-  
 
 create table facturaServitec(
-  noFactura char(10)  primary key,
+  noFactura int  primary key auto_increment,
   fechaEmision date ,
   cedula char(10),
-  subtotal float,
+  subtotal float ,
   iva float,
   total float,
   foreign key (cedula) references cliente (cedula)
+ #constraint cons check(iva > 12 and subtotal >0 )
 );
 
 create table distribuidora(
@@ -66,20 +66,13 @@ create table empleado(
     noTrabajo int primary key auto_increment,
     fechaTrabajo date,
     descripcion varchar(60),
-    noFactura char(10),
+    noFactura int default null,
     fechaEntrega date,
     costoManoObra float,
     isTerminado boolean default false,
     foreign key (noFactura) references facturaServitec (noFactura)
   );
 
-create table bitacora (
-  idbitacora int primary key,
-  detalle varchar(100),
-  fecha date,
-  noTrabajo int auto_increment,
-  foreign key (noTrabajo) references trabajo (noTrabajo)
-);
 
 create table empleadosAsignados(
   noTrabajo int,
@@ -115,14 +108,6 @@ create table insumos(
   foreign key(codigoArticulo) references articulo (codigoArticulo)
 );
 
-
-create table gasto(
-  noGasto int primary key,
-  razon varchar(50),
-  fechaGasto date,
-  cedula char(15),
-  foreign key(cedula) references empleado (cedula)  
-);
  
  
  delimiter $
@@ -141,19 +126,17 @@ $
  end
  @
  delimiter ;
-
-#call Buscar_Infor_FacExterna('0000100',@distribuidora,@nombreDistribuidora,@numRegisto);
-#select @distribuidora,@distribuidora,@nombreDistribuidora,@numRegisto;
+ 
 delimiter @
  create procedure eliminar_CompraArticulos_FacturaExterna(in codArticulo char(20),in numeroRegistro int)
  begin
     DELETE FROM compraArticulo WHERE codArticulo=codArticulo and noRegistro=numeroRegistro;
+    delete from insumos where codigoArticulo=codArticulo;
     Delete from articulo where codigoArticulo=codArticulo;
     delete from facturaexterna where noRegistro=numeroRegistro;
  end
  @
  delimiter ;
-
 
 delimiter @
  create procedure Ingresar_Trabajo(in fechaInicio Date,in fechaFin Date,in descrp varchar(60),in costoXObra float,out pknoTrabajo int)
@@ -196,7 +179,6 @@ delimiter @
  begin
     Delete from empleadosasignados where noTrabajo=numeroTrabajo and cedula=cedulaEmpleado;
     DELETE FROM insumos WHERE noTrabajo=numeroTrabajo and codigoArticulo=codArticulo;
-    delete from bitacora where noTrabajo=numeroTrabajo;
  end
  @
  delimiter ;
@@ -211,5 +193,34 @@ delimiter @
  @
  delimiter ;
  
- #call  eliminar_Trabajo(1,'007','0912642371');
  
+ delimiter @
+ create procedure Insertar_Factura_Servitec(in FechaInicial date,in cedulaClie char(10),in subtot float, in iva float, in tot float,out	numFact int)
+ begin
+    insert into facturaServitec values (0,FechaInicial,cedulaClie,subtot,iva,tot);
+	SELECT noFactura into numFact FROM facturaServitec order BY noFactura DESC LIMIT 1;
+ end
+ @
+ delimiter ;
+ 
+ 
+ #CREATE INDEX <index_name> ON <table_name> (<col_name>);
+create index DescripcionArticulo on articulo (descripcion);
+create index fechaEmisionFacturaServitec on facturaServitec (fechaEmision);
+create index noFacturaFacturaExterna on facturaExterna (noFactura);
+create index CedulaxCargoEmp on empleado(cedula,cargo);
+create index FechaTrabajo on trabajo (fechaTrabajo);
+
+#Modificar una distribuidora
+delimiter @
+ create procedure Eliminar_Distribuidora(in idDistrib char(20))
+ begin
+    update facturaExterna set idDistribuidora=null where idDistribuidora=idDistrib ;
+    DELETE FROM distribuidora WHERE idDistribuidora= idDistrib;
+	
+ end
+ @
+ delimiter ;
+ 
+create view TodosArticulos as (select art.codigoArticulo,art.descripcion,factExt.noFactura, dist.idDistribuidora,cart.precioUnitario,cart.cantidad from articulo art join compraarticulo cart on art.codigoArticulo=cart.codigoArticulo join facturaExterna factExt on cart.noRegistro=factExt.noRegistro join distribuidora dist on factExt.idDistribuidora=dist.idDistribuidora);
+select * from TodosArticulos;

@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Angel Moya
  */
 public class FacturaServitecClass {
-    private String noFactura;
+    private int noFactura;
     private Date fechaEmision;
     private String cedula;
     private double subtotal;
@@ -20,10 +20,10 @@ public class FacturaServitecClass {
     private double total;
 
     public FacturaServitecClass(){
-        this(null, null, null, 0, 0, 0);
+        this(0, null, null, 0, 0, 0);
     }
     
-    public FacturaServitecClass(String noFactura, Date fechaEmision, String cedula, double subtotal, double iva, double total) {
+    public FacturaServitecClass(int noFactura, Date fechaEmision, String cedula, double subtotal, double iva, double total) {
         this.noFactura = noFactura;
         this.fechaEmision = fechaEmision;
         this.cedula = cedula;
@@ -32,11 +32,11 @@ public class FacturaServitecClass {
         this.total = total;
     }
 
-    public String getNoFactura() {
+    public int getNoFactura() {
         return noFactura;
     }
 
-    public void setNoFactura(String noFactura) {
+    public void setNoFactura(int noFactura) {
         this.noFactura = noFactura;
     }
 

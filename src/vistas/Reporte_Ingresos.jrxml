@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="802" pageHeight="687" orientation="Landscape" columnWidth="730" leftMargin="36" rightMargin="36" topMargin="36" bottomMargin="36" uuid="631105e3-7754-4ecc-851b-2e52f38e3f2e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     cliente.`cedula` AS cliente_cedula,
+     cliente.`nombre` AS cliente_nombre,
+     cliente.`apellido` AS cliente_apellido,
+     facturaservitec.`noFactura` AS facturaservitec_noFactura,
+     facturaservitec.`fechaEmision` AS facturaservitec_fechaEmision,
+     facturaservitec.`total` AS facturaservitec_total,
+     trabajo.`noTrabajo` AS trabajo_noTrabajo,
+     trabajo.`descripcion` AS trabajo_descripcion
+FROM
+     `cliente` cliente,
+     `facturaservitec` facturaservitec,
+     `trabajo` trabajo]]>
+	</queryString>
+	<field name="cliente_cedula" class="java.lang.String"/>
+	<field name="cliente_nombre" class="java.lang.String"/>
+	<field name="cliente_apellido" class="java.lang.String"/>
+	<field name="facturaservitec_noFactura" class="java.lang.String"/>
+	<field name="facturaservitec_fechaEmision" class="java.sql.Date"/>
+	<field name="facturaservitec_total" class="java.lang.Float"/>
+	<field name="trabajo_noTrabajo" class="java.lang.Integer"/>
+	<field name="trabajo_descripcion" class="java.lang.String"/>
+	<variable name="TOTAL DE INGRESOS" class="java.lang.String"/>
+	<variable name="facturaservitec_total_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{facturaservitec_total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="211" y="1" width="321" height="33" uuid="5ba5cbc2-415e-4391-b367-3aa6fc85143f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Aharoni" size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE INGRESOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="211" y="33" width="321" height="1" uuid="c9460514-e813-4852-a5d5-f9193fdb3092"/>
+			</line>
+			<image>
+				<reportElement x="0" y="0" width="118" height="79" uuid="35fbc907-12be-4d78-8721-cefb3e990775"/>
+				<imageExpression><![CDATA["C:\\Users\\Anii BC\\Downloads\\Servitec-master\\Servitec-master\\src\\vistas\\Servitec_logo_small.png"]]></imageExpression>
+			</image>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="610" y="45" width="100" height="20" uuid="f768df23-a439-44da-b5ab-c5ad9fe1f04c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="76" y="0" width="99" height="20" uuid="3a48ade4-1c4f-4edd-a0c7-a4d797062d2c"/>
+				<text><![CDATA[N° DE FACTURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="76" height="20" uuid="dd4cccdd-2266-400d-ac9b-ec7aae67821e"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="0" width="84" height="20" uuid="0846ca89-ae28-4824-9cb3-48df45828514"/>
+				<text><![CDATA[N° DE TRABAJO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="0" width="100" height="20" uuid="2269507b-fb42-443e-b530-6bd28d4a5da8"/>
+				<text><![CDATA[TRABAJO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="0" width="77" height="20" uuid="66082689-0061-4a7e-b814-1015a9ff237c"/>
+				<text><![CDATA[CEDULA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="0" width="100" height="20" uuid="092cf224-0625-4dd1-94b4-7127556d7348"/>
+				<text><![CDATA[NOMBRE CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="536" y="0" width="100" height="20" uuid="fe6ad935-f4bb-4609-bdc4-cd9034bb5581"/>
+				<text><![CDATA[APELLIDO CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="636" y="0" width="64" height="20" uuid="c1227e21-0b81-4a9e-ac93-ff7afd280aee"/>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="91" splitType="Stretch">
+			<textField>
+				<reportElement x="76" y="0" width="99" height="20" uuid="4747b91c-589f-4e79-b106-e3d23022b135"/>
+				<textFieldExpression><![CDATA[$F{facturaservitec_noFactura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="76" height="20" uuid="673cfd6f-d565-479c-a8de-0e5587938e51"/>
+				<textFieldExpression><![CDATA[$F{facturaservitec_fechaEmision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="0" width="84" height="20" uuid="0c0276cc-19df-4e84-9d3e-ea622cf5951d"/>
+				<textFieldExpression><![CDATA[$F{trabajo_noTrabajo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="0" width="100" height="20" uuid="79e1d97b-53d2-4a00-9061-1be5a99666de"/>
+				<textFieldExpression><![CDATA[$F{trabajo_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="0" width="77" height="20" uuid="df84fd62-eefa-4535-8a64-70bcb51ca8e1"/>
+				<textFieldExpression><![CDATA[$F{cliente_cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="0" width="100" height="20" uuid="3ca39a17-0d17-4f99-893c-544b3ef4f816"/>
+				<textFieldExpression><![CDATA[$F{cliente_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="536" y="0" width="100" height="20" uuid="8979151b-38a5-478d-a279-43fbefba9765"/>
+				<textFieldExpression><![CDATA[$F{cliente_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="636" y="0" width="74" height="20" uuid="614dffeb-6b91-4501-8ce0-f7cd4ebca1f9"/>
+				<textFieldExpression><![CDATA[$F{facturaservitec_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="245" y="13" width="125" height="20" uuid="86e60c93-bf25-4bd9-bf56-e235349ebfcd"/>
+				<text><![CDATA[TOTAL DE INGRESOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="13" width="100" height="20" uuid="aefd4d60-78dc-44ff-85a2-fac774b1df73"/>
+				<textFieldExpression><![CDATA[$V{facturaservitec_total_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="290" y="12" width="80" height="20" uuid="f9895d1f-f090-419f-9c1f-ec566cb4b9bb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="370" y="12" width="40" height="20" uuid="243e3e17-41ae-4df3-b66c-ce4f3aa3e8ec"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="13" splitType="Stretch"/>
+	</summary>
+</jasperReport>

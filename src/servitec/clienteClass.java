@@ -25,6 +25,10 @@ public class clienteClass {
         this.direccion = direccion;
         this.telefono = telefono;
     }
+
+    public clienteClass(String cedula) {
+        this.cedula = cedula;
+    }
     
     public clienteClass() {
         this.cedula = null;

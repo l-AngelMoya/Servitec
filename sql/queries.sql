@@ -5,8 +5,7 @@ use servitec;
 select * from empleado order by apellido;
 
 SELECT user , contraseña FROM empleado where user!=null ;
-
-select cedula from empleado;
+select * from empleado;
 SELECT * FROM empleado where cargo='ALBAÑIL';
 
 select * from cliente;
@@ -14,11 +13,11 @@ select * from cliente;
 select * from distribuidora;
 
 select * from articulo;
+select art.codigoArticulo,art.descripcion,factExt.noFactura, dist.idDistribuidora,cart.precioUnitario,cart.cantidad from articulo art join compraarticulo cart on art.codigoArticulo=cart.codigoArticulo join facturaExterna factExt on cart.noRegistro=factExt.noRegistro join distribuidora dist on factExt.idDistribuidora=dist.idDistribuidora where descripcion like'%codos%';
 
+show create table facturaexterna;
 
 select * from gasto;
-
-
 
 select * from facturaServitec;
 #buscar una factura por su numero de factura (pk)
@@ -56,10 +55,10 @@ from facturaExterna fe join distribuidora dis on fe.idDistribuidora=dis.idDistri
 call Ingresar_Articulo("101010","4",10,40,"juego de cama");
 select * from articulo;
 select * from compraArticulo;
+select * from facturaExterna;
 select * from articulo a join compraArticulo ca on a.codigoArticulo=ca.codigoArticulo join facturaExterna fe on fe.noRegistro=ca.noRegistro;
 select * from facturaExterna;
-SELECT noRegistro FROM facturaExterna order BY noRegistro DESC LIMIT 1;
-
+SELECT noRegistro FROM facturaExterna order BY noRegistro DESC LIMIT 1;	
 call Buscar_Infor_FacExterna('000',@distribuidora,@nombreDistribuidora,@numRegisto);
 select @distribuidora,@numRegistro;
 
@@ -77,10 +76,16 @@ select ar.codigoArticulo,descripcion,cantidad from articulo ar join compraArticu
 select * from trabajo;
 select * from empleadosAsignados ;
 select * from insumos;
-select* from articulo;
+select * from articulo;
+#Articulos comprados en una distribuidora
+select art.codigoArticulo,art.descripcion,factExt.noFactura, dist.idDistribuidora,cart.precioUnitario,cart.cantidad from articulo art join compraarticulo cart on art.codigoArticulo=cart.codigoArticulo join facturaExterna factExt on cart.noRegistro=factExt.noRegistro join distribuidora dist on factExt.idDistribuidora=dist.idDistribuidora where descripcion like "%corriente%";
+
+create view ArticulosOrdenados 
+as select art.codigoArticulo,art.descripcion,factExt.noFactura, dist.idDistribuidora,cart.precioUnitario,cart.cantidad from articulo art join compraarticulo cart on art.codigoArticulo=cart.codigoArticulo join facturaExterna factExt on cart.noRegistro=factExt.noRegistro join distribuidora dist on factExt.idDistribuidora=dist.idDistribuidora where descripcion like "%codos%"; 
+
+select * from ArticulosOrdenados;
+
 select * from compraArticulo;
-
-
 
 #obtener los datos de la factura sin articulos
 select fechaTrabajo,fechaEntrega,costoManoObra,descripcion,noFactura,emp.cedula,emp.nombre,emp.apellido from trabajo tra join empleadosAsignados empAs on tra.notrabajo=empAs.noTrabajo join empleado emp on empAs.cedula=emp.cedula where tra.noTrabajo=1;
@@ -88,4 +93,9 @@ select art.codigoArticulo,art.descripcion,ins.cantidad from trabajo tr join insu
 select * from trabajo tra join empleadosAsignados empAs on tra.notrabajo=empAs.noTrabajo join empleado emp on empAs.cedula=emp.cedula where tra.noTrabajo=1;
 
 
+select * from trabajo tra join isumos ins on tra.noTrabajo=ins.noTrabajo join articulo art on ins.codigoArticulo=art.codigoArticulo;
+select * from trabajo where isTerminado=0  ;
+
+select noTrabajo,fechaTrabajo,Descripcion,costoManoObra from facturaServitec fa join trabajo tra on fa.noFactura=tra.noFactura where fa.noFactura=3;
+select * from trabajo;	
 

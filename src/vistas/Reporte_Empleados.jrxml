@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="791" pageHeight="595" orientation="Landscape" columnWidth="751" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8b673e49-bca5-4c0d-a532-30e1a016fab3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     empleado.`cedula` AS empleado_cedula,
+     empleado.`nombre` AS empleado_nombre,
+     empleado.`apellido` AS empleado_apellido,
+     empleado.`correo` AS empleado_correo,
+     empleado.`direccion` AS empleado_direccion,
+     empleado.`cargo` AS empleado_cargo,
+     empleado.`salarioMensual` AS empleado_salarioMensual,
+     empleado.`telefono` AS empleado_telefono
+FROM
+     `empleado` empleado]]>
+	</queryString>
+	<field name="empleado_cedula" class="java.lang.String"/>
+	<field name="empleado_nombre" class="java.lang.String"/>
+	<field name="empleado_apellido" class="java.lang.String"/>
+	<field name="empleado_direccion" class="java.lang.String"/>
+	<field name="empleado_cargo" class="java.lang.String"/>
+	<field name="empleado_salarioMensual" class="java.lang.Float"/>
+	<field name="empleado_telefono" class="java.lang.String"/>
+	<variable name="empleado_salarioMensual_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{empleado_salarioMensual}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="229" y="0" width="340" height="28" uuid="0bc0e42c-6370-4696-aad6-15ee06ac21ba"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Aharoni" size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE EMPLEADOS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="118" height="79" uuid="d10680ce-f283-4a9b-bc51-ecb71cb0b8c5"/>
+				<imageExpression><![CDATA["C:\\Users\\Anii BC\\Downloads\\Servitec-master\\Servitec-master\\src\\vistas\\Servitec_logo_small.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="229" y="28" width="340" height="1" uuid="909940b1-e2e1-49f0-9a5f-b7ac06c11d3d"/>
+			</line>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="622" y="43" width="100" height="20" uuid="b712c003-a926-4be1-ab56-09421d081541"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="7e9988a0-6fab-407a-bca3-8ed674e26b07"/>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="80414758-0d9b-4105-b648-ab287aaf351c"/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="ab6b2c50-81de-4897-82c8-ccaa73ff380f"/>
+				<text><![CDATA[APELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="8ce3da0f-4f85-40a8-9884-badc476184c3"/>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="20" uuid="7e27a6d9-1824-46b1-9b3c-db6ac30e498b"/>
+				<text><![CDATA[TELEFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="100" height="20" uuid="545403d6-331e-49b3-857f-ecd777c63454"/>
+				<text><![CDATA[DIRECCION ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="100" height="20" uuid="2dd6def6-5465-47a1-b377-360c3554facb"/>
+				<text><![CDATA[SALARIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="51" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="86e9b4d3-8c2b-4819-b076-a070d5063e9d"/>
+				<textFieldExpression><![CDATA[$F{empleado_cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="6da07047-2928-474d-b19c-ad84a0e52566"/>
+				<textFieldExpression><![CDATA[$F{empleado_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="c1b68ed3-9ccc-4971-9799-102c03f8c5d3"/>
+				<textFieldExpression><![CDATA[$F{empleado_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="7ed18b81-64be-4498-a2b1-2be054cba846"/>
+				<textFieldExpression><![CDATA[$F{empleado_cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="373e9508-8752-4794-a887-c5cad7688ecd"/>
+				<textFieldExpression><![CDATA[$F{empleado_telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="100" height="20" uuid="485f89e9-7649-48cc-8c6a-714c4f6fdce7"/>
+				<textFieldExpression><![CDATA[$F{empleado_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="20" uuid="cc64490f-40ba-4faf-9253-50e577847a23"/>
+				<textFieldExpression><![CDATA[$F{empleado_salarioMensual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="274" y="0" width="96" height="20" uuid="d9f0ee36-5b2a-4236-82b0-217cda835f46"/>
+				<text><![CDATA[TOTAL DE PAGO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="0" width="87" height="20" uuid="6f27cc57-3992-4cfc-a661-11b8ef61524a"/>
+				<textFieldExpression><![CDATA[$V{empleado_salarioMensual_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="320" y="10" width="80" height="20" uuid="cfe4d321-c15c-4c1a-b07e-841124fabea9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="400" y="10" width="40" height="20" uuid="c80fb398-8ff3-46f0-a92b-30e6cef6463e"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -475,7 +475,7 @@ public class Trabajo extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        DataBase.actualizar(instanciaConexion, 6, this);// TODO add your handling code here:
+        DataBase.actualizar(instanciaConexion, 5, this);// TODO add your handling code here:
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
@@ -504,7 +504,7 @@ public class Trabajo extends javax.swing.JFrame {
             TablaArticulos.setEnabled(true);
             jComboBoxEmpl.setEnabled(true);
             Txtalbañil.setEnabled(true);
-
+         
         } else {
             candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg"));
             TxtFechaEntrega.setEnabled(false);
@@ -514,6 +514,7 @@ public class Trabajo extends javax.swing.JFrame {
             TablaArticulos.setEnabled(false);
             jComboBoxEmpl.setEnabled(false);
             Txtalbañil.setEnabled(false);
+        
 
         }
         contador = contador + 1;
@@ -526,6 +527,7 @@ public class Trabajo extends javax.swing.JFrame {
         TxtNumFact.setText("");
         TxtManoObra.setText("");
         TxtFechaEntrega.setText("");
+        ArticulosEnCmbBoc.clear();
         for (int i = 0; i < TablaArticulos.getRowCount(); i++) {
             modelo.removeRow(i);
             i -= 1;
@@ -599,6 +601,12 @@ public class Trabajo extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Trabajo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

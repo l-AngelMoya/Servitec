@@ -6,12 +6,17 @@
 package InterfazGrafica;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import servitec.*;
 
 /**
@@ -19,15 +24,26 @@ import servitec.*;
  * @author Angel Moya
  */
 public class FacturaServitec extends javax.swing.JFrame {
-    private static int contador = 0;
 
+    private static ArrayList ArticulosEnCmbBoc = new ArrayList();
+    private static int contador = 0;
+    private static ArrayList<String> valores = new ArrayList();
+    private DefaultTableModel modelo;
     DataBase haciendoConexion = new DataBase();
     Connection instanciaConexion = haciendoConexion.getConnection();
+
     /**
      * Creates new form Empleado
      */
     public FacturaServitec() {
         initComponents();
+        valores.clear();
+        ArticulosEnCmbBoc.clear();
+        TxTFechaEmision.setText(String.valueOf(LocalDate.now()));
+        String cabecera[] = {"noTrabajo", "FechaTrabajo", "descripcion", "Costo", "NoFactura"};
+        String datos[][] = {};
+        modelo = new DefaultTableModel(datos, cabecera);
+        tablaTrabajos.setModel(modelo);
     }
 
     /**
@@ -52,7 +68,6 @@ public class FacturaServitec extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         TxtIva = new javax.swing.JTextField();
-        BtnModificar = new javax.swing.JButton();
         BtnIngresar = new javax.swing.JButton();
         BtnBuscar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
@@ -66,6 +81,7 @@ public class FacturaServitec extends javax.swing.JFrame {
         BtnCargarTrabajos = new javax.swing.JButton();
         candado = new javax.swing.JLabel();
         brochita = new javax.swing.JLabel();
+        jBoxTrabajos = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,17 +150,9 @@ public class FacturaServitec extends javax.swing.JFrame {
             }
         });
 
-        BtnModificar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
-        BtnModificar.setText("Modificar");
-        BtnModificar.setEnabled(false);
-        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarActionPerformed(evt);
-            }
-        });
-
         BtnIngresar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnIngresar.setText("Ingresar");
+        BtnIngresar.setEnabled(false);
         BtnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnIngresarActionPerformed(evt);
@@ -161,6 +169,7 @@ public class FacturaServitec extends javax.swing.JFrame {
 
         BtnEliminar.setFont(new java.awt.Font("MS Reference Serif", 3, 18)); // NOI18N
         BtnEliminar.setText("Eliminar");
+        BtnEliminar.setEnabled(false);
         BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEliminarActionPerformed(evt);
@@ -204,15 +213,15 @@ public class FacturaServitec extends javax.swing.JFrame {
 
         tablaTrabajos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nº Trabajo", "Descripcion", "CostoManoObra"
+                "noTrabajo", "FechaTrabajo", "Descriocion", "Costo"
             }
         ));
         tablaTrabajos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -221,6 +230,7 @@ public class FacturaServitec extends javax.swing.JFrame {
 
         BtnCargarTrabajos.setFont(new java.awt.Font("Baskerville Old Face", 2, 18)); // NOI18N
         BtnCargarTrabajos.setText("cargar trabajos");
+        BtnCargarTrabajos.setEnabled(false);
         BtnCargarTrabajos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCargarTrabajosActionPerformed(evt);
@@ -241,6 +251,19 @@ public class FacturaServitec extends javax.swing.JFrame {
             }
         });
 
+        jBoxTrabajos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jBoxTrabajos.setEnabled(false);
+        jBoxTrabajos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jBoxTrabajosFocusGained(evt);
+            }
+        });
+        jBoxTrabajos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBoxTrabajosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -254,39 +277,36 @@ public class FacturaServitec extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtnCargarTrabajos, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(28, 28, 28)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Txttsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(TxtIva, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-                                .addComponent(candado)
-                                .addGap(18, 18, 18)
-                                .addComponent(brochita)
-                                .addGap(61, 61, 61))
+                                .addComponent(BtnCargarTrabajos)
+                                .addGap(38, 38, 38)
+                                .addComponent(jBoxTrabajos, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Txttsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtIva, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(BtnModificar, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnIngresar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                                 .addComponent(BtnBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BtnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnRegresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnRegresar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -297,99 +317,103 @@ public class FacturaServitec extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TxtnFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                             .addComponent(TxTFechaEmision)
-                            .addComponent(TxtCedula))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                            .addComponent(TxtCedula))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(candado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(brochita)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnIngresar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(BtnEliminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnRegresar1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jBoxTrabajos)
+                                    .addComponent(BtnCargarTrabajos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(TxTFechaEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(TxtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32)
-                        .addComponent(BtnCargarTrabajos)
-                        .addGap(13, 13, 13))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(candado)
-                            .addComponent(brochita))
-                        .addGap(22, 22, 22)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TxtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(candado)
+                                    .addComponent(brochita))))
+                        .addGap(13, 13, 13)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Txttsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Txttsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnSalir)
+                        .addGap(4, 4, 4)
+                        .addComponent(TxtIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(BtnBuscar)
-                .addGap(18, 18, 18)
-                .addComponent(BtnIngresar)
-                .addGap(23, 23, 23)
-                .addComponent(BtnEliminar)
-                .addGap(16, 16, 16)
-                .addComponent(BtnModificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnRegresar1)
-                .addGap(18, 18, 18)
-                .addComponent(BtnSalir)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-         DataBase.actualizar(instanciaConexion, 2, this);
-    }//GEN-LAST:event_BtnModificarActionPerformed
-
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-          DataBase.Insertar(instanciaConexion, 2, this);
+        DataBase.Insertar(instanciaConexion, 5, this);
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        FacturaServitecClass facturaServitec=(FacturaServitecClass)haciendoConexion.Busqueda(instanciaConexion, this,4);
-        if(facturaServitec==null){
+        for (int i = 0; i < tablaTrabajos.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
+        }
+
+        FacturaServitecClass facturaServitec = (FacturaServitecClass) haciendoConexion.Busqueda(instanciaConexion, this, 5);
+        if (facturaServitec == null) {
             JOptionPane.showMessageDialog(rootPane, "Factura no existe en la base de datos");
-        }else{
+        } else {
+            TxtnFactura.setText(String.valueOf(facturaServitec.getNoFactura()));
             TxTFechaEmision.setText(String.valueOf(facturaServitec.getFechaEmision()));
             TxtCedula.setText(facturaServitec.getCedula());
             Txttsubtotal.setText(String.valueOf(facturaServitec.getSubtotal()));
             TxtIva.setText(String.valueOf(facturaServitec.getIva()));
             TxtTotal.setText(String.valueOf(facturaServitec.getTotal()));
-            BtnModificar.setEnabled(true);
+            BtnEliminar.setEnabled(true);
+            jBoxTrabajos.enable(false);
         }
-       
+
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        DataBase.eliminar(instanciaConexion, 2, this);
+        DataBase.eliminar(instanciaConexion, 5, this);
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
@@ -404,7 +428,24 @@ public class FacturaServitec extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRegresar1ActionPerformed
 
     private void BtnCargarTrabajosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCargarTrabajosActionPerformed
-        //Boton para Cargar Trabajos
+        try {
+            String[] info = jBoxTrabajos.getSelectedItem().toString().split(",");
+
+            String noTrabajo = info[0];
+            String FechaInicio = info[1];
+            String Descripcion = info[2];
+            String Costo = info[3];
+            String noFactura = info[4];
+            Object datos[] = {noTrabajo, FechaInicio, Descripcion, Costo, noFactura};
+            if (!ArticulosEnCmbBoc.contains(noTrabajo + FechaInicio + Descripcion + Costo + noFactura)) {
+                ArticulosEnCmbBoc.add(noTrabajo + FechaInicio + Descripcion + Costo + noFactura);
+                modelo.addRow(datos);
+            } else {
+                JOptionPane.showMessageDialog(null, "El Trabajo ya existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+
+        }
     }//GEN-LAST:event_BtnCargarTrabajosActionPerformed
 
     private void candadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candadoMouseClicked
@@ -415,15 +456,25 @@ public class FacturaServitec extends javax.swing.JFrame {
             Txttsubtotal.setEnabled(true);
             TxtIva.setEnabled(true);
             TxtTotal.setEnabled(true);
+            TxtnFactura.setEnabled(false);
+            jBoxTrabajos.setEnabled(true);
+            BtnCargarTrabajos.setEnabled(true);
+            BtnIngresar.setEnabled(true);
+
         } else {
-            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo.jpg"));
+            TxtnFactura.setEnabled(true);
+            candado.setIcon(new javax.swing.ImageIcon("src\\src\\photo1.jpg"));
             TxTFechaEmision.setEnabled(false);
             TxtCedula.setEnabled(false);
             Txttsubtotal.setEnabled(false);
             TxtIva.setEnabled(false);
             TxtTotal.setEnabled(false);
+            jBoxTrabajos.setEnabled(false);
+            BtnCargarTrabajos.setEnabled(false);
+            BtnIngresar.setEnabled(false);
+
         }
-        contador=contador+1;
+        contador = contador + 1;
     }//GEN-LAST:event_candadoMouseClicked
 
     private void brochitaLimpieza(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brochitaLimpieza
@@ -434,14 +485,16 @@ public class FacturaServitec extends javax.swing.JFrame {
         TxtIva.setText("");
         TxtTotal.setText("");
         tablaTrabajos.clearSelection();
+        jBoxTrabajos.enable(true);
+
     }//GEN-LAST:event_brochitaLimpieza
 
     private void TxtnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtnFacturaActionPerformed
-       TxtnFactura.transferFocus();
+        TxtnFactura.transferFocus();
     }//GEN-LAST:event_TxtnFacturaActionPerformed
 
     private void TxTFechaEmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxTFechaEmisionActionPerformed
-         TxTFechaEmision.transferFocus();
+        TxTFechaEmision.transferFocus();
     }//GEN-LAST:event_TxTFechaEmisionActionPerformed
 
     private void TxtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCedulaActionPerformed
@@ -449,16 +502,24 @@ public class FacturaServitec extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtCedulaActionPerformed
 
     private void TxttsubtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxttsubtotalActionPerformed
-       Txttsubtotal.transferFocus();
+        Txttsubtotal.transferFocus();
     }//GEN-LAST:event_TxttsubtotalActionPerformed
 
     private void TxtIvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIvaActionPerformed
-       TxtIva.transferFocus();
+        TxtIva.transferFocus();
     }//GEN-LAST:event_TxtIvaActionPerformed
 
     private void TxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTotalActionPerformed
         TxtTotal.transferFocus();
     }//GEN-LAST:event_TxtTotalActionPerformed
+
+    private void jBoxTrabajosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBoxTrabajosFocusGained
+        DataBase.llenarComboBoxTrabajos(instanciaConexion, this);
+    }//GEN-LAST:event_jBoxTrabajosFocusGained
+
+    private void jBoxTrabajosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxTrabajosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBoxTrabajosActionPerformed
 
     public static int getContador() {
         return contador;
@@ -482,6 +543,14 @@ public class FacturaServitec extends javax.swing.JFrame {
 
     public void setInstanciaConexion(Connection instanciaConexion) {
         this.instanciaConexion = instanciaConexion;
+    }
+
+    public JComboBox<String> getjBoxTrabajos() {
+        return jBoxTrabajos;
+    }
+
+    public void setjBoxTrabajos(JComboBox<String> jBoxTrabajos) {
+        this.jBoxTrabajos = jBoxTrabajos;
     }
 
     public JButton getBtnBuscar() {
@@ -516,20 +585,20 @@ public class FacturaServitec extends javax.swing.JFrame {
         this.BtnIngresar = BtnIngresar;
     }
 
-    public JButton getBtnModificar() {
-        return BtnModificar;
-    }
-
-    public void setBtnModificar(JButton BtnModificar) {
-        this.BtnModificar = BtnModificar;
-    }
-
     public JButton getBtnRegresar1() {
         return BtnRegresar1;
     }
 
     public void setBtnRegresar1(JButton BtnRegresar1) {
         this.BtnRegresar1 = BtnRegresar1;
+    }
+
+    public DefaultTableModel getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(DefaultTableModel modelo) {
+        this.modelo = modelo;
     }
 
     public JButton getBtnSalir() {
@@ -733,6 +802,30 @@ public class FacturaServitec extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -747,7 +840,6 @@ public class FacturaServitec extends javax.swing.JFrame {
     private javax.swing.JButton BtnCargarTrabajos;
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnIngresar;
-    private javax.swing.JButton BtnModificar;
     private javax.swing.JButton BtnRegresar1;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JTextField TxTFechaEmision;
@@ -758,6 +850,7 @@ public class FacturaServitec extends javax.swing.JFrame {
     private javax.swing.JTextField Txttsubtotal;
     private javax.swing.JLabel brochita;
     private javax.swing.JLabel candado;
+    private javax.swing.JComboBox<String> jBoxTrabajos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

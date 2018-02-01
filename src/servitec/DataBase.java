@@ -29,11 +29,11 @@ public class DataBase<T> {
 
     //la conexion propiamente dicha
     private static java.sql.Connection conn;
+
     /*
     Se deben especificar esta informacion que detalla el usuario, la contraseña y la informacion del servidor (ip , puerto, y nombre de la base de datos).
     
      */
-
     private static final String driver = "com.mysql.jdbc.Driver"; //driver (se queda siempre igual, si se usa mysql)
     private static final String usuario = "root"; //usuario de la base de datos
     private static final String contrasenna = "dean"; //contraseña del usuario
@@ -140,29 +140,41 @@ public class DataBase<T> {
                 // Articulo
                 case (4):
                     Articulo articulo = (Articulo) clase;
-                    String sq4 = "SELECT * FROM articulo WHERE codigoArticulo='" + articulo.getTxtCodigo().getText() + "' ";
+                    String sq4 = "select art.codigoArticulo,art.descripcion,factExt.noFactura, dist.idDistribuidora,cart.precioUnitario,cart.cantidad from articulo art join compraarticulo cart on art.codigoArticulo=cart.codigoArticulo join facturaExterna factExt on cart.noRegistro=factExt.noRegistro join distribuidora dist on factExt.idDistribuidora=dist.idDistribuidora where descripcion like'" + "%" + articulo.getTxtDescripcion().getText() + "%';";
+                    System.out.println(sq4);
                     ResultSet rs4 = stmt.executeQuery(sq4);
-                    if (rs4.next()) {
-                        objeto = (T) new ArticuloClass(rs4.getString(1), rs4.getString(2));
-                    } else {
-                        return null;
+
+                    while (rs4.next()) {
+                        Object datosArticulos[] = {rs4.getString(1), rs4.getString(2), rs4.getString(3), rs4.getString(4), rs4.getString(5), rs4.getString(6)};
+                        articulo.getModelo().addRow(datosArticulos);
                     }
-                    break;
-                //Trabajo
+
+                    return null;
+
+                //Factura Servitec
                 case (5):
-                /*Trabajo trabajo = (Trabajo) clase;
-                    String sq5 = "SELECT * FROM trabajo WHERE noTrabajo='" + trabajo.getTxtNumTrabajo().getText() + "' ";
+                    FacturaServitec factServitec = (FacturaServitec) clase;
+                    String sq5 = "select noFactura,fechaEmision,cedula,subtotal,iva,total from facturaServitec where nofactura=" + factServitec.getTxtnFactura().getText() + ";";
+                    System.out.println(sq5);
                     ResultSet rs5 = stmt.executeQuery(sq5);
                     if (rs5.next()) {
-                        objeto = (T) new TrabajoClass(rs5.getString(1), Date.valueOf(rs5.getString(2)), Date.valueOf(rs5.getString(5)), Float.valueOf(rs5.getString(6)), "001", rs5.getString(4), " ", rs5.getString(3));
+                        objeto = (T) new FacturaServitecClass(rs5.getInt(1), Date.valueOf(rs5.getString(2)), rs5.getString(3), Float.valueOf(rs5.getString(4)), Float.valueOf(rs5.getString(5)), Float.valueOf(rs5.getString(6)));
                     } else {
                         return null;
                     }
-                    break;*/
+                    String sq51 = "select noTrabajo,fechaTrabajo,Descripcion,costoManoObra from facturaServitec fa join trabajo tra on fa.noFactura=tra.noFactura where fa.noFactura=" + factServitec.getTxtnFactura().getText() + ";";
+                    System.out.println(sq51);
+                    ResultSet rs51 = stmt.executeQuery(sq51);
+                    while (rs51.next()) {
+                        Object datosTrabajos[] = {rs51.getString(1), rs51.getString(2), rs51.getString(3), rs51.getString(4)};
+                        System.out.println(datosTrabajos[0]);
+                        factServitec.getModelo().addRow(datosTrabajos);
+                    }
+
+                    break;
                 //Trabajo class
                 case (6):
                     arregloPk.clear();
-
                     Trabajo trabajo = (Trabajo) clase;
                     String sq6 = "select fechaTrabajo,fechaEntrega,costoManoObra,descripcion,noFactura,emp.cedula,emp.nombre,emp.apellido from trabajo tra join empleadosAsignados empAs on tra.notrabajo=empAs.noTrabajo join empleado emp on empAs.cedula=emp.cedula where tra.noTrabajo=" + trabajo.getTxtNumTrabajo().getText() + ";";
                     //System.out.println(sq6);
@@ -196,6 +208,17 @@ public class DataBase<T> {
                         Object datosArticulos[] = {rs7.getString(9), rs7.getString(10), rs7.getString(11), rs7.getString(12), rs7.getString(13)};
                         arregloPk.add(rs7.getString(9));
                         facturaExterna.getModelo().addRow(datosArticulos);
+                    }
+                    break;
+                case (8):
+                    Articulo articulo1 = (Articulo) clase;
+                    String sq41 = "select * from TodosArticulos;";
+                    System.out.println(sq41);
+                    ResultSet rs41 = stmt.executeQuery(sq41);
+
+                    while (rs41.next()) {
+                        Object datosArticulos[] = {rs41.getString(1), rs41.getString(2), rs41.getString(3), rs41.getString(4), rs41.getString(5), rs41.getString(6)};
+                        articulo1.getModelo().addRow(datosArticulos);
                     }
                     break;
             }
@@ -299,23 +322,51 @@ public class DataBase<T> {
                         ex.printStackTrace();
                     }
                     break;
-                // Articulo
-                /*case (4):
+
+                //insertar factura servitec
+                case (5):
                     try {
-                        Articulo claseArticulo = (Articulo) clase;
-                        if (!VerificarPK(instanciaConexion, 4, claseArticulo)) {
-                            String sql = "INSERT INTO articulo  VALUES (?,?)";
-                            PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
-                            stmt.setString(1, claseArticulo.getTxtCodigo().getText());
-                            stmt.setString(2, claseArticulo.getTxtDescri().getText());
-                            stmt.executeUpdate();
-                            JOptionPane.showMessageDialog(null, claseArticulo.getTxtCodigo().getText() + " " + claseArticulo.getTxtDescri().getText() + " fue ingresado con exito", "Ingreso completo", JOptionPane.INFORMATION_MESSAGE);
+                        FacturaServitec claseFacturaServitec = (FacturaServitec) clase;
+                        Cliente emp = new Cliente();
+                        emp.getTxtCedula().setText(claseFacturaServitec.getTxtCedula().getText());
+                        Statement stmt = instanciaConexion.createStatement();
+
+                        if (VerificarPK(instanciaConexion, 2, emp)) {
+                            String sq5 = "call Insertar_Factura_Servitec('" + Date.valueOf(claseFacturaServitec.getTxTFechaEmision().getText()) + "','" + claseFacturaServitec.getTxtCedula().getText() + "'," + claseFacturaServitec.getTxttsubtotal().getText() + "," + claseFacturaServitec.getTxtIva().getText() + "," + claseFacturaServitec.getTxtTotal().getText() + ",@numFact)";
+                            System.out.println(sq5);
+                            stmt.executeQuery(sq5);
+
+                            //PreparedStatement stmt = instanciaConexion.prepareStatement(sq5);
+                            // stmt.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Factura guardada con exito", "Ingreso con exito", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El cliente no existe en la base de datos", "Ingreso Fallido", JOptionPane.ERROR_MESSAGE);
+                        }
+
+                        String sq51 = "select @numFact";
+                        ResultSet noTrabajo = stmt.executeQuery(sq51);
+                        if (noTrabajo.next()) {
+                            claseFacturaServitec.getTxtnFactura().setText(noTrabajo.getString(1));
+                        } else {
+                            System.out.println("Error");
+                        }
+                        for (int i = 0; i < claseFacturaServitec.getTablaTrabajos().getRowCount(); i++) {
+                            String cadena = "";
+                            for (int j = 0; j < claseFacturaServitec.getTablaTrabajos().getColumnCount(); j++) {
+                                cadena = cadena + claseFacturaServitec.getTablaTrabajos().getValueAt(i, j) + ",";
+                            }
+                            //puede ser trigger pero naaaa
+                            String[] str = cadena.split(",");
+                            String sq52 = "UPDATE trabajo SET noTrabajo=" + str[0] + ", fechaTrabajo='" + Date.valueOf(str[1]) + "', descripcion='" + str[2] + "', costoManoObra=" + str[3] + ", noFactura=" + claseFacturaServitec.getTxtnFactura().getText() + " where noTrabajo=" + str[0] + ";";
+                            PreparedStatement stmt52 = instanciaConexion.prepareStatement(sq52);
+                            stmt52.executeUpdate(sq52);
+                            System.out.println(sq52);
                         }
 
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                    break;*/
+                    break;
                 //Insertar trabajo
                 case (6):
                     try {
@@ -326,7 +377,7 @@ public class DataBase<T> {
                             JOptionPane.showMessageDialog(null, "ingrese valores correctos en costo o fecha de entrega", "Ingreso Fallido", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             String sq1 = "call Ingresar_Trabajo('" + Date.valueOf(claseTrabajo.getTxtFechaActual().getText()) + "','" + Date.valueOf(claseTrabajo.getTxtFechaEntrega().getText()) + "','" + claseTrabajo.getTxtDescripcion().getText() + "'," + Float.valueOf(claseTrabajo.getTxtManoObra().getText()) + ",@pknoTrabajo);";
-                            System.out.println(sq1);
+                            //System.out.println(sq1);
                             stmt.executeQuery(sq1);
                             //imprime el pk del trabajo ingresado previamente y la muestra en un txt para que sea obtenida por el siguiente procedure
                             String sq2 = "select @pknoTrabajo";
@@ -424,16 +475,19 @@ public class DataBase<T> {
                     Empleado claseEmpleado = (Empleado) clase;
 
                     if (VerificarPK(instanciaConexion, 1, claseEmpleado)) {
-                        String sql = "";
+                        String sq1 = "";
                         if (claseEmpleado.getTxtIdSupervisor().getText().isEmpty() || claseEmpleado.getTxtIdSupervisor().getText().equalsIgnoreCase("null")) {
                             if (claseEmpleado.getTxtSalario().getText().isEmpty()) {
-                                sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual= default , user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor= null" + " where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
+                                sq1 = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual= default , user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor= null" + " where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
+                            } else {
+                                sq1 = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual=" + claseEmpleado.getTxtSalario().getText() + ", user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor= null" + " where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
                             }
                         } else {
-                            sql = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "', user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor='" + claseEmpleado.getTxtIdSupervisor().getText() + "' where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
+                            sq1 = "UPDATE empleado SET nombre='" + claseEmpleado.getTxTNombre().getText() + "', apellido='" + claseEmpleado.getTxtApellido().getText() + "', correo='" + claseEmpleado.getTxtCorreo().getText() + "', direccion='" + claseEmpleado.getTxtDireccion().getText() + "', telefono='" + claseEmpleado.getTxttelefono().getText() + "', cargo='" + claseEmpleado.getTxtCargo().getText() + "', salarioMensual='" + Double.valueOf(claseEmpleado.getTxtSalario().getText()) + "', user='" + claseEmpleado.getTxtUser().getText() + "', contraseña='" + claseEmpleado.getTxtContra().getText() + "', idSupervisor='" + claseEmpleado.getTxtIdSupervisor().getText() + "' where cedula='" + claseEmpleado.getTxtCedula().getText() + "'";
                         }
-                        PreparedStatement stmt = instanciaConexion.prepareStatement(sql);
-                        stmt.executeUpdate(sql);
+                        //System.out.println(sq1);
+                        PreparedStatement stmt = instanciaConexion.prepareStatement(sq1);
+                        stmt.executeUpdate(sq1);
                         JOptionPane.showMessageDialog(null, claseEmpleado.getTxTNombre().getText() + " fue Actualizado con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "Empleado no existe en la base de datos", "ERROR EN LA ACTUALIZACION", JOptionPane.ERROR_MESSAGE);
@@ -464,12 +518,28 @@ public class DataBase<T> {
                     }
                     break;
 
-                case (4):
-                    Articulo claseArticulo = (Articulo) clase;
-                    // String sq4 = "UPDATE distribuidora SET nombre='" + claseDistribuidora.getTxTNombre().getText() + "', direccion='" + claseDistribuidora.getTxtDireccion().getText() + "', correo='" + claseDistribuidora.getTxtCorreo().getText() + "', telefono='" + claseDistribuidora.getTxttelefono().getText() + "' where idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
-                    //PreparedStatement stmt4 = instanciaConexion.prepareStatement(sq4);
-                    //stmt4.executeUpdate(sq4);
-                    JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
+                case (5):
+                    Trabajo claseTrabajo = (Trabajo) clase;
+                    if (VerificarPK(instanciaConexion, 5, claseTrabajo)) {
+                        String sq5 = "UPDATE trabajo SET descripción='" + claseTrabajo.getTxtDescripcion().getText() + "', fecha actual='" + claseTrabajo.getTxtFechaActual().getText() + "', fecha entrega='" + claseTrabajo.getTxtFechaEntrega().getText() + "', mano de obra='" + claseTrabajo.getTxtManoObra().getText() + "' where idTrabajo='" + claseTrabajo.getTxtNumTrabajo().getText() + "'";
+                        PreparedStatement stmt5 = instanciaConexion.prepareStatement(sq5);
+                        stmt5.executeUpdate(sq5);
+                        JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Este Trabajo no existe en la base de datos", "ERROR EN LA ACTUALIZACION", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case (6):
+                    FacturaExterna claseFacturaExterna = (FacturaExterna) clase;
+                    if (VerificarPK(instanciaConexion, 5, claseFacturaExterna)) {
+                        String sq6 = "UPDATE factura externa SET numero de factura='" + claseFacturaExterna.getTxtnFactura().getText() + "', fecha emision='" + claseFacturaExterna.getTxTFechaEmision().getText() + "', ruc de distribuidora='" + claseFacturaExterna.getTxtRucDistribuidora().getText() + "', subtotal='" + claseFacturaExterna.getTxtSubtotal().getText() + "', descuento='" + claseFacturaExterna.getTxtDescuento().getText() + "', iva='" + claseFacturaExterna.getTxtIva().getText() + "', total='" + claseFacturaExterna.getTxtTotal().getText() + "' where idFactura Externa='" + claseFacturaExterna.getTxtNRegistro().getText() + "'";
+                        System.out.println(sq6);
+                        PreparedStatement stmt3 = instanciaConexion.prepareStatement(sq6);
+                        stmt3.executeUpdate(sq6);
+                        JOptionPane.showMessageDialog(null, "Actualizacion lograda con exito", "Actualizacion completa", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Actualizacion no pudo completarse", "ERROR EN LA ACTUALIZACION", JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
             }
         } catch (Exception e) {
@@ -596,7 +666,8 @@ public class DataBase<T> {
                 //Distribuidora
                 case (3):
                     Distribuidora claseDistribuidora = (Distribuidora) clase;
-                    String sq3 = "DELETE FROM distribuidora WHERE idDistribuidora='" + claseDistribuidora.getTxtid().getText() + "'";
+                    String sq3 = "call Eliminar_Distribuidora('" + claseDistribuidora.getTxtid().getText() + "');";
+                    //System.out.println(sq3);
                     PreparedStatement stmt3 = instanciaConexion.prepareStatement(sq3);
                     stmt3.executeUpdate(sq3);
                     JOptionPane.showMessageDialog(null, "Distribuidora eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
@@ -608,19 +679,26 @@ public class DataBase<T> {
                     stmt4.executeUpdate(sq4);
                     JOptionPane.showMessageDialog(null, "Articulo eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
                     break;
+                case (5):
+                    FacturaServitec claseFacturaServitec = (FacturaServitec) clase;
+                    //String sq5 = "DELETE FROM articulo WHERE codigoArticulo='" + claseArticulo.getTxtCodigo().getText() + "'";
+                    //PreparedStatement stmt4 = instanciaConexion.prepareStatement(sq4);
+                    //stmt4.executeUpdate(sq4);
+                    JOptionPane.showMessageDialog(null, "Articulo eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
+                    break;
                 case (6):
                     Trabajo claseTrabajo = (Trabajo) clase;
                     for (int i = 0; i < arregloPk.size(); i++) {
-                        String [] listaEmpleado=claseTrabajo.getTxtalbañil().getText().split(",");
-                        String sq6 = "call  eliminar_Trabajo(" + claseTrabajo.getTxtNumTrabajo().getText() + ",'"+ arregloPk.get(i) + "','" + listaEmpleado[0] + "');";
+                        String[] listaEmpleado = claseTrabajo.getTxtalbañil().getText().split(",");
+                        String sq6 = "call  eliminar_Trabajo(" + claseTrabajo.getTxtNumTrabajo().getText() + ",'" + arregloPk.get(i) + "','" + listaEmpleado[0] + "');";
                         //System.out.println(sq6);
                         PreparedStatement stmt6 = instanciaConexion.prepareStatement(sq6);
                         stmt6.executeUpdate(sq6);
                     }
-                    String sq61 = " delete from trabajo where noTrabajo="+ claseTrabajo.getTxtNumTrabajo().getText()+" ;";
-                       // System.out.println(sq61);
-                        PreparedStatement stmt61 = instanciaConexion.prepareStatement(sq61);
-                        stmt61.executeUpdate(sq61);
+                    String sq61 = " delete from trabajo where noTrabajo=" + claseTrabajo.getTxtNumTrabajo().getText() + " ;";
+                    // System.out.println(sq61);
+                    PreparedStatement stmt61 = instanciaConexion.prepareStatement(sq61);
+                    stmt61.executeUpdate(sq61);
 
                     JOptionPane.showMessageDialog(null, "Trabajo eliminado con exito", "Eliminado!", JOptionPane.INFORMATION_MESSAGE);
                     break;
@@ -661,7 +739,7 @@ public class DataBase<T> {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FacturaExterna.class.getName()).log(Level.SEVERE, null, ex);
+           // Logger.getLogger(FacturaExterna.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
             System.out.println("salio error");
         }
@@ -686,7 +764,7 @@ public class DataBase<T> {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(Trabajo.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Trabajo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
             System.out.println("salio error");
         }
@@ -708,10 +786,32 @@ public class DataBase<T> {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(Trabajo.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Trabajo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
             System.out.println("salio error");
         }
     }
 
+    public static void llenarComboBoxTrabajos(java.sql.Connection instanciaConexion, FacturaServitec fserv) {
+        try {
+            fserv.getjBoxTrabajos().removeAllItems();
+            Statement stmt = instanciaConexion.createStatement();
+            String sq1 = "select noTrabajo, fechaTrabajo,descripcion,costoManoObra,noFactura from trabajo where isTerminado=0 ;";
+            ResultSet trabajos = stmt.executeQuery(sq1);
+
+            while (trabajos.next()) {
+                String noTrabajo = trabajos.getString(1);
+                String FechaInicio = trabajos.getString(2);
+                String Descripcion = trabajos.getString(3);
+                String Costo = trabajos.getString(4);
+                String noFactura = trabajos.getString(5);
+                fserv.getjBoxTrabajos().addItem(noTrabajo + "," + FechaInicio + "," + Descripcion + "," + Costo + "," + noFactura);
+            }
+
+        } catch (SQLException ex) {
+            //Logger.getLogger(Trabajo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println("salio error");
+        }
+    }
 }
